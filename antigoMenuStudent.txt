@@ -1,0 +1,48 @@
+<!-- Sidebar -->
+  <aside class="sidebar sidebar-icons-right sidebar-icons-boxed sidebar-expand-lg">
+    <header class="sidebar-header">
+      <span class="logo">
+        <a href="{{URL::to('Aluno')}}"><h3 style="font-family:verdana;color:red">NPJ-Sistema</h3></a>
+      </span>
+    </header>
+
+    <nav class="sidebar-navigation">
+      <ul class="menu">
+
+      <hr>
+        <li class="menu-item active">
+          <a class="menu-link" href="{{URL::to('Aluno')}}">
+            <span class="title" style="font-size:25px">Painel de Controle</span>
+          </a>
+        </li>
+      </hr>
+      <hr>
+      <li class="menu-item">
+          <span class="title" style="font-size:20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      </li>
+      </hr>
+      <hr>
+      <li class="menu-item">
+        <a class="menu-link"  href="{{URL::to('Aluno/Peticoes')}}">
+          <span class="title" style="font-size:20px">PETIÇÕES</span>
+        </a>
+      </li>
+      </hr><hr>
+        <li class="menu-item">
+            <span class="title" style="font-size:20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </li>
+      </hr>
+      <hr>
+      <br><br><br><br><br><br><br>
+        <li class="menu-item">
+          <a class="menu-link" href="{{URL::to('Aluno/Preferencias')}}">
+            <span class="title">CONFIGURAÇÕES</span>
+          </a>
+        </li>
+      </hr>
+      </ul>
+    </nav>
+
+
+  </aside>
+  <!-- END Sidebar -->

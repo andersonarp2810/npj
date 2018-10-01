@@ -1,0 +1,4 @@
+Comandos para colocar imagens:
+
+-> composer install
+-> php artisan storage:link

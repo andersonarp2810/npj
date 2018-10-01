@@ -1,0 +1,41 @@
+aluno envia p/ professor
+student_ok = 'true'
+teacher_ok = ''
+
+professor recusa
+teacher_ok = 'false'
+student_ok = ''
+//escreve comentario
+
+
+aluno reenvia p/ professor
+student_ok = 'true'
+teacher_ok = ''
+
+//professor deve receber a peticao com a identificacao de que ja passou por ele
+Professor aceita e Envia p/ defensor
+teacher_ok = 'true'
+defender_ok = ''
+
+
+Defensor recusa
+defender_ok = 'false'
+teacher_ok = ''
+student_ok = ''
+//escreve comentario
+
+
+Aluno reenvia p/ professor
+student_ok = 'true'
+teacher_ok = ''
+defender_ok = 'false'
+
+
+Professor aceita e envia p/ defensor
+teacher_ok = 'true'
+defender_ok = ''
+
+
+Defensor aceita peticao
+defensor_ok = true
+

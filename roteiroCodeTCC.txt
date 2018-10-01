@@ -1,0 +1,38 @@
+
+
+Aluno:
+
+Create - create user, create human
+Update - update user, update human
+Delete - 
+
+
+
+Dupla:
+
+*Create - Pelo menos 2 Alunos que nao estejam em duplas e que estejam 'active', Pelo menos 1 Grupo existente
+*Update - Trocar estudantes atuais por estudantes que não estejam em duplas e que estejam 'active' ou Trocar o grupo vinculado por outro Grupo existente 
+*Delete - Trocar o status de 'true' p/ 'false'
+
+
+
+
+Professor:
+
+Create - 
+Update - 
+Delete - 
+
+
+Grupo:
+
+Create - 
+Update - 
+Delete - 
+
+
+Defensor:
+
+Create - 
+Update - 
+Delete - 
