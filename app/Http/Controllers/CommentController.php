@@ -10,12 +10,22 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 
+use App\Services\CommentService;
+
 class CommentController extends Controller
 {
+
+  public function __construct(CommentService $service){
+    $this->service = $service;
+  }
+
     public function store(Request $request){
 
       $petition = Petition::find($request['idPetition']);
       if(Auth::user()->type == 'teacher'){
+
+        //$this->service->professorStore($request, $petition);
+
         $group = Group::find($petition->group_id);
         $teacher = Human::find($group->teacher_id);
 
