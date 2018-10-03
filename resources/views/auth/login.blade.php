@@ -13,10 +13,11 @@ NPJ - SISTEM
                 <div class="card-body">
                     <div class="box-parent-login">
                         <div class="well bg-white box-login">
-                            <h1 style="font-size: 70px" class="ls-login-logo mb-4 text-center">
-                                NPJ
+                            <h1 style="font-size: 70px" class="ls-login-logo text-center">
+                                NPJ                                
                                 <!--<img src="{{URL::asset('storage/logo.png')}}" class="img-responsive img-thumbnail" style="width:450px; height:160px; margin:0 auto">-->
                             </h1>
+                            <h5 class="text-center mb-4">Núcleo de Práticas Jurídicas</h5>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
 
@@ -42,7 +43,7 @@ NPJ - SISTEM
                                         @endif
                                     </div>
 
-                                    <input type="submit" value="Login" class="btn btn-dark btn-lg btn-block mt-4">
+                                    <input type="submit" value="Entrar" class="btn btn-dark btn-lg btn-block mt-4">
 
                                 </fieldset>
                             </form>
