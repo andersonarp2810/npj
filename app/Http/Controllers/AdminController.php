@@ -16,15 +16,6 @@ use Validator;
 class AdminController extends Controller
 {
 
-  /**
- * Create a new controller instance.
- *
- * @return void
- */
- public function __construct()
- {
-     $this->middleware('auth');
- }
 
  /**
  * Display a listing of the resource.
@@ -59,9 +50,6 @@ class AdminController extends Controller
 
  public function preferences()
  {
-   if(Auth::user()->type != 'admin'){
-     return redirect()->back();
-   }
    $user  = User::find(Auth::user()->id);
    $human = Human::where('user_id',$user->id)->first();
    return view('admin.preferences')->with(['user'=>$user,'human'=>$human]);
