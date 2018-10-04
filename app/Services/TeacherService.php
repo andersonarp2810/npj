@@ -47,7 +47,7 @@ class TeacherService {
             return redirect()->back()->withErrors($validate)->withInput();
     }
 
-    public function update(Request $request) {
+    public function update(Human $human, User $user, Request $request) {
         if($request['password'] != null){
             $user->password = bcrypt($request['password']);
         }
@@ -61,15 +61,12 @@ class TeacherService {
         return redirect()->back();
     }
 
-    public function destroy(Request $request) {
+    public function destroy(Teacher $teacher, Request $request) {
         if($teacher != null && $teacher->status == 'active'){
-            //->where('teacher_id',$teacher->id)
             $groups = Group::all();
         foreach($groups as $group){
            if($group->teacher_id == $teacher->id){
-                //dd($group);
                 if($group != null && $group->status == 'active'){//se o professor participar de algum grupo e se esse for active
-                    //dd($group->status);
                     $group->status = 'inactive';
                     $group->save();
   
@@ -92,7 +89,6 @@ class TeacherService {
                 }
             }    
         }
-         //dd($teacher);
         $teacher->status = 'inactive';
   
         $teacher->save();
