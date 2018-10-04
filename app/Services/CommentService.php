@@ -35,7 +35,6 @@ class CommentService
             $request->session()->flash('status', 'Avaliação realizada com Sucesso!!');
         }
 
-        return redirect('Professor/Peticoes');
     }
 
     public function defensorStore(Request $request, Petition $petition)
@@ -61,7 +60,6 @@ class CommentService
             $petition->save();
             $request->session()->flash('status', 'Avaliação realizada com Sucesso!!');
         }
-        return redirect('Defensor/Peticoes');
     }
 
 }
