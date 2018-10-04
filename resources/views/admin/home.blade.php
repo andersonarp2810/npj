@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('content')
+@section('component')
 <div style="width:100%">
   <div class="row" style="width:100%">
     <div class="col-md-6">
