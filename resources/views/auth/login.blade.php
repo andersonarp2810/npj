@@ -6,10 +6,10 @@ NPJ - SISTEMA
 
 @section('content')
     <div class="bg-home">
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-5 mt-5">
+        <div style="height: 100vh;" class="row align-items-center justify-content-center">
+            <div class="col-md-5">
                 
-                <div style="border-radius: 2%" class="card mt-5">
+                <div style="border-radius: 2%" class="card">
                     <div class="card-body">
                         <div class="box-parent-login">
                             <div class="well bg-white box-login">
