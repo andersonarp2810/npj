@@ -5,7 +5,7 @@ NPJ - SISTEMA
 @endsection
 
 @section('content')
-    <div class="bg-home">
+    <div class="container bg-home">
         <div style="height: 100vh;" class="row align-items-center justify-content-center">
             <div class="col-md-5">
                 

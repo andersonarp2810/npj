@@ -8,11 +8,11 @@
 
 <div id="main">
 <!-- Topbar -->
-@component('components.topbar')
-  @slot('user')
-    {{Auth::user()->email}}
-  @endslot
+@component('components.topbar')  
+  {{Auth::user()->email}}  
 @endcomponent
+
+
 <!-- END Topbar -->
 
 <!-- Main container -->
@@ -32,6 +32,9 @@
     </nav>
   </footer>
   <!-- END Footer -->
+  @component('components.bottombar')  
+    {{Auth::user()->email}}  
+  @endcomponent
 
 <!-- END Main container -->
 </div>

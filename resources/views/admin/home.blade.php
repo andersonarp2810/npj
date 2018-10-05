@@ -1,28 +1,28 @@
 @extends('layouts.admin')
 @section('component')
-<div style="width:100%">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="input-group" style="width:50%;">
+<div class="container-fluid">
+  <div class="row justify-content-center mt-3 mb-3">
+    <div class="col-lg-3 col-md-5 col-12">
+      <div class="input-group">
         <div class="input-group-prepend">
           <a class="btn btn-outline-secondary" style="pointer-events: none;cursor: default;text-decoration: none;color: black;"><i class="fa fa-filter fa-1x"></i></a>
         </div>
         <select class="custom-select" id="valueHome" style="cursor:pointer" onchange="verifica(this.value)">
-          <option value="1" selected><p>ESTÁGIOS DAS PETIÇÕES</p></option>
-          <option value="2"><p>RANKING DE DUPLAS</p></option>
-          <option value="3"><p>RANKING DE GRUPOS</p></option>
+          <option value="1" selected><p>Status das petições</p></option>
+          <option value="2">Ranking de duplas</option>
+          <option value="3">Ranking de grupos</option>
         </select>
       </div>
     </div>
   </div>
   <div id="option1" style="display:block">    
       <div class="text-center">
-        <h1 class="text-center">PETIÇÕES</h1>
+        <h1 class="h1 h1-responsive text-center">Status das Petições</h1>
       </div>    
-    <br><br>    
+    <br>
 
     <div class="row justify-content-center">
-      <div class="col-lg-4 col-md-6">
+      <div class="col-lg-4 col-md-4 col-12 mb-3">
         <div class="card">
           <div class="card-header bg-primary text-white">
             ALUNO
@@ -40,7 +40,7 @@
         </div>
       </div>
 
-      <div class="col-lg-4 col-md-6">
+      <div class="col-lg-4 col-md-4 col-12 mb-3">
         <div class="card text-white">
           <div class="card-header bg-primary text-white">
               PROFESSOR
@@ -60,7 +60,7 @@
           </div>
         </div>
         
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-4 col-12  ">
           <div class="card text-white">
             <div class="card-header bg-primary text-white">
               DEFENSOR
@@ -83,7 +83,7 @@
 
     <div class="row justify-content-center mt-3">
       
-      <div class="col-lg-4 col-md-6">
+      <div class="col-lg-4 col-md-6 mb-3">
           <div class="card text-white">
             <div class="card-header bg-warning text-white">
               RECUSADAS - PROFESSOR
@@ -103,7 +103,7 @@
           </div>
         </div>
 
-      <div class="col-lg-4 col-md-6">
+      <div class="col-lg-4 col-md-6 mb-3">
           <div class="card text-white">
             <div class="card-header bg-danger text-white">
               RECUSADAS
@@ -123,7 +123,7 @@
           </div>
         </div>
         
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6 mb-3">
           <div class="card text-white">
             <div class="card-header bg-success text-white">
               FINALIZADAS
