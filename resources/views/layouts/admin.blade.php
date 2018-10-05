@@ -6,19 +6,19 @@
 @sidebar([
     'items' => [
         [
-            'item' => 'Alunos', 'itemUrl' => 'Admin/Alunos', 'icon' => 'utensils'
+            'item' => 'Alunos', 'itemUrl' => 'Admin/Alunos', 'icon' => 'user'
         ], 
         [
-            'item' => 'Duplas', 'itemUrl' => 'Admin/Duplas', 'icon' => 'utensils'
+            'item' => 'Duplas', 'itemUrl' => 'Admin/Duplas', 'icon' => 'user-friends'
         ],
         [
-            'item' => 'Professores', 'itemUrl' => 'Admin/Professores', 'icon' => 'list'
+            'item' => 'Professores', 'itemUrl' => 'Admin/Professores', 'icon' => 'user-graduate'
         ],
         [
-            'item' => 'Grupos', 'itemUrl' => 'Admin/Grupos', 'icon' => 'table'
+            'item' => 'Grupos', 'itemUrl' => 'Admin/Grupos', 'icon' => 'users'
         ],
         [
-            'item' => 'Defensores', 'itemUrl' => 'Admin/Defensores', 'icon' => 'list'
+            'item' => 'Defensores', 'itemUrl' => 'Admin/Defensores', 'icon' => 'user-tie'
         ],
     ]
 ])
