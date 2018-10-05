@@ -54,8 +54,8 @@ class TemplateService{
   }
 //--------------------------------------------------------------------------------------------------
 
-public function editStatus(Request $request){
-$template = Template::find($request['id']);
+  public function editStatus(Request $request){
+  $template = Template::find($request['id']);
           if($template != null){
               $status = "";
               if($template->status == "active"){
