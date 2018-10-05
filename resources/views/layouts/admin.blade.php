@@ -1,8 +1,29 @@
 @extends('layouts.base')
 
 @section('content')
+
 <!-- Sidebar -->
-@include('admin.sidebar')
+@sidebar([
+    'items' => [
+        [
+            'item' => 'Alunos', 'itemUrl' => 'Admin/Alunos', 'icon' => 'utensils'
+        ], 
+        [
+            'item' => 'Duplas', 'itemUrl' => 'Admin/Duplas', 'icon' => 'utensils'
+        ],
+        [
+            'item' => 'Professores', 'itemUrl' => 'Admin/Professores', 'icon' => 'list'
+        ],
+        [
+            'item' => 'Grupos', 'itemUrl' => 'Admin/Grupos', 'icon' => 'table'
+        ],
+        [
+            'item' => 'Defensores', 'itemUrl' => 'Admin/Defensores', 'icon' => 'list'
+        ],
+    ]
+])
+@endsidebar
+
 <!-- END Sidebar -->
 
 
