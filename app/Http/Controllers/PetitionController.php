@@ -75,8 +75,10 @@ class PetitionController extends Controller
                 if ($petition->student_ok == 'false') { //aluno esta editando Peticao RECUSADA
                     if ($request->botao == 'ENVIAR') { //aluno vai ENVIAR a Petição RECUSADA editada
 
-                        $comment = Comment::where('petition_id', $petition->id)->orderBy('id', 'desc')->first(); //pegar o ultimo comentario
-                        //$comment = Comment::where('petition_id',$petition->id);
+                        //$comment = Comment::where('petition_id', $petition->id)->orderBy('id', 'desc')->first(); //pegar o ultimo comentario
+                        $comments = Comment::all()->where('petition_id', $petition->id);
+
+                        
 
                         $photos = Photo::all()->where('petition_id', $petition->id);
 
@@ -112,7 +114,6 @@ class PetitionController extends Controller
                             }
                         } else {
                             if ($request['images'] != null) {
-                                $photos = Photo::all()->where('petition_id', $petition->id);
 
                                 if ($photos->count() == 0) { //se nao existirem fotos
                                     $files = $request->file('images');
@@ -132,23 +133,25 @@ class PetitionController extends Controller
                             }
                         }
 
+                        /*
                         if ($comment != null) {
-                            Comment::create([
-                                'content' => $comment->content,
-                                'human_id' => $comment->human_id,
-                                'petition_id' => $p->id, //passando o ultimo comentario da versao anterior para essa nova versão da petição
-                            ]);
-                        }
-
-                        /*if($comment != null){
-                        foreach($comment as $co){
                         Comment::create([
-                        'content'     => $co->content,
-                        'human_id'    => $co->human_id,
-                        'petition_id' => $p->id,//passando o comentario da versao anterior para essa nova versão da petição
+                        'content' => $comment->content,
+                        'human_id' => $comment->human_id,
+                        'petition_id' => $p->id, //passando o ultimo comentario da versao anterior para essa nova versão da petição
                         ]);
                         }
-                        }**/
+                         */
+
+                        if ($comments != null) {
+                            foreach ($comments as $co) {
+                                Comment::create([
+                                    'content' => $co->content,
+                                    'human_id' => $co->human_id,
+                                    'petition_id' => $p->id, //passando o comentario da versao anterior para essa nova versão da petição
+                                ]);
+                            }
+                        }
 
                         $petition->visible = 'false'; //tornour-se versão anterior
                         $petition->student_ok = null;

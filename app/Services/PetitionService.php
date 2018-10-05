@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services;
 
 use App\Entities\Comment;
 use App\Entities\DoubleStudent;
@@ -62,25 +62,30 @@ class PetitionService{
         return ['defender' => $defender, 'petitions' => $petitions, 'user' => $user];
     }
 
-    public function enviar(Request $request, Student $student){
+    public function enviar(Request $request, Human $student){
 
                 //Se o Student estiver na primeira posição da DUPLA
                 $doubleStudent = DoubleStudent::all()->where('status', '=', 'active')->where('student_id', '=', $student->id)->first();
                 if ($doubleStudent == null) { // se não estiver na primeira posição da DUPLA
                     $doubleStudent = DoubleStudent::all()->where('status', '=', 'active')->where('student2_id', '=', $student->id)->first();
                 }
-                $student_ok = $request->botao == 'ENVIAR' ? true : null; // 'ENVIAR'(para o professor) ou 'SALVAR'(rascunho)
+                $student_ok = $request->botao == 'ENVIAR'; // 'ENVIAR'(para o professor) ou 'SALVAR'(rascunho)
 
-                $petition = Petition::create([
+                $novapeticao = [
                     'description' => $request['description'],
                     'content' => $request['content'],
-                    'student_ok' => $student_ok,
                     'template_id' => $request['template_id'],
                     'doubleStudent_id' => $doubleStudent->id,
                     'group_id' => $doubleStudent->group_id,
                     'version' => 1,
                     'visible' => 'true',
-                ]);
+                ];
+
+                if($student_ok){
+                    $novapeticao['student_ok'] = 'true';
+                }
+
+                $petition = Petition::create($novapeticao);
                 $doubleStudent->qtdPetitions = ($doubleStudent->qtdPetitions + 1);
                 $group = Group::find($doubleStudent->group_id);
                 $group->qtdPetitions = ($group->qtdPetitions + 1);
