@@ -20,86 +20,18 @@
         <h1 class="text-center">PETIÇÕES</h1>
       </div>    
     <br><br>    
+
     <div class="row justify-content-center">
       <div class="col-lg-4 col-md-6">
-        <div class="card bg-info text-white">
-          <div class="card-body bg-primary">
-            <div class="row">
-              <div class="col-md-6">
-                <i class="fas fa-user fa-5x" aria-hidden="true" style="margin-top:10px;"></i>
-              </div>
-              <div class="col-md-6">
-                <h6>ALUNO</h6>
-                <h1 class="display-4">{{$petitions->where('student_ok','=','false')->count()}}</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6">
-        <div class="card bg-success text-white">
-          <div class="card-body bg-primary">
-            <div class="row">
-              <div class="col-md-6">
-                <i class="fas fa-user-graduate fa-5x" style="margin-top:10px;"></i>
-              </div>
-              <div class="col-md-6">
-                <h6>PROFESSOR</h6>
-                <h1 class="display-4">{{$petitions->where('student_ok','true')->where('teacher_ok','')->where('defender_ok','')->count()}}</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="card bg-info text-white">
-            <div class="card-body bg-primary">
-              <div class="row">
-                <div class="col-md-6">
-                  <i class="fas fa-user-tie fa-5x" aria-hidden="true" style="margin-top:10px;"></i>
-                </div>
-                <div class="col-md-6">
-                  <h6>DEFENSOR</h6>
-                  <h1 class="display-4">{{$petitions->where('student_ok','true')->where('teacher_ok','true')->where('defender_ok','')->count()}}</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-
-    <div class="row justify-content-center mt-3">
-      <div class="col-lg-4 col-md-6">
-        <div class="card bg-success text-white">
-          <div class="card-body bg-warning">
-            <div class="row">
-              <div class="col-md-6">
-                <i class="fa fa-th fa-5x" aria-hidden="true" style="margin-top:10px;"></i>
-              </div>
-              <div class="col-md-6">
-                <h6>PROFESSOR-RECUSADAS</h6>
-                <h1 class="display-4">{{$petitions->where('student_ok','false')->where('teacher_ok','false')->count()}}</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6">
         <div class="card">
-          <div class="card-header bg-danger text-white">
-            RECUSADAS
-            <span class="float-right">{{$petitions->where('defender_ok','=','false')->count()}}</span>
+          <div class="card-header bg-primary text-white">
+            ALUNO
+            <span class="fas fa-user fa-lg float-right my-1"></span>
           </div>
-          <div class="card-body text-center">
-            <span class="fa-stack fa-2x">
-                <i class="fas fa-file fa-stack-2x text-danger"></i>
-                <i class="fas fa-times fa-stack-1x mt-1 text-white"></i>
-              </span>              
+          <div class="card-body text-center text-primary">
+            <h1 class="h1 h1-responsive">{{$petitions->where('student_ok','=','false')->count()}}</h1>            
           </div>
-          <div class="card-footer bg-danger">
+          <div class="card-footer bg-primary">
             <a href="" class="text-white">
               Detalhes
               <span class="fas fa-arrow-right mr-1"></span>
@@ -109,23 +41,107 @@
       </div>
 
       <div class="col-lg-4 col-md-6">
-        <div class="card bg-success text-white">
-          <div class="card-body bg-success">
-            <div class="row">
-              <div class="col-md-6">
-              <span class="fa-stack fa-3x">
-                <i class="fas fa-file fa-stack-2x"></i>
-                <i class="fas fa-check fa-stack-1x mt-1 text-success"></i>
-              </span>
-              </div>
-              <div class="col-md-6">
-                <h6>FINALIZADAS</h6>
-                <h1 class="display-4">{{$petitions->where('student_ok','true')->where('teacher_ok','true')->where('defender_ok','true')->count()}}</h1>
-              </div>
+        <div class="card text-white">
+          <div class="card-header bg-primary text-white">
+              PROFESSOR
+              <span class="fas fa-user-graduate fa-lg float-right my-1"></span>
+            </div>
+            <div class="card-body text-center text-primary">
+              <h1 class="h1 h1-responsive">
+                {{$petitions->where('student_ok','true')->where('teacher_ok','')->where('defender_ok','')->count()}}
+              </h1>            
+            </div>
+            <div class="card-footer bg-primary">
+              <a href="" class="text-white">
+                Detalhes
+                <span class="fas fa-arrow-right mr-1"></span>
+              </a>
             </div>
           </div>
         </div>
-      </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="card text-white">
+            <div class="card-header bg-primary text-white">
+              DEFENSOR
+              <span class="fas fa-user-tie fa-lg float-right my-1"></span>
+            </div>
+            <div class="card-body text-center text-primary">
+              <h1 class="h1 h1-responsive">
+                {{$petitions->where('student_ok','true')->where('teacher_ok','true')->where('defender_ok','')->count()}}
+              </h1>            
+            </div>
+            <div class="card-footer bg-primary">
+              <a href="" class="text-white">
+                Detalhes
+                <span class="fas fa-arrow-right mr-1"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+      
+      <div class="col-lg-4 col-md-6">
+          <div class="card text-white">
+            <div class="card-header bg-warning text-white">
+              RECUSADAS - PROFESSOR
+              <span class="fas fa-user-graduate fa-lg float-right my-1"></span>
+            </div>
+            <div class="card-body text-center text-warning">
+              <h1 class="h1 h1-responsive">
+                {{$petitions->where('student_ok','false')->where('teacher_ok','false')->count()}}
+              </h1>            
+            </div>
+            <div class="card-footer bg-warning">
+              <a href="" class="text-white">
+                Detalhes
+                <span class="fas fa-arrow-right mr-1"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      <div class="col-lg-4 col-md-6">
+          <div class="card text-white">
+            <div class="card-header bg-danger text-white">
+              RECUSADAS
+              <span class="fas fa-user-tie fa-lg float-right my-1"></span>
+            </div>
+            <div class="card-body text-center text-danger">
+              <h1 class="h1 h1-responsive">
+                {{$petitions->where('defender_ok','=','false')->count()}}
+              </h1>            
+            </div>
+            <div class="card-footer bg-danger">
+              <a href="" class="text-white">
+                Detalhes
+                <span class="fas fa-arrow-right mr-1"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="card text-white">
+            <div class="card-header bg-success text-white">
+              FINALIZADAS
+              <span class="fas fa-check fa-lg float-right my-1"></span>
+            </div>
+            <div class="card-body text-center text-success">
+              <h1 class="h1 h1-responsive">
+                {{$petitions->where('student_ok','true')->where('teacher_ok','true')->where('defender_ok','true')->count()}}
+              </h1>            
+            </div>
+            <div class="card-footer bg-success">
+              <a href="" class="text-white">
+                Detalhes
+                <span class="fas fa-arrow-right mr-1"></span>
+              </a>
+            </div>
+          </div>
+        </div>
     </div>
     
   </div>

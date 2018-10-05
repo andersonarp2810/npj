@@ -32,16 +32,14 @@
   </div>
 </main>
   <!-- Footer -->
-  <footer class="site-footer" style="margin-top:2%">
-    <div class="row">
-      <div class="col-md-6">
-        <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
-          <li class="nav-item">
-            <p class="text-center text-md-left">Copyright © 2018 Soares n.g.</a></p>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <footer class="mt-3">    
+    <nav class="navbar bottom navbar-light bg-light">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          Copyright © 2018 NExTi.
+        </li>
+      </ul>
+    </nav>
   </footer>
   <!-- END Footer -->
 
