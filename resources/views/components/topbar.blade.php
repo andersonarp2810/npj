@@ -2,7 +2,7 @@
 
   <nav class="navbar navbar-light bg-light">
     <span class="navbar-text">
-    Olá, {{$user}} - Bem-vindo de volta
+    Olá, {{Auth::user()->email}} - Bem-vindo de volta
     </span>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">

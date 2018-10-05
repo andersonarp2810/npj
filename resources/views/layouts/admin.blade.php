@@ -8,11 +8,7 @@
 
 <div id="main">
 <!-- Topbar -->
-@component('components.topbar')
-  @slot('user')
-    {{Auth::user()->email}}
-  @endslot
-@endcomponent
+@include('components.topbar')
 <!-- END Topbar -->
 
 <!-- Main container -->
