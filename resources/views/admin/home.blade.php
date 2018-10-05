@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('component')
 <div style="width:100%">
-  <div class="row" style="width:100%">
+  <div class="row">
     <div class="col-md-6">
-      <div class="input-group" style="width:50%;margin-left:110%">
+      <div class="input-group" style="width:50%;">
         <div class="input-group-prepend">
           <a class="btn btn-outline-secondary" style="pointer-events: none;cursor: default;text-decoration: none;color: black;"><i class="fa fa-filter fa-1x"></i></a>
         </div>
@@ -15,25 +15,18 @@
       </div>
     </div>
   </div>
-  <div id="option1" style="display:block">
-    <ul class="nav nav-primary">
-      <li class="nav-item">
-        <h1 class="text-center" style="font-family:arial;font-weight:800;margin-left:140%">PETIÇÕES</h1>
-      </li>
-    </ul>
-    <br><br>
-    <ul>
-      <li class="nav-item">
-        <h4 class="text-center text-md-left" style="font-size:22px">stages:</h4>
-      </li>
-    </ul>
-    <div class="row" style="margin-top:1.5%;margin-left:2%;width:110%">
-      <div class="col-sm-12 col-md-3 col-lg-3">
+  <div id="option1" style="display:block">    
+      <div class="text-center">
+        <h1 class="text-center">PETIÇÕES</h1>
+      </div>    
+    <br><br>    
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-6">
         <div class="card bg-info text-white">
           <div class="card-body bg-primary">
             <div class="row">
               <div class="col-md-6">
-                <i class="fa fa-th fa-5x" aria-hidden="true" style="margin-top:10px;"></i>
+                <i class="fas fa-user fa-5x" aria-hidden="true" style="margin-top:10px;"></i>
               </div>
               <div class="col-md-6">
                 <h6>ALUNO</h6>
@@ -43,12 +36,13 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-12 col-md-3 col-lg-3">
+
+      <div class="col-lg-4 col-md-6">
         <div class="card bg-success text-white">
           <div class="card-body bg-primary">
             <div class="row">
               <div class="col-md-6">
-                <i class="fa fa-th fa-5x" style="margin-top:10px;"></i>
+                <i class="fas fa-user-graduate fa-5x" style="margin-top:10px;"></i>
               </div>
               <div class="col-md-6">
                 <h6>PROFESSOR</h6>
@@ -58,12 +52,13 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-12 col-md-3 col-lg-3">
+
+        <div class="col-lg-4 col-md-6">
           <div class="card bg-info text-white">
             <div class="card-body bg-primary">
               <div class="row">
                 <div class="col-md-6">
-                  <i class="fa fa-th fa-5x" aria-hidden="true" style="margin-top:10px;"></i>
+                  <i class="fas fa-user-tie fa-5x" aria-hidden="true" style="margin-top:10px;"></i>
                 </div>
                 <div class="col-md-6">
                   <h6>DEFENSOR</h6>
@@ -75,8 +70,8 @@
         </div>
     </div>
 
-    <div class="row" style="margin-left:15%;width:110%">
-      <div class="col-sm-12 col-md-3 col-lg-3">
+    <div class="row justify-content-center mt-3">
+      <div class="col-lg-4 col-md-6">
         <div class="card bg-success text-white">
           <div class="card-body bg-warning">
             <div class="row">
@@ -84,40 +79,47 @@
                 <i class="fa fa-th fa-5x" aria-hidden="true" style="margin-top:10px;"></i>
               </div>
               <div class="col-md-6">
-                <h7>PROFESSOR-RECUSADAS</h7>
+                <h6>PROFESSOR-RECUSADAS</h6>
                 <h1 class="display-4">{{$petitions->where('student_ok','false')->where('teacher_ok','false')->count()}}</h1>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-sm-12 col-md-3 col-lg-3">
-        <div class="card bg-success text-white">
-          <div class="card-body bg-danger">
-            <div class="row">
-              <div class="col-md-6">
-                <i class="fa fa-th fa-5x" aria-hidden="true" style="margin-top:10px;"></i>
-              </div>
-              <div class="col-md-6">
-                <h6>DEFENSOR-RECUSADAS</h6>
-                <h1 class="display-4">{{$petitions->where('defender_ok','=','false')->count()}}</h1>
-              </div>
-            </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="card">
+          <div class="card-header bg-danger text-white">
+            RECUSADAS
+            <span class="float-right">{{$petitions->where('defender_ok','=','false')->count()}}</span>
+          </div>
+          <div class="card-body text-center">
+            <span class="fa-stack fa-2x">
+                <i class="fas fa-file fa-stack-2x text-danger"></i>
+                <i class="fas fa-times fa-stack-1x mt-1 text-white"></i>
+              </span>              
+          </div>
+          <div class="card-footer bg-danger">
+            <a href="" class="text-white">
+              Detalhes
+              <span class="fas fa-arrow-right mr-1"></span>
+            </a>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="row" style="margin-left:26%;width:110%">
-      <div class="col-sm-12 col-md-3 col-lg-3">
+      <div class="col-lg-4 col-md-6">
         <div class="card bg-success text-white">
           <div class="card-body bg-success">
             <div class="row">
               <div class="col-md-6">
-                <i class="fa fa-th fa-5x" aria-hidden="true" style="margin-top:10px;"></i>
+              <span class="fa-stack fa-3x">
+                <i class="fas fa-file fa-stack-2x"></i>
+                <i class="fas fa-check fa-stack-1x mt-1 text-success"></i>
+              </span>
               </div>
               <div class="col-md-6">
-                <h7>FINALIZADAS</h7>
+                <h6>FINALIZADAS</h6>
                 <h1 class="display-4">{{$petitions->where('student_ok','true')->where('teacher_ok','true')->where('defender_ok','true')->count()}}</h1>
               </div>
             </div>
@@ -125,6 +127,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 
   <div id="option2" style="display:none;width:100%"><!--ranking de Duplas-->

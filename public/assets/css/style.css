@@ -41,13 +41,12 @@
 .sidenav-header {
   border-bottom: 1px solid #fff;
   color: #fff;
-  display: block;
-  padding: 1rem;
-  padding-left: 18%;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
+  height: 70px;  
   margin-bottom: 20px;
+}
+
+.sidenav-header > img{
+  padding: 10px;
 }
 
 .sidenav-footer {
