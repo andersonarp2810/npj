@@ -127,3 +127,7 @@
   background: rgb(20,53,172);
   background: linear-gradient(117deg, rgba(20,53,172,1) 0%, rgba(9,24,121,1) 54%, rgba(0,0,0,1) 100%);
 }
+
+small{
+  font-size: 10px;
+}

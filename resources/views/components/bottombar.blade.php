@@ -5,38 +5,43 @@
     </span>
     <ul class="navbar-nav mx-auto">
 
-      <li class="nav-item mr-2">
-        <a href="" class="nav-link">
+      <li class="nav-item ">
+        <a href="" class="nav-link text-center">
           <span class="fas fa-user fa-lg"></span>
+          <small>Alunos</small>
         </a>
       </li>
-      <li class="nav-item mr-2">
-        <a href="" class="nav-link">
+      <li class="nav-item ">
+        <a href="" class="nav-link text-center">
           <span class="fas fa-user-friends fa-lg"></span>
+          <small>Duplas</small>
         </a>
       </li>
-      <li class="nav-item mr-2">
-        <a href="" class="nav-link">
+      <li class="nav-item ">
+        <a href="" class="nav-link text-center">
           <span class="fas fa-user-graduate fa-lg"></span>
+          <small>Professores</small>
         </a>
       </li>
-      <li class="nav-item mr-2">
+      <li class="nav-item ">
         <a href="" class="nav-link">
           <span class="fas fa-users fa-lg"></span>
+          <small>Grupos</small>
         </a>
       </li>
-      <li class="nav-item mr-2">
-        <a href="" class="nav-link">
+      <li class="nav-item ">
+        <a href="" class="nav-link text-center">
           <span class="fas fa-user-tie fa-lg"></span>
+          <small>Defensores</small>
         </a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <button type="button" name="button" class="btn btn-sm btn-outline-danger" onClick="location.href='{{URL::to('Sair')}}'">
-          SAIR
-          <span class="fas fa-sign-out-alt"></span>
-        </button>
+        <a href="#" class="text-danger" onClick="location.href='{{URL::to('Sair')}}'">          
+          <span class="fas fa-sign-out-alt fa-lg"></span>
+          <small>Sair</small>
+        </a>
       </li>
     </ul>
   </nav>
