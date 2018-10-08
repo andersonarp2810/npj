@@ -1,69 +1,74 @@
 @extends('layouts.admin')
-@section('content')
-<div class="card">
-  <h4 class="card-title">Gerenciar Duplas</h4>
-  <div class="card-body">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="row">
-          @if ($errors->any())
-          <div class="alert alert-danger">
-            <ul>
-              @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-          @endif
-          @if(Session::has('status'))
-            <p class="alert alert-info" style="width:20%;">{{ Session::get('status') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-          @endif
-        </div>
-        <div class="row">
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
-            <span class="text-center">
-              <div class="input-group">
-                <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
-                <span class="input-group-addon">
-                  <i class="fa fa-search"></i>
+@section('component')
+<div class="container">
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <div class="card">
+      <h4 class="card-title">Gerenciar Duplas</h4>
+      <div class="card-body">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="row">
+              @if ($errors->any())
+              <div class="alert alert-danger">
+                <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+              @endif
+              @if(Session::has('status'))
+                <p class="alert alert-info" style="width:20%;">{{ Session::get('status') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+              @endif
+            </div>
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-4">
+                <span class="text-center">
+                  <div class="input-group">
+                    <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
+                    <span class="input-group-addon">
+                      <i class="fa fa-search"></i>
+                    </span>
+                  </div>
                 </span>
               </div>
-            </span>
-          </div>
-          <div class="col-md-4">
-            <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModaldoubleStudent" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de nova dupla"><i class="fa fa-plus"></i> Nova Dupla</button>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead class="thead-dark">
-                <tr>
-                  <th style="font-size:18pt" class="text-center">Estudante1</th>
-                  <th style="font-size:18pt" class="text-center">Estudante2</th>
-                  <th style="font-size:18pt" class="text-center">GRUPO</th>
-                  <th style="font-size:18pt" class="text-center">AÇÕES</th>
-                </tr>
-              </thead>
-              <tbody>
-                @forelse($doubleStudents as $doubleStudent)
-                  @if($humans->find($doubleStudent->student_id) && $humans->find($doubleStudent->student2_id))
-                    <tr class="object" name="{{$humans->find($doubleStudent->student_id)->name}}">
-                      <td style="font-size:10pt" class="text-center">{{$humans->find($doubleStudent->student_id)->name}}</td>
-                      <td style="font-size:10pt" class="text-center">{{$humans->find($doubleStudent->student2_id)->name}}</td>
-                      <td style="font-size:10pt" class="text-center">{{$doubleStudent->group->name}}</td>
-                      <td style="font-size:18pt;width:15%" class="text-center">
-                        <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModaldoubleStudent" onclick="editModaldoubleStudent('{{$doubleStudent->id}}','{{$humans->find($doubleStudent->student_id)->name}}','{{$humans->find($doubleStudent->student2_id)->name}}','{{$doubleStudent->group->name}}')" title="Editar Dupla"><i class="fa fa-pencil"></i></button>
-                        <button type="button" class="btn btn-outline-danger" role="button" data-toggle="modal" data-target="#deleteModaldoubleStudent" onclick="deletedoubleStudent('{{$doubleStudent->id}}')" title="Excluir Dupla"><i class="fa fa-trash"></i></button>
-                      </td>
+              <div class="col-md-4">
+                <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModaldoubleStudent" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de nova dupla"><i class="fa fa-plus"></i> Nova Dupla</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th style="font-size:18pt" class="text-center">Estudante1</th>
+                      <th style="font-size:18pt" class="text-center">Estudante2</th>
+                      <th style="font-size:18pt" class="text-center">GRUPO</th>
+                      <th style="font-size:18pt" class="text-center">AÇÕES</th>
                     </tr>
-                  @endif
-                @empty
-                <td class="text-center">Nenhuma Dupla registrada!</td>
-                @endforelse
-              </tbody>
-            </table>
+                  </thead>
+                  <tbody>
+                    @forelse($doubleStudents as $doubleStudent)
+                      @if($humans->find($doubleStudent->student_id) && $humans->find($doubleStudent->student2_id))
+                        <tr class="object" name="{{$humans->find($doubleStudent->student_id)->name}}">
+                          <td style="font-size:10pt" class="text-center">{{$humans->find($doubleStudent->student_id)->name}}</td>
+                          <td style="font-size:10pt" class="text-center">{{$humans->find($doubleStudent->student2_id)->name}}</td>
+                          <td style="font-size:10pt" class="text-center">{{$doubleStudent->group->name}}</td>
+                          <td style="font-size:18pt;width:15%" class="text-center">
+                            <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModaldoubleStudent" onclick="editModaldoubleStudent('{{$doubleStudent->id}}','{{$humans->find($doubleStudent->student_id)->name}}','{{$humans->find($doubleStudent->student2_id)->name}}','{{$doubleStudent->group->name}}')" title="Editar Dupla"><i class="fa fa-pencil"></i></button>
+                            <button type="button" class="btn btn-outline-danger" role="button" data-toggle="modal" data-target="#deleteModaldoubleStudent" onclick="deletedoubleStudent('{{$doubleStudent->id}}')" title="Excluir Dupla"><i class="fa fa-trash"></i></button>
+                          </td>
+                        </tr>
+                      @endif
+                    @empty
+                    <td class="text-center">Nenhuma Dupla registrada!</td>
+                    @endforelse
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -230,5 +235,5 @@
     </div>
   </div>
 </div>
-@stop
--->
+</div>
+@endsection
