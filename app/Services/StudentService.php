@@ -13,8 +13,26 @@ use Validator;
 
 class StudentService {
 
-    public function index(Request $request) {
-        # code...
+    public function index() {
+        $student = Human::all()->where('user_id','=',Auth::user()->id)->where('status','=','active')->first();
+
+        if($student->doubleS == 'SIM') {
+            $doubleStudent = DoubleStudent::all()->where('student_id','=',$student->id)->where('status','active')->first();
+
+            if($doubleStudent == null) {
+            $doubleStudent = DoubleStudent::all()->where('status','=','active')->where('student2_id','=',$student->id)->first();
+            }
+
+            $petitions = Petition::all()->where('doubleStudent_id','=',$doubleStudent->id);
+            $group = Group::all()->where('status','=','active')->where('id','=',$doubleStudent->group_id)->first();
+            $teacher = Human::all()->where('id','=',$group->teacher_id)->where('status','=','active')->first();
+            $humans = Human::all()->where('status','=','active');
+            $user = Auth::user();
+
+            return ['student'=>$student,'doubleStudent'=>$doubleStudent,'petitions'=>$petitions,'group'=>$group,'teacher'=>$teacher,'humans'=>$humans,'user'=>$user];
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function store(Request $request) {
@@ -85,5 +103,24 @@ class StudentService {
             $request->session()->flash('status', 'Erro, Aluno não existe!');
             return redirect()->back();
         }
+    }
+
+    public function editar(Human $human, User $user, Request $request)
+    {
+
+        $human->name = $request['name'];
+        $human->gender = $request['gender'];
+        $human->phone = $request['phone'];
+        $user->email = $request['email'];
+
+        if ($request['password'] != null) {
+            $user->password = $request['password'];
+        }
+        $human->save();
+        $user->save();
+        $request->session()->flash('status', 'Dados salvos com sucesso!!');
+
+        return redirect()->back();
+
     }
 }

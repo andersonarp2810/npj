@@ -26,28 +26,10 @@ class StudentController extends Controller
       return view('admin.student')->with(['students'=>$students]);
 
     } else if(Auth::user()->type == 'student') {
-      $student = Human::all()->where('user_id','=',Auth::user()->id)->where('status','=','active')->first();
-
-      if($student->doubleS == 'SIM') {
-        $doubleStudent = DoubleStudent::all()->where('student_id','=',$student->id)->where('status','active')->first();
-
-        if($doubleStudent == null) {
-          $doubleStudent = DoubleStudent::all()->where('status','=','active')->where('student2_id','=',$student->id)->first();
-        }
-
-        $petitions = Petition::all()->where('doubleStudent_id','=',$doubleStudent->id);
-        $groups = Group::all()->where('status','=','active')->where('id','=',$doubleStudent->group_id);
-        $group = $groups->first();
-        $teachers = Human::all()->where('id','=',$group->teacher_id)->where('status','=','active');
-        $teacher = $teachers->first();
-        $humans = Human::all()->where('status','=','active');
-        $user = Auth::user();
-        return view('student.home')->with(['student'=>$student,'doubleStudent'=>$doubleStudent,'petitions'=>$petitions,'group'=>$group,'teacher'=>$teacher,'humans'=>$humans,'user'=>$user]);
-      } else {//se o aluno nao tiver dupla
-        return redirect('Sair');
-      }
-    } else {
-      return redirect()->back();
+      $dados = $this->service->index();
+      return view('student.home')->with($dados);
+    } else {//se o aluno nao tiver dupla
+      return redirect('Sair');
     }
   }
 
@@ -81,4 +63,20 @@ class StudentController extends Controller
        
     return $this->service->destroy($student, $request);
   }
+
+  public function preferences()
+    {
+      $user = User::find(Auth::user()->id);
+      #dd($user);
+      $human = Human::where('user_id', $user->id)->first();
+      return view('student.preferences')->with(['user' => $user, 'human' => $human]);
+    }
+
+    public function preferencesEditar(Request $request)
+    {
+      $user = User::find($request['idUser']);
+      $human = Human::find($request['idHuman']);
+
+      return $this->service->editar($human, $user, $request);
+    }
 }
