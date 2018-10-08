@@ -208,4 +208,99 @@ class PetitionService
         $petition->defender_id = null; //defensor nao deve estar vinculado a uma versao anterior, somente a vesao finalizada
         $petition->save();
     }
+
+    public function changePetition(Petition $petition, Petition $oldPetition)
+    {
+        $oldPetition->visible = 'false';
+        $petition->student_ok = $oldPetition->student_ok;
+        $petition->teacher_ok = $oldPetition->teacher_ok;
+        $petition->defender_ok = $oldPetition->defender_ok;
+        $petition->defender_id = $oldPetition->defender_id;
+
+        //$comment = Comment::where('petition_id', $oldPetition->id)->orderBy('id', 'desc')->first(); //pegar o ultimo comentario da petição antiga
+        $comments = Comment::where('petition_id', $oldPetition->id); //pegar todos
+        if ($comments != null) {
+            foreach ($comments as $comment) {
+                Comment::create([
+                    'content' => $comment->content,
+                    'human_id' => $comment->human_id,
+                    'petition_id' => $petition->id, //copiando o comentario da petição antiga para a peticao escolhida
+                ]);
+            }
+        }
+
+        $oldPetition->student_ok = null;
+        $oldPetition->teacher_ok = null;
+        $oldPetition->defender_ok = null;
+        $oldPetition->defender_id = null;
+        $oldPetition->save();
+        $petition->visible = 'true';
+        $petition->save();
+        $status = "Deu certo";
+    }
+
+    public function copyPetition(Petition $petition)
+    {
+        $p = Petition::create([
+            'description' => $petition->description,
+            'content' => $petition->content,
+            'template_id' => $petition->template_id,
+            'doubleStudent_id' => $petition->doubleStudent_id,
+            'group_id' => $petition->group_id,
+            'version' => 1,
+            'visible' => 'true',
+        ]);
+        $p->petitionFirst = $p->id;
+        $p->save();
+
+        $status = "Deu certo";
+
+        return $status;
+    }
+
+    public function delete(Petition $petition)
+    {
+        $photos = Photo::all()->where('petition_id', $petition->id);
+
+        if ($photos != null) {
+            Storage::disk('public')->delete('petition' . $petition->id);
+            foreach ($photos as $photo) {
+                $photo->delete();
+            }
+        }
+        $petition->delete();
+
+    }
+
+    public function edit(Petition $petition)
+    {
+        $templates = Template::all();
+        $photos = Photo::all()->where('petition_id', $petition->id);
+        $IsPhotos = $photos->count() != 0 ? 'true' : 'false';
+        $comments = Comment::all()->where('petition_id', $petition->id);
+
+        return ['petition' => $petition, 'templates' => $templates, 'photos' => $photos, 'IsPhotos' => $IsPhotos, 'comments' => $comments];
+    }
+
+    public function show(Petition $petition)
+    {
+        $humans = Human::all()->where('status', 'active');
+        $temps = Template::all();
+        $petitions = Petition::all()->where('petitionFirst', $petition->petitionFirst);
+        $photos = Photo::all()->where('petition_id', $petition->id);
+        $comments = Comment::all()->where('petition_id', $petition->id);
+
+        return ['petition' => $petition, 'humans' => $humans, 'temps' => $temps, 'petitions' => $petitions, 'photos' => $photos, 'comments' => $comments];
+    }
+
+    public function avaliar(Petition $petition)
+    {
+
+        $photos = Photo::all()->where('petition_id', $petition->id);
+        $humans = Human::all()->where('status', 'active');
+        $template = Template::find($petition->template_id);
+        $comments = Comment::all()->where('petition_id', $petition->id);
+
+        return ['petition' => $petition, 'photos' => $photos, 'humans' => $humans, 'template' => $template, 'comments' => $comments];
+    }
 }
