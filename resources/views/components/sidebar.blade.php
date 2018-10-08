@@ -1,7 +1,10 @@
 <div id="mySidenav" class="sidenav d-none d-lg-block gradient">
-  <div class="sidenav-header">    
+  <div class="sidenav-header">   
+    <a href="{{URL::to('Admin/')}}"> 
       <img src="{{URL::asset('assets/img/fap.png')}}" alt="" height="50px">
       <!-- <img src="" alt="logo" style="height: 50"/> -->    
+  
+   </a>
   </div>
 
   
