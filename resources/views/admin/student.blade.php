@@ -2,10 +2,11 @@
 @section('component')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-lg-10">
-    
-      <div class="card">
-        <h4 class="card-title">Gerenciar Alunos</h4>
+    <div class="col-lg-10 my-5">
+      <div class="card my-5">
+        <div class="card-header">
+          <h4>Gerenciar Alunos</h4>
+        </div>
         <div class="card-body">
           <div class="col-lg-12">
             <div class="card">
@@ -81,7 +82,7 @@
         </div>
       </div>
     </div>
-  </div>
+  
 
 
   <!-- Modal -->
@@ -218,4 +219,5 @@
     </div>
   </div>
 </div>
+
 @endsection

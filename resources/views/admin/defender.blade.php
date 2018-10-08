@@ -2,9 +2,11 @@
 @section('component')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-lg-10">
-      <div class="card">
-        <h4 class="card-title">Gerenciar Defensores</h4>
+    <div class="col-lg-10 my-5">
+      <div class="card my-5">
+        <div class="card-header">
+          <h4>Gerenciar Defensores</h4>
+        </div>
 
         <div class="card-body">
           <div class="col-lg-12">
@@ -135,7 +137,7 @@
     </div>
   </div>
 </div>
-</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="editModalDefender" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -215,5 +217,6 @@
     </div>
   </div>
 </div>
+
 </div>
 @endsection
