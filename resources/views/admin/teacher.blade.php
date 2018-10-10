@@ -111,24 +111,28 @@
               <label for="">E-mail *</label>
               <input type="email" name="email" class="form-control" maxlength="80" value="" required>
             </div>
-            <div class="row" style="margin-left:2px">
-              <div class="form-group">
-              <label for="">Sexo</label>
-              <select class="form-control" name="gender" required>
-                <option value="">Selecione o sexo</option>
-                <option value="Masculino">Masculino</option>
-                <option value="Feminino">Feminino</option>
-              </select>
-            </div>
-            <div class="form-group">
-                <label for="">Telefone</label>
-                <input type="tel" name="phone" class="form-control input-phone" value="">
+            <div class="row">
+                <div class="col-lg-5">
+                  <div class="form-group">
+                    <label for="">Sexo</label>
+                    <select class="form-control" name="gender" required>
+                      <option value="">Selecione o sexo</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Feminino">Feminino</option>
+                    </select>
+                  </div>
               </div>
-            </div>
+              <div class="col-lg-7">
+                <div class="form-group">
+                  <label for="">Telefone</label>
+                  <input type="tel" name="phone" class="form-control input-phone" value="">
+                </div>
+              </div>
+              </div>
             <div class="form-group">
               <label for="">Senha *</label>
               <div class="input-group">
-                <input type="text" name="password" class="form-control" id="inputSenha" required>
+                <input type="password" name="password" class="form-control" id="inputSenha" required>
               </div>
             </div>
             <div class="modal-footer">
