@@ -61,7 +61,7 @@
                               <td style="font-size:10pt" class="text-center">{{$doubleStudents->where('group_id',$group->id)->count()}}</td>
                               <!--Pegar qtd de peticoes por dupla-->
                               <td style="font-size:10pt;width:15%" class="text-center">
-                                <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalGroup" onclick="editModalGroup('{{$group->id}}','{{$group->name}}','{{$group->teacher_id}}')" title="Editar Grupo"><i class="fa fa-pencil"></i></button>
+                                <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalGroup" onclick="editModalGroup('{{$group->id}}','{{$group->name}}','{{$group->teacher_id}}')" title="Editar Grupo"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-outline-danger" role="button" data-toggle="modal" data-target="#deleteModalGroup" onclick="deleteGroup('{{$group->id}}','{{$group->name}}')" title="Excluir Grupo"><i class="fa fa-trash"></i></button>
                               </td>
                             </tr>

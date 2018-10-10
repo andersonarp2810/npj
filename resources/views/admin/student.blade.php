@@ -65,7 +65,7 @@
                             <td style="font-size:10pt" class="text-center">{{$student->doubleS}}</td>
 
                             <td style="font-size:10pt;width:15%" class="text-center">
-                              <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalStudent" onclick="editStudent('{{$student->id}}','{{$student->name}}','{{$student->user->email}}','{{$student->gender}}','{{$student->phone}}')" title="Editar Aluno"><i class="fa fa-pencil"></i></button>
+                              <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalStudent" onclick="editStudent('{{$student->id}}','{{$student->name}}','{{$student->user->email}}','{{$student->gender}}','{{$student->phone}}')" title="Editar Aluno"><i class="fa fa-edit"></i></button>
                               <button type="button" class="btn btn-outline-danger" role="button" data-toggle="modal" data-target="#deleteModalStudent" onclick="deleteStudent('{{$student->id}}','{{$student->name}}')" title="Excluir Aluno"><i class="fa fa-trash"></i></button>
                             </td>
                           </tr>
