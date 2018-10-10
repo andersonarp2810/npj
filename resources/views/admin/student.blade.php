@@ -170,23 +170,27 @@
               <label for="">E-mail</label>
               <input type="text" name="email" class="form-control" maxlength="80" value="" id="studentEmail" required>
             </div>
-            <div class="row" style="margin-left:2px">
-              <div class="form-group">
-                <label for="">Sexo</label>
-                <select class="form-control" name="gender" id="studentGender" required>
-                  <option value="">Selecione o sexo</option>
-                  <option value="Masculino">Masculino</option>
-                  <option value="Feminino">Feminino</option>
-                </select>
+            <div class="row">
+                <div class="col-lg-5">
+                  <div class="form-group">
+                    <label for="">Sexo</label>
+                    <select class="form-control" name="gender" required>
+                      <option value="">Selecione o sexo</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Feminino">Feminino</option>
+                    </select>
+                  </div>
               </div>
-              <div class="form-group">
-                <label for="">Telefone</label>
-                <input type="tel" name="phone" class="form-control input-phone" id="studentPhone" value="">
+              <div class="col-lg-7">
+                <div class="form-group">
+                  <label for="">Telefone</label>
+                  <input type="tel" name="phone" class="form-control input-phone" value="">
+                </div>
               </div>
-            </div>
+              </div>
             <div class="form-group">
               <label for="">Senha</label>
-              <input type="text" name="password" class="form-control">
+              <input type="password" name="password" class="form-control">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
