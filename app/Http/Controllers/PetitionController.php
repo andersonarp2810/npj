@@ -182,14 +182,17 @@ class PetitionController extends Controller
 
         if ($petition != null) {
             $hu = Human::all()->where('user_id', Auth::user()->id)->first();
-            $doubleHu = DoubleStudent::all()->where('student_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
-            if ($doubleHu == null) {
-                $doubleHu = DoubleStudent::all()->where('student2_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
-            } // somente quem for da dupla pode editar
+            if (Auth::user()->type == 'student') {
+                $doubleHu = DoubleStudent::all()->where('student_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
+                if ($doubleHu == null) {
+                    $doubleHu = DoubleStudent::all()->where('student2_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
+                } // somente quem for da dupla pode acessar
+            }
 
             if ($doubleHu != null) { //se o usuario estiver consultando a sua peticao entoa OK
                 $dados = $this->service->show($petition);
-                return view('student.petitionShow')->with($dados);
+                $view = Auth::user()->type . "petitionShow";
+                return view($view)->with($dados);
             }
         }
         return redirect()->back();
@@ -216,5 +219,21 @@ class PetitionController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function emitir(Request $request, $id)
+    {
+        $defender = Human::all()->where('user_id', Auth::user()->id)->first();
+        $humans = Human::all()->where('status', 'active');
+        $temps = Template::all()->where('status', 'active');
+        $petition = Petition::find($id);
+        if ($petition != null && $petition->defender_id == $defender->id && $petition->visible == 'true') {
+            $photos = Photo::all()->where('petition_id', $petition->id);
+            $comments = Comment::all()->where('petition_id', $petition->id);
+            return view('defender.petitionEmitir')->with(['humans' => $humans, 'temps' => $temps, 'petition' => $petition, 'photos' => $photos, 'comments' => $comments]);
+        } else {
+            return redirect()->back();
+        }
+
     }
 }

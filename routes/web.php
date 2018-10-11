@@ -228,35 +228,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Defensor'], function () {
      */
     Route::get('Peticoes', 'PetitionController@index'); //ver as peticoes das quais ele pertence
 
-    Route::get('Peticao/Show/{id}', function ($id) {
-        $petition = Petition::find($id);
-        $hu = Human::all()->where('user_id', Auth::user()->id)->first();
+    Route::get('Peticao/Show/{id}', 'PetitionController@show');
 
-        if ($petition != null) { //se o usuario estiver consultando a sua peticao entoa OK
-            $humans = Human::all()->where('status', 'active');
-            $temps = Template::all();
-            $photos = Photo::all()->where('petition_id', $petition->id);
-            $comments = Comment::all()->where('petition_id', $petition->id)->where('human_id', $hu->id);
-            return view('defender.petitionShow')->with(['petition' => $petition, 'humans' => $humans, 'temps' => $temps, 'photos' => $photos, 'comments' => $comments]);
-        } else {
-            return redirect()->back();
-        }
-    });
-
-    Route::get('Peticao/Emitir/{id}', function ($id) {
-
-        $defender = Human::all()->where('user_id', Auth::user()->id)->first();
-        $humans = Human::all()->where('status', 'active');
-        $temps = Template::all()->where('status', 'active');
-        $petition = Petition::find($id);
-        if ($petition != null && $petition->defender_id == $defender->id && $petition->visible == 'true') {
-            $photos = Photo::all()->where('petition_id', $petition->id);
-            $comments = Comment::all()->where('petition_id', $petition->id);
-            return view('defender.petitionEmitir')->with(['humans' => $humans, 'temps' => $temps, 'petition' => $petition, 'photos' => $photos, 'comments' => $comments]);
-        } else {
-            return redirect()->back();
-        }
-    });
+    Route::get('Peticao/Emitir/{id}', 'PetitionController@emitir');
     //Ao ver as peticoes, ele irá ver também todos os comentarios que ele fez referentes aquela peticao
     Route::get('Peticao/Avaliar/{id}', 'PetitionController@avaliar');
 
