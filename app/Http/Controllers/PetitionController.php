@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Entities\Comment;
 use App\Entities\DoubleStudent;
-use App\Entities\Group;
 use App\Entities\Human;
 use App\Entities\Petition;
-use App\Entities\Photo;
 use App\Entities\Template;
 use App\Services\PetitionService;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
-use Storage;
 
 class PetitionController extends Controller
 {
@@ -58,7 +54,7 @@ class PetitionController extends Controller
         if (Auth::user()->type == 'student') { // só autenticação
 
             $student = Human::all()->where('user_id', '=', Auth::user()->id)->where('status', '=', 'active')->first();
-            $this->service->enviar($request, $student);
+            $this->service->newPetition($request, $student);
 
             return redirect('Aluno/Peticoes');
 
@@ -71,186 +67,41 @@ class PetitionController extends Controller
     {
         if (Auth::user()->type == 'student') { // autenticação
             $petition = Petition::find($request['id']);
-            if ($petition != null) {
+            if ($petition != null) { // não requisitar id indisponível
                 if ($petition->student_ok == 'false') { //aluno esta editando Peticao RECUSADA
                     if ($request->botao == 'ENVIAR') { //aluno vai ENVIAR a Petição RECUSADA editada
+                        $this->service->newVersion($request, $petition);
 
-                        $comment = Comment::where('petition_id', $petition->id)->orderBy('id', 'desc')->first(); //pegar o ultimo comentario
-                        //$comment = Comment::where('petition_id',$petition->id);
-
-                        $photos = Photo::all()->where('petition_id', $petition->id);
-
-                        //cria nova versao da peticao
-                        $totalVersao = Petition::all()->where('petitionFirst', $petition->petitionFirst)->count();
-
-                        $p = Petition::create([
-                            'description' => $petition->description,
-                            'content' => $request['content'],
-                            'student_ok' => 'true', //era 'false' agr é 'true'
-                            'teacher_ok' => $petition->teacher_ok,
-                            'defender_ok' => $petition->defender_ok,
-                            'defender_id' => $petition->defender_id,
-                            'template_id' => $petition->template_id,
-                            'doubleStudent_id' => $petition->doubleStudent_id,
-                            'group_id' => $petition->group_id,
-                            'version' => $totalVersao + 1,
-                            'visible' => 'true',
-                        ]);
-                        $p->petitionFirst = $petition->petitionFirst;
-                        $p->save();
-
-                        if ($photos != null) {
-                            foreach ($photos as $photo) { //fotos da petition antiga
-
-                                $po = Photo::create([
-                                    'photo' => $photo->photo,
-                                    'petition_id' => $p->id, //id da nova Petition
-                                ]);
-                                $diskPublic = Storage::disk('public');
-                                //Storage::disk('public')->put('petition/'.$petition->id,$file),
-                                $diskPublic->copy('petition/' . $petition->id . '/' . $photo->photo, 'petition/' . $p->id . '/' . $po->photo);
-                            }
-                        } else {
-                            if ($request['images'] != null) {
-                                $photos = Photo::all()->where('petition_id', $petition->id);
-
-                                if ($photos->count() == 0) { //se nao existirem fotos
-                                    $files = $request->file('images');
-
-                                    foreach ($files as $file) {
-
-                                        $fname = $file->getClientOriginalName();
-                                        dd($petition->id);
-                                        Photo::create([
-                                            'photo' => Storage::disk('public')->put($fname, $file),
-                                            'petition_id' => $petition->id,
-                                        ]);
-                                        $diskPublic = Storage::disk('public');
-                                        $diskPublic->put('petition/' . $petition->id . '/' . $fname, $file);
-                                    }
-                                }
-                            }
-                        }
-
-                        if ($comment != null) {
-                            Comment::create([
-                                'content' => $comment->content,
-                                'human_id' => $comment->human_id,
-                                'petition_id' => $p->id, //passando o ultimo comentario da versao anterior para essa nova versão da petição
-                            ]);
-                        }
-
-                        /*if($comment != null){
-                        foreach($comment as $co){
-                        Comment::create([
-                        'content'     => $co->content,
-                        'human_id'    => $co->human_id,
-                        'petition_id' => $p->id,//passando o comentario da versao anterior para essa nova versão da petição
-                        ]);
-                        }
-                        }**/
-
-                        $petition->visible = 'false'; //tornour-se versão anterior
-                        $petition->student_ok = null;
-                        $petition->teacher_ok = null;
-                        $petition->defender_ok = null;
-                        $petition->defender_id = null; //defensor nao deve estar vinculado a uma versao anterior, somente a vesao finalizada
-                        $petition->save();
                         $request->session()->flash('status', 'Petição Enviada com sucesso!');
+
                     } else if ($request->botao == 'SALVAR') { //aluno vai apenas salvar as alterações e nao vai ENVIAR a Petição RECUSADA
-                        if ($request['images'] != null) {
-                            $photos = Photo::all()->where('petition_id', $petition->id);
-
-                            if ($photos->count() == 0) { //se nao existirem fotos
-                                $files = $request->file('images');
-
-                                foreach ($files as $file) {
-
-                                    $fname = $file->getClientOriginalName();
-
-                                    Photo::create([
-                                        'photo' => Storage::disk('public')->put($fname, $file),
-                                        'petition_id' => $petition->id,
-                                    ]);
-                                    $diskPublic = Storage::disk('public');
-                                    $diskPublic->put('petition/' . $petition->id . '/' . $fname, $file);
-                                }
-                            }
-                        }
-                        $petition->description = $request->description;
-                        $petition->content = $request->content;
-                        $petition->save();
+                        $this->service->updateDraft($request, $petition);
                         $request->session()->flash('status', 'Alterações foram salvas com Sucesso!!');
                     }
                     return redirect('Aluno/Peticoes');
+
                 } else if ($petition->student_ok == null) { //aluno esta editando Peticao RASCUNHO
                     if ($request->botao == 'ENVIAR') { //aluno vai enviar Petição RASCUNHO editada
 
-                        $doubleStudent = DoubleStudent::find($petition->doubleStudent_id);
-                        $doubleStudent->qtdPetitions = ($doubleStudent->qtdPetitions + 1);
-                        $group = Group::find($doubleStudent->group_id);
-                        $group->qtdPetitions = ($group->qtdPetitions + 1);
-                        $doubleStudent->save();
-                        $group->save();
-
-                        if ($request['images'] != null) {
-                            $photos = Photo::all()->where('petition_id', $petition->id);
-
-                            if ($photos->count() == 0) { //se nao existirem fotos
-                                $files = $request->file('images');
-
-                                foreach ($files as $file) {
-
-                                    $fname = $file->getClientOriginalName();
-                                    dd($petition->id);
-                                    Photo::create([
-                                        'photo' => Storage::disk('public')->put($fname, $file),
-                                        'petition_id' => $petition->id,
-                                    ]);
-                                    $diskPublic = Storage::disk('public');
-                                    $diskPublic->put('petition/' . $petition->id . '/' . $fname, $file);
-                                }
-                            }
-                        }
-
-                        $petition->description = $request['description'];
-                        $petition->content = $request['content'];
                         $petition->student_ok = 'true'; //student_ok era null, agr é true
-                        $petition->save();
+                        $this->service->updateDraft($request, $petition);
+
+                        $doubleStudent = DoubleStudent::find($petition->doubleStudent_id);
+                        $this->service->countPetition($doubleStudent);
+
                         $request->session()->flash('status', 'Petição Enviada com sucesso!');
+
                     } else if ($request->botao == 'SALVAR') { //aluno vai salvar Petição RASCUNHO editada
-
-                        if ($request['images'] != null) {
-                            $photos = Photo::all()->where('petition_id', $petition->id);
-
-                            if ($photos->count() == 0) { //se ainda nao existirem fotos
-                                $files = $request->file('images');
-
-                                foreach ($files as $file) {
-
-                                    $fname = $file->getClientOriginalName();
-
-                                    Photo::create([
-                                        'photo' => Storage::disk('public')->put($fname, $file),
-                                        'petition_id' => $petition->id,
-                                    ]);
-                                    $diskPublic = Storage::disk('public');
-                                    $diskPublic->put('petition/' . $petition->id . '/' . $fname, $file);
-                                }
-                            }
-                        }
-
-                        $petition->description = $request['description'];
-                        $petition->content = $request['content'];
-                        $petition->save();
+                        $this->service->updateDraft($request, $petition);
                         $request->session()->flash('status', 'Alterações foram salvas com Sucesso!!');
                     }
+
                     return redirect('Aluno/Peticoes');
                 }
-            } else {
+            } else { // se petição nula
                 return redirect()->back();
             }
-        } else {
+        } else { // se usuário não é aluno
             return redirect()->back();
         }
     }
@@ -262,37 +113,14 @@ class PetitionController extends Controller
         $pOld = Petition::all()->where('petitionFirst', $p->petitionFirst)->where('visible', 'true')->first(); //Peticao antiga
         if ($p != null && $pOld != null && $p != $pOld) {
             if ($pOld->defender_ok != 'true') { //Se defensor nao tiver APROVADO a peticao antiga, FAZ A TROCA DAS PETICOES
-                $pOld->visible = 'false';
-                $p->student_ok = $pOld->student_ok;
-                $p->teacher_ok = $pOld->teacher_ok;
-                $p->defender_ok = $pOld->defender_ok;
-                $p->defender_id = $pOld->defender_id;
-
-                $comment = Comment::where('petition_id', $pOld->id)->orderBy('id', 'desc')->first(); //pegar o ultimo comentario da petição antiga
-                //$comment = Comment::where('petition_id',$pOld->id);
-                if ($comment != null) {
-                    Comment::create([
-                        'content' => $comment->content,
-                        'human_id' => $comment->human_id,
-                        'petition_id' => $p->id, //passando o comentario da petição antiga para a peticao escolhida
-                    ]);
-                }
-
-                $pOld->student_ok = null;
-                $pOld->teacher_ok = null;
-                $pOld->defender_ok = null;
-                $pOld->defender_id = null;
-                $pOld->save();
-                $p->visible = 'true';
-                $p->save();
-                $status = "Deu certo";
+                // if separado para não quebrar caso $pOld seja null
+                $this->service->changePetition($p, $pOld);
                 return response()->json(['status' => $status]);
 
             }
-        } else {
-            return redirect()->back();
         }
-        return null;
+
+        return redirect()->back(); // se não passar nos dois ifs
 
     }
 
@@ -304,24 +132,10 @@ class PetitionController extends Controller
         if ($petition != null) { //se a petição ja tiver sido finalizada FAZ A COPIA DA PETIÇÃO
 
             //cria nova versao da peticao
-            $p = Petition::create([
-                'description' => $petition->description,
-                'content' => $petition->content,
-                'template_id' => $petition->template_id,
-                'doubleStudent_id' => $petition->doubleStudent_id,
-                'group_id' => $petition->group_id,
-                'version' => 1,
-                'visible' => 'true',
-            ]);
-            $p->petitionFirst = $p->id;
-            $p->save();
-
-            $status = "Deu certo";
+            $status = $this->service->copyPetition($petition);
             return response()->json(['status' => $status]);
-        } else {
-            return redirect()->back();
         }
-        return null;
+        return redirect()->back();
     }
 
     public function escolherTemplate(Request $request)
@@ -334,24 +148,92 @@ class PetitionController extends Controller
     {
         $petition = Petition::find($request['id']);
         if ($petition != null && $petition->student_ok == '') { //peticao diferente de nulo e sendo RASCUNHO
-            $photos = Photo::all()->where('petition_id', $petition->id);
-
-            if ($photos != null) {
-                Storage::disk('public')->delete('petition' . $petition->id);
-                foreach ($photos as $photo) {
-                    //Storage::delete('petition/'.$petition->id.'/'.$photo);
-
-                    //Storage::disk('public')->delete('petition/'.$petition->id.'/'.$photo);
-
-                    $photo->delete();
-                }
-            }
-            $petition->delete();
+            $this->service->delete($petition);
             $request->session()->flash('status', 'Petição rascunho excluida com Sucesso!!');
-            return redirect('Aluno/Peticoes');
-        } else {
-            return redirect('Aluno/Peticoes');
         }
+        return redirect('Aluno/Peticoes');
+
     }
 
+    public function edit(Request $request, $id)
+    {
+        $petition = Petition::find($id);
+
+        if ($petition != null) {
+            $hu = Human::all()->where('user_id', Auth::user()->id)->first();
+            $doubleHu = DoubleStudent::all()->where('student_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
+            if ($doubleHu == null) {
+                $doubleHu = DoubleStudent::all()->where('student2_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
+            } // somente quem for da dupla pode editar
+
+            if ($doubleHu != null && $petition->visible == 'true' && $petition->student_ok != 'true') {
+                // se usuário é da dupla, se a petição não foi deletada e se não foi enviada
+                $dados = $this->service->edit($petition);
+                return view('student.petitionEditar')->with($dados);
+            }
+        }
+        return redirect()->back();
+
+    }
+
+    public function show(Request $request, $id)
+    {
+        $petition = Petition::find($id);
+
+        if ($petition != null) {
+            $hu = Human::all()->where('user_id', Auth::user()->id)->first();
+            if (Auth::user()->type == 'student') {
+                $doubleHu = DoubleStudent::all()->where('student_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
+                if ($doubleHu == null) {
+                    $doubleHu = DoubleStudent::all()->where('student2_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
+                } // somente quem for da dupla pode acessar
+            }
+
+            if ($doubleHu != null) { //se o usuario estiver consultando a sua peticao entoa OK
+                $dados = $this->service->show($petition);
+                $view = Auth::user()->type . "petitionShow";
+                return view($view)->with($dados);
+            }
+        }
+        return redirect()->back();
+
+    }
+
+    public function avaliar(Request $request, $id)
+    {
+        if (Auth::user()->type == 'teacher' || Auth::user()->type == 'defender') {
+            $petition = Petition::find($id);
+            if ($petition != null) {
+                $human = Human::all()->where('user_id', Auth::user()->id)->first();
+                if (Auth::user()->type == 'teacher') {
+                    $group = Group::find($petition->group_id);
+                    if ($human->id != $group->teacher_id) {
+                        return redirect()->back();
+                    }
+                }
+                if ($petition != null && $petition->visible == 'true') {
+                    $dados = $this->service->avaliar($petition);
+                    return view('defender.petitionAvaliable')->with($dados);
+                }
+            }
+        }
+
+        return redirect()->back();
+    }
+
+    public function emitir(Request $request, $id)
+    {
+        $defender = Human::all()->where('user_id', Auth::user()->id)->first();
+        $humans = Human::all()->where('status', 'active');
+        $temps = Template::all()->where('status', 'active');
+        $petition = Petition::find($id);
+        if ($petition != null && $petition->defender_id == $defender->id && $petition->visible == 'true') {
+            $photos = Photo::all()->where('petition_id', $petition->id);
+            $comments = Comment::all()->where('petition_id', $petition->id);
+            return view('defender.petitionEmitir')->with(['humans' => $humans, 'temps' => $temps, 'petition' => $petition, 'photos' => $photos, 'comments' => $comments]);
+        } else {
+            return redirect()->back();
+        }
+
+    }
 }
