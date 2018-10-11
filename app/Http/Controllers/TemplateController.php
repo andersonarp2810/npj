@@ -12,8 +12,16 @@ use Auth;
 
 use Illuminate\Http\Request;
 
+use App\Services\TemplateService;
+
 class TemplateController extends Controller
 {
+
+public function __construct(TemplateService $service)
+    {
+        $this->service = $service;
+    }
+//--------------------------------------------------------------------------------------------------
     public function index(){
 
       if(Auth::user()->type == 'teacher'){
@@ -31,7 +39,7 @@ class TemplateController extends Controller
       }
 
     }
-
+//--------------------------------------------------------------------------------------------------
     public function add(){//Professor
       if(Auth::user()->type != 'teacher'){
         return redirect()->back();
@@ -39,75 +47,32 @@ class TemplateController extends Controller
         $humans = Human::all()->where('status','active');
         return view('teacher.templateCadastrar')->with(['humans'=>$humans]);
     }
-
+//--------------------------------------------------------------------------------------------------
     public function store(Request $request){
       if(Auth::user()->type == 'teacher'){
-        $teacher = Human::all()->where('user_id','=',Auth::user()->id)->where('status','=','active')->first();
-        if($request->botao == 'POSTAR'){//professor clicou em POSTAR Template
-          $template = Template::create([
-            'title'      => $request['title'],
-            'content'    => $request['content'],
-            'teacher_id' => $teacher->id,
-          ]);
-          $request->session()->flash('status', 'Template postado com sucesso!');
-        }else if($request->botao == 'SALVAR'){//Professor clicou em SALVAR Template
-          $template = Template::create([
-            'title'      => $request['title'],
-            'content'    => $request['content'],
-            'teacher_id' => $teacher->id,
-            'status'     => 'inactive',
-          ]);
-          $request->session()->flash('status', 'Template salvo com sucesso!');
-        }
-        return redirect('Professor/Templates');
+        return $this->service->store($request);
       }else{
           return redirect()->back();
       }
     }
-
+//--------------------------------------------------------------------------------------------------
     public function update(Request $request){
       if(Auth::user()->type == 'teacher'){
-        $teachers = Human::all()->where('user_id','=',Auth::user()->id)->where('status','=','active');
-        $teacher = $teachers->first();//professor
-        $template = Template::find($request['idTemplate']);
-
-        if($template->title != $request['title']){
-          $template->title = $request['title'];
-          $template->save();
-        }
-
-        if($template->content != $request['content']){
-          $template->content = $request['content'];
-          $template->save();
-        }
-        $request->session()->flash('status', 'Template editado com Sucesso!!');
-        return redirect('Professor/Templates');
+        return $this->service->update($request);
       }else{
           return redirect()->back();
       }
     }
-
+//--------------------------------------------------------------------------------------------------
 
       public function editStatus(Request $request)
       {
         if(Auth::user()->type == 'teacher'){
-          $template = Template::find($request['id']);
-          if($template != null){
-              $status = "";
-              if($template->status == "active"){
-                $template->status = "inactive";
-                $status = "inactive";
-              }else{
-                $template->status = "active";
-                $status = "active";
-              }
-              $template->save();
-              return response()->json(['status' => $status]);
-          }
+          return $this->service->editStatus($request);
         }else{
           return redirect()->back();
         }
         return null;
       }
-
+//--------------------------------------------------------------------------------------------------
 }
