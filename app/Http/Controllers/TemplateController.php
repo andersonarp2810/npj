@@ -2,77 +2,97 @@
 
 namespace App\Http\Controllers;
 
-use App\Entities\Petition;
 use App\Entities\Human;
-use App\Entities\DoubleStudent;
-use App\Entities\Group;
 use App\Entities\Template;
+use App\Services\TemplateService;
 use App\User;
 use Auth;
-
 use Illuminate\Http\Request;
-
-use App\Services\TemplateService;
 
 class TemplateController extends Controller
 {
 
-public function __construct(TemplateService $service)
+    public function __construct(TemplateService $service)
     {
         $this->service = $service;
     }
 //--------------------------------------------------------------------------------------------------
-    public function index(){
+    public function index()
+    {
 
-      if(Auth::user()->type == 'teacher'){
-        $teachers = Human::all()->where('user_id','=',Auth::user()->id)->where('status','=','active');
-        $teacher = $teachers->first();//professor
-        $templates = Template::all()->where('teacher_id',$teacher->id);
-        $defenders = Human::all()->where('user_id','=',Auth::user()->id)->where('status','=','active');
-        $defender = $defenders->first();
-        $petitions = Petition::all()->where('defender_id','=',$defender->id);
-        $humans = Human::all()->where('status','=','active');
-        $user = Auth::user();
-        return view('teacher.template')->with(['teacher'=>$teacher,'templates'=>$templates,'defender'=>$defender,'petitions'=>$petitions,'humans'=>$humans,'user'=>$user]);
-      }else{
-          return redirect()->back();
-      }
+        if (Auth::user()->type == 'teacher') {
+            $dados = $this->service->index();
+            return view('teacher.template')->with($dados);
+        } else {
+            return redirect()->back();
+        }
 
     }
 //--------------------------------------------------------------------------------------------------
-    public function add(){//Professor
-      if(Auth::user()->type != 'teacher'){
-        return redirect()->back();
-      }
-        $humans = Human::all()->where('status','active');
-        return view('teacher.templateCadastrar')->with(['humans'=>$humans]);
+    public function add()
+    { //Professor
+        if (Auth::user()->type != 'teacher') {
+            return redirect()->back();
+        }
+        $humans = Human::all()->where('status', 'active');
+        return view('teacher.templateCadastrar')->with(['humans' => $humans]);
     }
 //--------------------------------------------------------------------------------------------------
-    public function store(Request $request){
-      if(Auth::user()->type == 'teacher'){
-        return $this->service->store($request);
-      }else{
-          return redirect()->back();
-      }
+    public function store(Request $request)
+    {
+        if (Auth::user()->type == 'teacher') {
+            $this->service->store($request);
+            return redirect('Professor/Templates');
+        } else {
+            return redirect()->back();
+        }
     }
 //--------------------------------------------------------------------------------------------------
-    public function update(Request $request){
-      if(Auth::user()->type == 'teacher'){
-        return $this->service->update($request);
-      }else{
-          return redirect()->back();
-      }
+    public function update(Request $request)
+    {
+        if (Auth::user()->type == 'teacher') {
+            $this->service->update($request);
+            return redirect('Professor/Templates');
+        } else {
+            return redirect()->back();
+        }
     }
 //--------------------------------------------------------------------------------------------------
 
-      public function editStatus(Request $request)
-      {
-        if(Auth::user()->type == 'teacher'){
-          return $this->service->editStatus($request);
-        }else{
-          return redirect()->back();
+    public function editStatus(Request $request)
+    {
+        if (Auth::user()->type == 'teacher') {
+            $this->service->editStatus($request);
+            return response()->json(['status' => $status]);
+        } else {
+            return redirect()->back();
         }
         return null;
-      }
+    }
 //--------------------------------------------------------------------------------------------------
+
+    public function edit(Request $request, $id)
+    {
+        $template = Template::find($id);
+        $hu = Human::all()->where('user_id', Auth::user()->id)->first();
+
+        if ($template != null && ($hu->id == $template->teacher_id)) { //se template pertencer ao usuario corrente
+            return view('teacher.templateEditar')->with(['template' => $template]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function show(Request $request, $id)
+    {
+        $template = Template::find($id);
+        $hu = Human::all()->where('user_id', Auth::user()->id)->first();
+
+        if ($template != null && ($hu->id == $template->teacher_id)) { //se tempalte pertencer ao usuario corrente
+            $humans = Human::all()->where('status', 'active');
+            return view('teacher.templateShow')->with(['template' => $template, 'humans' => $humans]);
+        } else {
+            return redirect()->back();
+        }
+    }
 }

@@ -1,11 +1,6 @@
 <?php
 
-use App\Entities\Comment;
 use App\Entities\Group;
-use App\Entities\Human;
-use App\Entities\Petition;
-use App\Entities\Photo;
-use App\Entities\Template;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -162,29 +157,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Professor'], function () {
     Route::get('Templates', 'TemplateController@index');
     Route::get('Template/Add', 'TemplateController@add');
     Route::post('Template/Cadastrar', 'TemplateController@store');
-    Route::get('Template/Edit/{id}', function ($id) {
-        $template = Template::find($id);
-        $hu = Human::all()->where('user_id', Auth::user()->id)->first();
-
-        if ($template != null && ($hu->id == $template->teacher_id)) { //se template pertencer ao usuario corrente
-            return view('teacher.templateEditar')->with(['template' => $template]);
-        } else {
-            return redirect()->back();
-        }
-    });
+    Route::get('Template/Edit/{id}', 'TemplateController@edit');
     Route::post('Template/Editar', 'TemplateController@update');
     Route::post('Template/Excluir', 'TemplateController@destroy');
-    Route::get('Template/Show/{id}', function ($id) {
-        $template = Template::find($id);
-        $hu = Human::all()->where('user_id', Auth::user()->id)->first();
-
-        if ($template != null && ($hu->id == $template->teacher_id)) { //se tempalte pertencer ao usuario corrente
-            $humans = Human::all()->where('status', 'active');
-            return view('teacher.templateShow')->with(['template' => $template, 'humans' => $humans]);
-        } else {
-            return redirect()->back();
-        }
-    });
+    Route::get('Template/Show/{id}', 'TemplateController@show');
 
     Route::post('Template/Status', 'TemplateController@editStatus');
 
