@@ -7,7 +7,7 @@
         <div class="card-header">
             <div class="row">  
                 <div class="col-md-4">
-                    <h4>Gerenciar Duplas</h4>
+                    <h4>Gerenciar Grupos</h4>
                 </div>
                 <div class="col-md-5"></div>
                 <div class="col-md-2">
