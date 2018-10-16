@@ -148,37 +148,47 @@
   </div>
 
   <div id="option2" style="display:none;width:100%"><!--ranking de Duplas-->
-    <ul class="nav nav-primary">
-      <li class="nav-item">
-        <h1 class="text-center" style="font-family:arial;font-weight:800;padding-left:40%">RANKING DE DUPLAS</h1>
-      </li>
-    </ul>
-    <br><br>
-    <table class="table table-condensed table-striped table-bordered">
-      <thead class="table">
-        <tr>
-          <th style="font-size:18pt;width:20%" class="text-center">COLOCAÇÃO</th>
-          <th style="font-size:18pt" class="text-center">ALUNO1</th>
-          <th style="font-size:18pt" class="text-center">ALUNO2</th>
-          <th style="font-size:18pt" class="text-center">N° DE PETIÇÕES</th>
-          <th style="font-size:18pt" class="text-center">GRUPO</th>
-        </tr>
-      </thead>
-      <tbody>
-        <br>
-        @forelse($doubleStudents as $doubleStudent)
-            <tr>
-              <td class="text-center">{{$count++}}</td>
-              <td class="text-center">{{$humans->where('id',$doubleStudent->student_id)->first()->name}}</td>
-              <td class="text-center">{{$humans->where('id',$doubleStudent->student2_id)->first()->name}}</td>
-              <td class="text-center">{{$doubleStudent->qtdPetitions}}</td>
-              <td class="text-center">{{$groups->where('id',$doubleStudent->group_id)->first()->name}}</td>
-            </tr>
-        @empty
-            <td>Não há duplas cadastradas</td>
-        @endforelse
-      </tbody>
-    </table>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="card">
+            <div class="card-header">
+                <h4>Ranking de Duplas</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead class="thead-dark">
+                <tr>
+                  <th style="font-size:18pt;width:20%" class="text-center">COLOCAÇÃO</th>
+                  <th style="font-size:18pt" class="text-center">ALUNO1</th>
+                  <th style="font-size:18pt" class="text-center">ALUNO2</th>
+                  <th style="font-size:18pt" class="text-center">N° DE PETIÇÕES</th>
+                  <th style="font-size:18pt" class="text-center">GRUPO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <br>
+                @forelse($doubleStudents as $doubleStudent)
+                    <tr>
+                      <td class="text-center">{{$count++}}</td>
+                      <td class="text-center">{{$humans->where('id',$doubleStudent->student_id)->first()->name}}</td>
+                      <td class="text-center">{{$humans->where('id',$doubleStudent->student2_id)->first()->name}}</td>
+                      <td class="text-center">{{$doubleStudent->qtdPetitions}}</td>
+                      <td class="text-center">{{$groups->where('id',$doubleStudent->group_id)->first()->name}}</td>
+                    </tr>
+                @empty
+                    <td>Não há duplas cadastradas</td>
+                @endforelse
+              </tbody>
+            </table>
+           </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
   </div>
 
   <div id="option3" style="display:none;margin-left:2%"><!--ranking de GRUPOS-->
