@@ -5,7 +5,15 @@
     <div class="col-lg-10 my-5">
       <div class="card my-5">
         <div class="card-header">
-          <h4>Gerenciar Alunos</h4>
+          <div class="row">
+            <div class="col-md-4">
+                <h4>Gerenciar Alunos</h4>
+            </div>
+            <div class="col-md-5"></div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalStudent" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo aluno"><i class="fa fa-plus"></i> Novo Aluno</button>
+            </div>
+        </div>
         </div>
         <div class="card-body">
           <div class="col-lg-12">
@@ -25,7 +33,6 @@
                 @endif
               </div>
               <div class="row">
-                <div class="col-md-4"></div>
                 <div class="col-md-4">
                   <span class="text-center">
                     <div class="input-group">
@@ -36,9 +43,8 @@
                     </div>
                   </span>
                 </div>
-                <div class="col-md-4">
-                  <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalStudent" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo aluno"><i class="fa fa-plus"></i> Novo Aluno</button>
-                </div>
+               
+                
               </div>
               <div class="card-body">
                 <div class="table-responsive">

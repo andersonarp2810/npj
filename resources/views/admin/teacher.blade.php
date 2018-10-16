@@ -6,7 +6,15 @@
     
       <div class="card my-5">
         <div class="card-header">
-          <h4>Gerenciar Professores</h4>
+          <div class="row">
+            <div class="col-md-4">
+                <h4>Gerenciar Professores</h4>
+            </div>
+            <div class="col-md-5"></div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalTeacher" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo professor"><i class="fa fa-plus"></i> Novo Professor</button>
+            </div>
+          </div>
         </div>
 
         <div class="card-body">
@@ -27,20 +35,18 @@
                 @endif
               </div>
               <div class="row">
-                <div class="col-md-4"></div>
                 <div class="col-md-4">
-                  <span class="text-center">
-                    <div class="input-group">
-                      <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
-                      <span class="input-group-addon">
-                        <i class="fa fa-search"></i>
+                    <span class="text-center">
+                        <div class="input-group">
+                          <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
+                          <span class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                          </span>
+                        </div>
                       </span>
-                    </div>
-                  </span>
                 </div>
-                <div class="col-md-4">
-                  <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalTeacher" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo professor"><i class="fa fa-plus"></i> Novo Professor</button>
-                </div>
+                
+ 
               </div>
               <div class="card-body">
                 <div class="table-responsive">
