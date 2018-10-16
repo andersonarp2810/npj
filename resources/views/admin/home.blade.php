@@ -192,33 +192,40 @@
   </div>
 
   <div id="option3" style="display:none;margin-left:2%"><!--ranking de GRUPOS-->
-    <ul class="nav nav-primary">
-      <li class="nav-item">
-        <h1 class="text-center" style="font-family:arial;font-weight:800;padding-left:40%">RANKING DE GRUPOS</h1>
-      </li>
-    </ul>
-    <br><br>
-    <table class="table table-condensed table-striped table-bordered">
-      <thead class="table">
-        <tr>
-          <th style="font-size:18pt;width:20%" class="text-center">COLOCAÇÃO</th>
-          <th style="font-size:18pt" class="text-center">GRUPO</th>
-          <th style="font-size:18pt" class="text-center">N° DE PETIÇÕES</th>
-        </tr>
-      </thead>
-      <tbody>
-        <br>
-        @forelse($groups as $group)
-            <tr>
-              <td class="text-center">{{$countG++}}</td>
-              <td class="text-center">{{$group->name}}</td>
-              <td class="text-center">{{$group->qtdPetitions}}</td>
-            </tr>
-        @empty
-            <td>Não há grupos cadastrados</td>
-        @endforelse
-      </tbody>
-    </table>
-  </div>
-</div>
+    <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="card">
+              <div class="card-header">
+                  <h4>Ranking de Duplas</h4>
+              </div>
+              <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th style="font-size:18pt;width:20%" class="text-center">COLOCAÇÃO</th>
+                          <th style="font-size:18pt" class="text-center">GRUPO</th>
+                          <th style="font-size:18pt" class="text-center">N° DE PETIÇÕES</th>
+                        </tr>
+                     </thead>
+                    <tbody>
+                      @forelse($groups as $group)
+                          <tr>
+                            <td class="text-center">{{$countG++}}</td>
+                            <td class="text-center">{{$group->name}}</td>
+                            <td class="text-center">{{$group->qtdPetitions}}</td>
+                          </tr>
+                      @empty
+                          <td>Não há grupos cadastrados</td>
+                      @endforelse
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 @endsection
