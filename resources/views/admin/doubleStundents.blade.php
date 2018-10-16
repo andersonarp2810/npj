@@ -9,7 +9,7 @@
             <div class="col-md-4">
                 <h4>Gerenciar Duplas</h4>
             </div>
-            <div class="col-md-5"></div>
+            <div class="col-md-6"></div>
             <div class="col-md-2">
           <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModaldoubleStudent" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de nova dupla"><i class="fa fa-plus"></i> Nova Dupla</button>
             </div>

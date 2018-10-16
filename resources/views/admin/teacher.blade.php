@@ -10,8 +10,8 @@
             <div class="col-md-4">
                 <h4>Gerenciar Professores</h4>
             </div>
-            <div class="col-md-5"></div>
-            <div class="col-md-3">
+            <div class="col-md-6"></div>
+            <div class="col-md-2">
                 <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalTeacher" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo professor"><i class="fa fa-plus"></i> Novo Professor</button>
             </div>
           </div>
