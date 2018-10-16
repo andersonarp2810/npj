@@ -76,4 +76,19 @@ return $this->service->store($request);
 
    return $this->service->destroy($defender, $request);
   }
+
+  public function preferences()
+  {
+      $user = User::find(Auth::user()->id);
+      $human = Human::where('user_id', $user->id)->first();
+      return view('defender.preferences')->with(['user' => $user, 'human' => $human]);
+  }
+
+  public function preferencesEditar(Request $request)
+  {
+    $user = User::find($request['idUser']);
+    $human = Human::find($request['idHuman']);
+
+    return $this->service->editar($human, $user, $request);
+  }
 }

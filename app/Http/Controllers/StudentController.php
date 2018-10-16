@@ -65,18 +65,17 @@ class StudentController extends Controller
   }
 
   public function preferences()
-    {
+  {
       $user = User::find(Auth::user()->id);
-      #dd($user);
       $human = Human::where('user_id', $user->id)->first();
       return view('student.preferences')->with(['user' => $user, 'human' => $human]);
-    }
+  }
 
-    public function preferencesEditar(Request $request)
-    {
-      $user = User::find($request['idUser']);
-      $human = Human::find($request['idHuman']);
+  public function preferencesEditar(Request $request)
+  {
+    $user = User::find($request['idUser']);
+    $human = Human::find($request['idHuman']);
 
-      return $this->service->editar($human, $user, $request);
-    }
+    return $this->service->editar($human, $user, $request);
+  }
 }

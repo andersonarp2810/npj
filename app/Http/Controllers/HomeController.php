@@ -35,6 +35,6 @@ class HomeController extends Controller
       }elseif(Auth::user()->type == "defender"){
         return redirect('Defensor');
       }
-      return redirect('/');
+      return view('auth.login');
     }
 }
