@@ -6,12 +6,18 @@ use App\Entities\Comment;
 use App\Entities\Group;
 use App\Entities\Human;
 use App\Entities\Petition;
+use App\Services\PetitionService;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
 
 class CommentService
 {
+
+    public function __construct(PetitionService $service)
+    {
+        $this->service = $service;
+    }
 
     public function professorStore(Request $request, Petition $petition)
     {
@@ -22,6 +28,16 @@ class CommentService
         if ($request->botao == 'APROVAR') {
             $petition->teacher_ok = 'true';
             $petition->save();
+
+        }
+        else if($request->botao == 'ENVIAR'){ // professor poder corrigir e enviar petição de aluno desvinculado
+            $this->service->newVersion($request, $petition);
+            $petition->teacher_ok = 'true';
+            $petition->save();
+
+            
+        }else if($request->botao == 'SALVAR'){ // salvar sem enviar
+            $this->service->updateDraft($request, $petition);
 
         } else if ($request->botao == 'REPROVAR') { //se estiver clicado em REPROVAR
             $comment = Comment::create([
@@ -53,8 +69,8 @@ class CommentService
                 'human_id' => $defender->id,
                 'petition_id' => $request['idPetition'],
             ]);
-            $petition->student_ok = 'false';
-//          $petition->teacher_ok = null;
+            $petition->student_ok = 'true';
+            $petition->teacher_ok = 'false';
             $petition->defender_ok = 'false';
             $petition->defender_id = $defender->id; //petição passa a estar vinculada ao defensor
             $petition->save();
