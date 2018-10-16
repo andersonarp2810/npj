@@ -2,7 +2,7 @@
 @section('component')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-lg-10 my-5">
+    <div class="col-lg-12 my-5">
       <div class="card my-5">
         <div class="card-header">
             <div class="row">

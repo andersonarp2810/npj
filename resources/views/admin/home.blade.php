@@ -150,7 +150,7 @@
   <div id="option2" style="display:none;width:100%"><!--ranking de Duplas-->
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-lg-10">
+        <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
                 <h4>Ranking de Duplas</h4>
@@ -194,7 +194,7 @@
   <div id="option3" style="display:none;margin-left:2%"><!--ranking de GRUPOS-->
     <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-10">
+          <div class="col-lg-12">
             <div class="card">
               <div class="card-header">
                   <h4>Ranking de Duplas</h4>
