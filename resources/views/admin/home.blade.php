@@ -2,7 +2,8 @@
 @section('component')
 <div class="container-fluid">
   <div class="row justify-content-center mt-3 mb-3">
-    <div class="col-lg-3 col-md-5 col-12">
+    <div class="col-md-9"></div>
+    <div class="col-lg-3 col-md-3 col-12">
       <div class="input-group">
         <div class="input-group-prepend">
           <a class="btn btn-outline-secondary" style="pointer-events: none;cursor: default;text-decoration: none;color: black;"><i class="fa fa-filter fa-1x"></i></a>
