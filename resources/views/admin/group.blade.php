@@ -103,25 +103,29 @@
           </div>
           <form action="{{URL::to('Admin/Grupo/Cadastrar')}}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
-            <div class="row" style="margin-left:2%">
-              <div class="form-group">
-                <label for="">Nome</label>
-                <input type="text" name="name" class="form-control" maxlength="80" value="" required>
+            <div class="row">
+              <div class="col-lg-6">
+                  <div class="form-group">
+                      <label for="">Nome</label>
+                      <input type="text" name="name" class="form-control" maxlength="80" value="" required>
+                    </div>
               </div>
-              <div class="form-group">
-                <label for="">Professor</label>
-                <select class="form-control" name="teacher_id" required>
-                  <option value="">Selecione o professor</option>
-                  @foreach($humans as $human)
-                    <!--Está sem validação-->
-                    @if($human->user->type == 'teacher' && $human->status == 'active' && $human->groupT == 'NAO')
-                      <option value="{{$human->id}}">{{$human->name}}</option>
-                    @endif
-                  @endforeach
-                </select>
+              <div class="col-lg-6">
+                  <div class="form-group">
+                      <label for="">Professor</label>
+                      <select class="form-control" name="teacher_id" required>
+                        <option value="">Selecione o professor</option>
+                        @foreach($humans as $human)
+                          <!--Está sem validação-->
+                          @if($human->user->type == 'teacher' && $human->status == 'active' && $human->groupT == 'NAO')
+                            <option value="{{$human->id}}">{{$human->name}}</option>
+                          @endif
+                        @endforeach
+                      </select>
+                    </div>
               </div>
             </div>
-            <div class="row" style="margin-left:2px">
+            <div class="row justify-content-center">
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
