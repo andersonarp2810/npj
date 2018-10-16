@@ -103,46 +103,51 @@
             </div>
           </div>
           <br>
-          <div class="row" style="margin-left:2px">
-            <div class="form-group">
-            <label for="">Primeiro Estudante</label>
-            <select class="form-control" name="student_id" id="student_id" onchange="verify(this.value)" required>
-              <option value="">Selecione o Estudante</option>
-              @foreach($humans as $human)
-                @if($human->user->type == 'student' && $human->status == 'active' && $human->doubleS == 'NAO')
-                  <option value="{{$human->id}}">{{$human->name}}</option>
-                @endif
-              @endforeach
-            </select>
-          </div>
-          <div class="row" style="margin-left:2px">
-            <div class="form-group">
-            <label for="">Segundo Estudante</label>
-            <select class="form-control" name="student2_id" id="student2_id" required>
-              <option value="">Selecione o Estudante</option>
-              @foreach($humans as $human)
-                <div>
-                  @if($human->user->type == 'student' && $human->status == 'active' && $human->doubleS == 'NAO')
-                    <option value="{{$human->id}}" id="r" style="display:block">{{$human->name}}</option>
-                  @endif
+          <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Primeiro Estudante</label>
+                    <select class="form-control" name="student_id" id="student_id" onchange="verify(this.value)" required>
+                      <option value="">Selecione o Estudante</option>
+                      @foreach($humans as $human)
+                        @if($human->user->type == 'student' && $human->status == 'active' && $human->doubleS == 'NAO')
+                          <option value="{{$human->id}}">{{$human->name}}</option>
+                        @endif
+                      @endforeach
+                    </select>
+                  </div>
+            </div>
+            <div class="col-md-6">
+             
+                <div class="form-group">
+                <label for="">Segundo Estudante</label>
+                <select class="form-control" name="student2_id" id="student2_id" required>
+                  <option value="">Selecione o Estudante</option>
+                  @foreach($humans as $human)
+                    <div>
+                      @if($human->user->type == 'student' && $human->status == 'active' && $human->doubleS == 'NAO')
+                        <option value="{{$human->id}}" id="r" style="display:block">{{$human->name}}</option>
+                      @endif
+                    </div>
+                  @endforeach
+                </select>
                 </div>
-              @endforeach
-            </select>
+              
             </div>
-          </div>
-          <div class="row" style="margin-left:2px">
-            <div class="form-group">
-            <label for="">Grupo</label>
-            <select class="form-control" name="group_id" required>
-              <option value="">Selecione o Grupo</option>
-              @foreach($groups as $group)
-                @if($group->status == 'active')
-                  <option value="{{$group->id}}">{{$group->name}}</option>
-                @endif
-              @endforeach
-            </select>
+          
+            <div class="col-md-12">
+              <div class="form-group">
+              <label for="">Grupo</label>
+              <select class="form-control" name="group_id" required>
+                <option value="">Selecione o Grupo</option>
+                @foreach($groups as $group)
+                  @if($group->status == 'active')
+                    <option value="{{$group->id}}">{{$group->name}}</option>
+                  @endif
+                @endforeach
+              </select>
+              </div>
             </div>
-          </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
