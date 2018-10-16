@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\DoubleStudent;
+use App\Entities\Group;
 use App\Entities\Human;
 use App\Entities\Petition;
 use App\Entities\Template;
@@ -191,7 +192,7 @@ class PetitionController extends Controller
 
             if ($doubleHu != null) { //se o usuario estiver consultando a sua peticao entoa OK
                 $dados = $this->service->show($petition);
-                $view = Auth::user()->type . "petitionShow";
+                $view = Auth::user()->type . ".petitionShow";
                 return view($view)->with($dados);
             }
         }

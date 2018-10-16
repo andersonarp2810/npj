@@ -53,8 +53,8 @@ class CommentService
                 'human_id' => $defender->id,
                 'petition_id' => $request['idPetition'],
             ]);
-            $petition->student_ok = 'false';
-//          $petition->teacher_ok = null;
+            $petition->student_ok = 'true';
+            $petition->teacher_ok = 'false';
             $petition->defender_ok = 'false';
             $petition->defender_id = $defender->id; //petição passa a estar vinculada ao defensor
             $petition->save();

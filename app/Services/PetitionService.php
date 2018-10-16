@@ -90,7 +90,7 @@ class PetitionService
         }
 
         $petition = Petition::create($novapeticao);
-        countPetition($doubleStudent);
+        $this->countPetition($doubleStudent);
 
         $petition->petitionFirst = $petition->id;
         $petition->save();
@@ -119,7 +119,7 @@ class PetitionService
     public function updateDraft(Request $request, Petition $petition)
     {
 
-        addImages($request, $petition);
+        $this->addImages($request, $petition);
 
         $petition->description = $request['description'];
         $petition->content = $request['content'];
@@ -188,7 +188,7 @@ class PetitionService
                 $diskPublic->copy('petition/' . $petition->id . '/' . $photo->photo, 'petition/' . $newPetition->id . '/' . $po->photo);
             }
         }
-        addImages($request, $newPetition);
+        $this->addImages($request, $newPetition);
 
         $comments = Comment::all()->where('petition_id', $petition->id);
         if ($comments != null) {
