@@ -86,16 +86,16 @@
       
       <div class="col-lg-4 col-md-6 mb-3">
           <div class="card text-white">
-            <div class="card-header bg-warning text-white">
+            <div class="card-header bg-danger text-white">
               RECUSADAS - PROFESSOR
               <span class="fas fa-user-graduate fa-lg float-right my-1"></span>
             </div>
-            <div class="card-body text-center text-warning">
+            <div class="card-body text-center text-danger">
               <h1 class="h1 h1-responsive">
                 {{$petitions->where('student_ok','false')->where('teacher_ok','false')->count()}}
               </h1>            
             </div>
-            <div class="card-footer bg-warning">
+            <div class="card-footer bg-danger">
               <a href="" class="text-white">
                 Detalhes
                 <span class="fas fa-arrow-right mr-1"></span>
@@ -107,7 +107,7 @@
       <div class="col-lg-4 col-md-6 mb-3">
           <div class="card text-white">
             <div class="card-header bg-danger text-white">
-              RECUSADAS
+              RECUSADAS - DEFENSOR
               <span class="fas fa-user-tie fa-lg float-right my-1"></span>
             </div>
             <div class="card-body text-center text-danger">

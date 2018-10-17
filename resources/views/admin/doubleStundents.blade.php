@@ -51,10 +51,10 @@
                   <table class="table table-striped">
                     <thead class="thead-dark">
                       <tr>
-                        <th style="font-size:18pt" class="text-center">Estudante1</th>
-                        <th style="font-size:18pt" class="text-center">Estudante2</th>
-                        <th style="font-size:18pt" class="text-center">GRUPO</th>
-                        <th style="font-size:18pt" class="text-center">AÇÕES</th>
+                        <th style="font-size:16pt" class="text-center">Estudante1</th>
+                        <th style="font-size:16pt" class="text-center">Estudante2</th>
+                        <th style="font-size:16pt" class="text-center">GRUPO</th>
+                        <th style="font-size:16pt" class="text-center">AÇÕES</th>
                       </tr>
                     </thead>
                     <tbody>

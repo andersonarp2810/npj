@@ -51,12 +51,12 @@
                   <table class="table table-striped">
                     <thead class="thead-dark">
                       <tr>
-                        <th style="font-size:18pt" class="text-center">NOME</th>
-                        <th style="font-size:18pt" class="text-center">E-MAIL</th>
-                        <th style="font-size:18pt" class="text-center">GÊNERO</th>
-                        <th style="font-size:18pt" class="text-center">TELEFONE</th>
-                        <th style="font-size:18pt" class="text-center">DUPLA</th>
-                        <th style="font-size:18pt" class="text-center">AÇÕES</th>
+                        <th style="font-size:16pt" class="text-center">NOME</th>
+                        <th style="font-size:16pt" class="text-center">E-MAIL</th>
+                        <th style="font-size:16pt" class="text-center">GÊNERO</th>
+                        <th style="font-size:16pt" class="text-center">TELEFONE</th>
+                        <th style="font-size:16pt" class="text-center">DUPLA</th>
+                        <th style="font-size:16pt" class="text-center">AÇÕES</th>
                       </tr>
                     </thead>
                     <tbody>

@@ -49,11 +49,11 @@
                   <table class="table table-striped">
                     <thead class="thead-dark">
                       <tr>
-                        <th style="font-size:18pt" class="text-center">NOME</th>
-                        <th style="font-size:18pt" class="text-center">PROFESSOR</th>
-                        <th style="font-size:18pt" class="text-center">QTD DUPLAS</th>
+                        <th style="font-size:16pt" class="text-center">NOME</th>
+                        <th style="font-size:16pt" class="text-center">PROFESSOR</th>
+                        <th style="font-size:16pt" class="text-center">QTD DUPLAS</th>
       <!--                  <th>QTD PETIÇÕES</th>-->
-                        <th style="font-size:18pt" class="text-center">AÇÕES</th>
+                        <th style="font-size:16pt" class="text-center">AÇÕES</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -125,12 +125,12 @@
                     </div>
               </div>
             </div>
-            <div class="row justify-content-center">
+            
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
               </div>
-            </div>
+            
         </form>
       </div>
     </div>
