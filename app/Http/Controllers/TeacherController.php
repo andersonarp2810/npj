@@ -2,66 +2,62 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Entities\Human;
-use App\Entities\Petition;
-use App\Entities\Group;
-use App\Entities\DoubleStudent;
+use App\Services\TeacherService;
 use App\User;
 use Auth;
-use Validator;
-
-use App\Services\TeacherService;
+use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
 
-  public function __construct(TeacherService $service) {
-    $this->service = $service;
-  }
-
-  public function index()
-  {
-
-    if(Auth::user()->type == 'admin') {
-      $teachers = Human::all()->where('status','=','active');
-      return view('admin.teacher')->with(['teachers'=>$teachers]);
-    }else if(Auth::user()->type == 'teacher') {
-      $dados = $this->service->index();
-      return view('teacher.home')->with($dados);
-    } else {
-      return redirect()->back();
-    }
-  }
-
-  public function store(Request $request)
-  {
-    if(Auth::user()->type != 'admin') {
-      return redirect()->back();
-    }
-    return $this->service->store($request);
-  }
-
-  public function update(Request $request)
-  {
-    if(Auth::user()->type != 'admin'){
-      return redirect()->back();
-    } 
-    $human = Human::find($request['id']);
-    $user = User::find($human->user_id);
-
-    return $this->service->update($human, $user, $request);
-  }
-
-  public function destroy(Request $request)
-  {
-    if(Auth::user()->type != 'admin'){
-      return redirect()->back();
+    public function __construct(TeacherService $service)
+    {
+        $this->service = $service;
     }
 
-     $teacher = Human::find($request['id']);//Pega o id do professor
-     
-    return $this->service->destroy($teacher, $request);
-  }
+    public function index()
+    {
+
+        if (Auth::user()->type == 'admin') {
+            $teachers = Human::all()->where('status', '=', 'active');
+            return view('admin.teacher')->with(['teachers' => $teachers]);
+        } else if (Auth::user()->type == 'teacher') {
+            $dados = $this->service->index();
+            return view('teacher.home')->with($dados);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function store(Request $request)
+    {
+        if (Auth::user()->type != 'admin') {
+            return redirect()->back();
+        }
+        return $this->service->store($request);
+    }
+
+    public function update(Request $request)
+    {
+        if (Auth::user()->type != 'admin') {
+            return redirect()->back();
+        }
+        $human = Human::find($request['id']);
+        $user = User::find($human->user_id);
+
+        return $this->service->update($human, $user, $request);
+    }
+
+    public function destroy(Request $request)
+    {
+        if (Auth::user()->type != 'admin') {
+            return redirect()->back();
+        }
+
+        $teacher = Human::find($request['id']); //Pega o id do professor
+
+        return $this->service->destroy($teacher, $request);
+    }
 
 }
