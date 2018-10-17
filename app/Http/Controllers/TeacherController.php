@@ -23,27 +23,13 @@ class TeacherController extends Controller
   public function index()
   {
 
-    if(Auth::user()->type == 'admin'){
+    if(Auth::user()->type == 'admin') {
       $teachers = Human::all()->where('status','=','active');
       return view('admin.teacher')->with(['teachers'=>$teachers]);
-    }else if(Auth::user()->type == 'teacher'){
-      $teacher = Human::all()->where('user_id','=',Auth::user()->id)->where('status','=','active')->first();
-
-      $group = Group::all()->where('status','=','active')->where('teacher_id','=',$teacher->id)->first();
-
-      if($group == null){
-        return redirect('Sair');
-      }
-
-      $doubleStudents = DoubleStudent::all()->where('status','=','active')->where('group_id',$group->id)->sortByDesc('qtdPetitions');;
-
-      $petitions = Petition::all()->where('group_id',$group->id);
-
-      $humans = Human::all()->where('status','=','active');
-      $user = Auth::user();
-      $count = 1;
-      return view('teacher.home')->with(['teacher'=>$teacher,'group'=>$group,'doubleStudents'=>$doubleStudents,'petitions'=>$petitions,'humans'=>$humans,'user'=>$user,'count'=>$count]);
-    }else{
+    }else if(Auth::user()->type == 'teacher') {
+      $dados = $this->service->index();
+      return view('teacher.home')->with($dados);
+    } else {
       return redirect()->back();
     }
   }
