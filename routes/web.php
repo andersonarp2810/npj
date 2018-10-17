@@ -122,13 +122,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Aluno'], function () {
 
     Route::post('Peticao/Delete', 'PetitionController@delete');
 
-    /*
-    ///////////////////////////////////////////
-    /////////////////Preferências///////////////////
-    ///////////////////////////////////////////
-     */
-    Route::get('Preferencias', 'StudentController@update');
-
 });
 
 //-----------------------------------------------------------------------------
@@ -140,6 +133,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Professor'], function () {
     ///////////////////////////////////////////
      */
     Route::get('', 'TeacherController@index');
+    Route::get('Preferencias', 'TeacherController@preferences');
+    Route::post('Preferencias/Editar', 'TeacherController@preferencesEditar');
 
     /*
     ///////////////////////////////////////////
@@ -179,14 +174,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Professor'], function () {
     ///////////////////////////////////////////
      */
     Route::post('Comentario/Cadastrar', 'CommentController@store'); //O professor pode cadastrar comentario
-
-    /*
-    ///////////////////////////////////////////
-    /////////////////Preferências///////////////////
-    ///////////////////////////////////////////
-     */
-    Route::get('Preferencias', 'TeacherController@update'); //Campo de mudança de senhas e de parâmetros
-
 });
 
 Route::group(['middleware' => 'auth', 'prefix' => 'Defensor'], function () {
@@ -196,6 +183,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Defensor'], function () {
     ///////////////////////////////////////////
      */
     Route::get('', 'DefenderController@index');
+    Route::get('Preferencias', 'DefensorController@preferences');
+    Route::post('Preferencias/Editar', 'DefensorController@preferencesEditar');
 
     /*
     ///////////////////////////////////////////
@@ -213,21 +202,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Defensor'], function () {
     Route::post('Peticao/Emitir', 'PetitionController@emitir');
 
     Route::post('Comentario/Cadastrar', 'CommentController@store'); //O defensor pode cadastrar comentario
-
-    /*
-    ///////////////////////////////////////////
-    /////////////////Preferências///////////////////
-    ///////////////////////////////////////////
-     */
-    Route::get('Preferencias', 'DefenderController@update'); //Campo de mudança de senhas e de parâmetros
-
 });
 
 //Route::post('Login', 'LoginController@index')->name('home');
-
-Route::get('/', function () {
-    return view('auth.login');
-});
 
 Route::get('Sair', function () {
     if (!Auth::guest()) {
@@ -238,4 +215,4 @@ Route::get('Sair', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');

@@ -71,6 +71,21 @@ class DefenderController extends Controller
         $defender = Human::find($request['id']);
         $defender_User = User::find($defender->user_id);
 
-        return $this->service->destroy($defender, $request);
-    }
+   return $this->service->destroy($defender, $request);
+  }
+
+  public function preferences()
+  {
+      $user = User::find(Auth::user()->id);
+      $human = Human::where('user_id', $user->id)->first();
+      return view('defender.preferences')->with(['user' => $user, 'human' => $human]);
+  }
+
+  public function preferencesEditar(Request $request)
+  {
+    $user = User::find($request['idUser']);
+    $human = Human::find($request['idHuman']);
+
+    return $this->service->editar($human, $user, $request);
+  }
 }
