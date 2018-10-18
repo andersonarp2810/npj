@@ -162,7 +162,6 @@
                 <tr>
                   <th class="text-center">Colocação</th>
                   <th class="text-center">Dupla</th>
-                 
                   <th class="text-center">N° de Petições</th>
                   <th class="text-center">Grupo</th>
                 </tr>
