@@ -4,6 +4,7 @@
 
 <!-- Sidebar -->
 @sidebar([
+    'url' => "Admin",
     'items' => [
         [
             'item' => 'Alunos', 'itemUrl' => '/Admin/Alunos', 'icon' => 'user'
