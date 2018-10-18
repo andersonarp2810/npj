@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.student')
 @section('content')
 <div class="card" style="margin-left:3%;width:60%;margin-left:25%;margin-top:5%">
   <h4 class="card-title">Preferências</h4>

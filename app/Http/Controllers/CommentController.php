@@ -22,11 +22,15 @@ class CommentController extends Controller
         $petition = Petition::find($request['idPetition']);
         if (Auth::user()->type == 'teacher') {
 
-            return $this->service->professorStore($request, $petition);
+            $this->service->professorStore($request, $petition);
+
+            return redirect('Professor/Peticoes');
 
         } else if (Auth::user()->type == 'defender') { //Área do Defensor
 
-            return $this->service->defensorStore($request, $petition);
+            $this->service->defensorStore($request, $petition);
+
+            return redirect('Defensor/Peticoes');
 
         } else {
             $request->session()->flash('status', 'Você não possui Autorização de Acesso!!');
