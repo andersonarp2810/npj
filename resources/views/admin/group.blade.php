@@ -5,19 +5,17 @@
     <div class="col-lg-12 my-5">
       <div class="card my-5">
         <div class="card-header">
-            <div class="row">  
-                <div class="col-md-4">
-                    <h4>Gerenciar Grupos</h4>
-                </div>
-                <div class="col-md-6"></div>
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalGroup" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo grupo"><i class="fa fa-plus"></i> Novo Grupo</button>
-                </div>
-            </div>
+             <h4>Gerenciar Grupos
+                <button type="button" class="btn btn-primary float-right" role="button" data-toggle="modal" data-target="#newModalStudent" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo aluno">
+                    <i class="fa fa-plus"></i>
+                    Novo Grupo
+                  </button>
+             </h4>
+               
         </div>
         <div class="card-body">
           <div class="col-lg-12">
-            <div class="card">
+           
               <div class="row">
                 @if ($errors->any())
                 <div class="alert alert-danger">
@@ -32,37 +30,37 @@
                   <p class="alert alert-info" style="width:20%;">{{ Session::get('status') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                 @endif
               </div>
-              <div class="row">
-                <div class="col-md-4">
-                    <span class="text-center">
-                        <div class="input-group">
-                          <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
-                          <span class="input-group-addon">
-                            <i class="fa fa-search"></i>
-                          </span>
-                        </div>
-                      </span>
+              <div class="row mb-3">
+                  <div class="col-md-4">
+                    <div class="input-group">
+                      <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fas fa-search"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="card-body">
+              
                 <div class="table-responsive">
                   <table class="table table-striped">
                     <thead class="thead-dark">
                       <tr>
-                        <th style="font-size:16pt" class="text-center">NOME</th>
-                        <th style="font-size:16pt" class="text-center">PROFESSOR</th>
-                        <th style="font-size:16pt" class="text-center">QTD DUPLAS</th>
+                        <th class="text-center">Nome</th>
+                        <th class="text-center">Professor</th>
+                        <th class="text-center">QTD Duplas</th>
       <!--                  <th>QTD PETIÇÕES</th>-->
-                        <th style="font-size:16pt" class="text-center">AÇÕES</th>
+                        <th class="text-center">Ações</th>
                       </tr>
                     </thead>
                     <tbody>
                       @forelse($groups as $group)
                         @if($group->status == 'active')
-                            <tr class="object" name="{{$group->name}}">
-                              <td style="font-size:10pt" class="text-center">{{$group->name}}</td>
-                              <td style="font-size:10pt" class="text-center">{{$humans->find($group->teacher_id)->name}}</td>
-                              <td style="font-size:10pt" class="text-center">{{$doubleStudents->where('group_id',$group->id)->count()}}</td>
+                            <tr class="my-auto align-middle" name="{{$group->name}}">
+                              <td class="text-center">{{$group->name}}</td>
+                              <td class="text-center">{{$humans->find($group->teacher_id)->name}}</td>
+                              <td class="text-center">{{$doubleStudents->where('group_id',$group->id)->count()}}</td>
                               <!--Pegar qtd de peticoes por dupla-->
                               <td style="font-size:10pt;width:15%" class="text-center">
                                 <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalGroup" onclick="editModalGroup('{{$group->id}}','{{$group->name}}','{{$group->teacher_id}}')" title="Editar Grupo"><i class="fa fa-edit"></i></button>
@@ -75,8 +73,8 @@
                       @endforelse
                     </tbody>
                   </table>
-                </div>
-              </div>
+               
+              
             </div>
           </div>
         </div>
