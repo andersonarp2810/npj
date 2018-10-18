@@ -61,7 +61,7 @@ class StudentController extends Controller
     }
     $student = Human::find($request['id']);
        
-    return $this->service->destroy($student, $request);
+    return $this->service->delete($student, $request);
   }
 
   public function preferences()
