@@ -2,10 +2,18 @@
 @section('component')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-lg-10 my-5">
+    <div class="col-lg-12 my-5">
       <div class="card my-5">
         <div class="card-header">
-          <h4>Gerenciar Grupos</h4>
+            <div class="row">  
+                <div class="col-md-4">
+                    <h4>Gerenciar Grupos</h4>
+                </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalGroup" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo grupo"><i class="fa fa-plus"></i> Novo Grupo</button>
+                </div>
+            </div>
         </div>
         <div class="card-body">
           <div class="col-lg-12">
@@ -25,19 +33,15 @@
                 @endif
               </div>
               <div class="row">
-                <div class="col-md-4"></div>
                 <div class="col-md-4">
-                  <span class="text-center">
-                    <div class="input-group">
-                      <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
-                      <span class="input-group-addon">
-                        <i class="fa fa-search"></i>
+                    <span class="text-center">
+                        <div class="input-group">
+                          <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
+                          <span class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                          </span>
+                        </div>
                       </span>
-                    </div>
-                  </span>
-                </div>
-                <div class="col-md-4">
-                  <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalGroup" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo grupo"><i class="fa fa-plus"></i> Novo Grupo</button>
                 </div>
               </div>
               <div class="card-body">
@@ -45,11 +49,11 @@
                   <table class="table table-striped">
                     <thead class="thead-dark">
                       <tr>
-                        <th style="font-size:18pt" class="text-center">NOME</th>
-                        <th style="font-size:18pt" class="text-center">PROFESSOR</th>
-                        <th style="font-size:18pt" class="text-center">QTD DUPLAS</th>
+                        <th style="font-size:16pt" class="text-center">NOME</th>
+                        <th style="font-size:16pt" class="text-center">PROFESSOR</th>
+                        <th style="font-size:16pt" class="text-center">QTD DUPLAS</th>
       <!--                  <th>QTD PETIÇÕES</th>-->
-                        <th style="font-size:18pt" class="text-center">AÇÕES</th>
+                        <th style="font-size:16pt" class="text-center">AÇÕES</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -61,7 +65,7 @@
                               <td style="font-size:10pt" class="text-center">{{$doubleStudents->where('group_id',$group->id)->count()}}</td>
                               <!--Pegar qtd de peticoes por dupla-->
                               <td style="font-size:10pt;width:15%" class="text-center">
-                                <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalGroup" onclick="editModalGroup('{{$group->id}}','{{$group->name}}','{{$group->teacher_id}}')" title="Editar Grupo"><i class="fa fa-pencil"></i></button>
+                                <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalGroup" onclick="editModalGroup('{{$group->id}}','{{$group->name}}','{{$group->teacher_id}}')" title="Editar Grupo"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-outline-danger" role="button" data-toggle="modal" data-target="#deleteModalGroup" onclick="deleteGroup('{{$group->id}}','{{$group->name}}')" title="Excluir Grupo"><i class="fa fa-trash"></i></button>
                               </td>
                             </tr>
@@ -99,30 +103,34 @@
           </div>
           <form action="{{URL::to('Admin/Grupo/Cadastrar')}}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
-            <div class="row" style="margin-left:2%">
-              <div class="form-group">
-                <label for="">Nome</label>
-                <input type="text" name="name" class="form-control" maxlength="80" value="" required>
+            <div class="row">
+              <div class="col-lg-6">
+                  <div class="form-group">
+                      <label for="">Nome</label>
+                      <input type="text" name="name" class="form-control" maxlength="80" value="" required>
+                    </div>
               </div>
-              <div class="form-group">
-                <label for="">Professor</label>
-                <select class="form-control" name="teacher_id" required>
-                  <option value="">Selecione o professor</option>
-                  @foreach($humans as $human)
-                    <!--Está sem validação-->
-                    @if($human->user->type == 'teacher' && $human->status == 'active' && $human->groupT == 'NAO')
-                      <option value="{{$human->id}}">{{$human->name}}</option>
-                    @endif
-                  @endforeach
-                </select>
+              <div class="col-lg-6">
+                  <div class="form-group">
+                      <label for="">Professor</label>
+                      <select class="form-control" name="teacher_id" required>
+                        <option value="">Selecione o professor</option>
+                        @foreach($humans as $human)
+                          <!--Está sem validação-->
+                          @if($human->user->type == 'teacher' && $human->status == 'active' && $human->groupT == 'NAO')
+                            <option value="{{$human->id}}">{{$human->name}}</option>
+                          @endif
+                        @endforeach
+                      </select>
+                    </div>
               </div>
             </div>
-            <div class="row" style="margin-left:2px">
+            
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
               </div>
-            </div>
+            
         </form>
       </div>
     </div>

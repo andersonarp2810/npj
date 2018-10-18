@@ -2,11 +2,19 @@
 @section('component')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-lg-10 my-5">
+    <div class="col-lg-12 my-5">
     
       <div class="card my-5">
         <div class="card-header">
-          <h4>Gerenciar Professores</h4>
+          <div class="row">
+            <div class="col-md-4">
+                <h4>Gerenciar Professores</h4>
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalTeacher" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo professor"><i class="fa fa-plus"></i> Novo Professor</button>
+            </div>
+          </div>
         </div>
 
         <div class="card-body">
@@ -27,32 +35,30 @@
                 @endif
               </div>
               <div class="row">
-                <div class="col-md-4"></div>
                 <div class="col-md-4">
-                  <span class="text-center">
-                    <div class="input-group">
-                      <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
-                      <span class="input-group-addon">
-                        <i class="fa fa-search"></i>
+                    <span class="text-center">
+                        <div class="input-group">
+                          <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
+                          <span class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                          </span>
+                        </div>
                       </span>
-                    </div>
-                  </span>
                 </div>
-                <div class="col-md-4">
-                  <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalTeacher" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo professor"><i class="fa fa-plus"></i> Novo Professor</button>
-                </div>
+                
+ 
               </div>
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-striped">
                     <thead class="thead-dark">
                       <tr>
-                        <th style="font-size:18pt" class="text-center">NOME</th>
-                        <th style="font-size:18pt" class="text-center">E-MAIL</th>
-                        <th style="font-size:18pt" class="text-center">GÊNERO</th>
-                        <th style="font-size:18pt" class="text-center">TELEFONE</th>
-                        <th style="font-size:18pt" class="text-center">GRUPO</th>
-                        <th style="font-size:18pt" class="text-center">AÇÕES</th>
+                        <th style="font-size:16pt" class="text-center">NOME</th>
+                        <th style="font-size:16pt" class="text-center">E-MAIL</th>
+                        <th style="font-size:16pt" class="text-center">GÊNERO</th>
+                        <th style="font-size:16pt" class="text-center">TELEFONE</th>
+                        <th style="font-size:16pt" class="text-center">GRUPO</th>
+                        <th style="font-size:16pt" class="text-center">AÇÕES</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -65,7 +71,7 @@
                             <td style="font-size:10pt" class="text-center">{{$teacher->phone}}</td>
                             <td style="font-size:10pt" class="text-center">{{$teacher->groupT}}</td>
                             <td style="font-size:10pt;width:15%" class="text-center">
-                              <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalTeacher" onclick="editTeacher('{{$teacher->id}}','{{$teacher->name}}','{{$teacher->user->email}}','{{$teacher->gender}}','{{$teacher->phone}}')"><i class="fa fa-pencil"></i></button>
+                              <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalTeacher" onclick="editTeacher('{{$teacher->id}}','{{$teacher->name}}','{{$teacher->user->email}}','{{$teacher->gender}}','{{$teacher->phone}}')"><i class="fa fa-edit"></i></button>
                               <button type="button" class="btn btn-outline-danger" role="button" data-toggle="modal" data-target="#deleteModalTeacher" onclick="deleteTeacher('{{$teacher->id}}','{{$teacher->name}}')"><i class="fa fa-trash"></i></button>
                             </td>
                           </tr>
@@ -111,24 +117,28 @@
               <label for="">E-mail *</label>
               <input type="email" name="email" class="form-control" maxlength="80" value="" required>
             </div>
-            <div class="row" style="margin-left:2px">
-              <div class="form-group">
-              <label for="">Sexo</label>
-              <select class="form-control" name="gender" required>
-                <option value="">Selecione o sexo</option>
-                <option value="Masculino">Masculino</option>
-                <option value="Feminino">Feminino</option>
-              </select>
-            </div>
-            <div class="form-group">
-                <label for="">Telefone</label>
-                <input type="tel" name="phone" class="form-control input-phone" value="">
+            <div class="row">
+                <div class="col-lg-5">
+                  <div class="form-group">
+                    <label for="">Sexo</label>
+                    <select class="form-control" name="gender" required>
+                      <option value="">Selecione o sexo</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Feminino">Feminino</option>
+                    </select>
+                  </div>
               </div>
-            </div>
+              <div class="col-lg-7">
+                <div class="form-group">
+                  <label for="">Telefone</label>
+                  <input type="tel" name="phone" class="form-control input-phone" value="">
+                </div>
+              </div>
+              </div>
             <div class="form-group">
               <label for="">Senha *</label>
               <div class="input-group">
-                <input type="text" name="password" class="form-control" id="inputSenha" required>
+                <input type="password" name="password" class="form-control" id="inputSenha" required>
               </div>
             </div>
             <div class="modal-footer">
@@ -168,23 +178,27 @@
               <label for="">E-mail</label>
               <input type="email" name="email" class="form-control" maxlength="80" value="" id="teacherEmail" required>
             </div>
-          <div class="row" style="margin-left:2px">
-            <div class="form-group">
-              <label for="">Sexo</label>
-              <select class="form-control" name="gender" id="teacherGender" required>
-                <option value="">Selecione o sexo</option>
-                <option value="Masculino">Masculino</option>
-                <option value="Feminino">Feminino</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="">Telefone</label>
-              <input type="tel" name="phone" class="form-control input-phone" id="teacherPhone" value="">
-            </div>
-          </div>
+            <div class="row">
+                <div class="col-lg-5">
+                  <div class="form-group">
+                    <label for="">Sexo</label>
+                    <select class="form-control" name="gender" required>
+                      <option value="">Selecione o sexo</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Feminino">Feminino</option>
+                    </select>
+                  </div>
+              </div>
+              <div class="col-lg-7">
+                <div class="form-group">
+                  <label for="">Telefone</label>
+                  <input type="tel" name="phone" class="form-control input-phone" value="">
+                </div>
+              </div>
+              </div>
             <div class="form-group">
               <label for="">Senha</label>
-              <input type="text" name="password" class="form-control">
+              <input type="password" name="password" class="form-control">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

@@ -36,7 +36,7 @@
                 @endif
               </div>
 
-              <div class="row justify-content-center mb-3">
+              <div class="row mb-3">
                 <div class="col-md-4">
                   <div class="input-group">
                     <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
@@ -70,7 +70,13 @@
                             <td class="text-center align-middle">{{$student->user->email}}</td>
                             <td class="text-center align-middle">{{$student->gender}}</td>
                             <td class="text-center align-middle">{{$student->phone}}</td>
-                            <td class="text-center align-middle">{{$student->doubleS}}</td>
+                            <td class="text-center align-middle">
+                              @if($student->doubleS == "SIM")
+                              <span class="fas fa-check-circle fa-lg text-success"></span>
+                              @else
+                              <span class="fas fa-times-circle fa-lg text-danger"></span>
+                              @endif
+                            </td>
 
                             <td class="text-center align-middle">
                               <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalStudent" onclick="editStudent('{{$student->id}}','{{$student->name}}','{{$student->user->email}}','{{$student->gender}}','{{$student->phone}}')" title="Editar Aluno">
@@ -122,23 +128,27 @@
               <label for="">E-mail *</label>
               <input type="text" name="email" class="form-control" maxlength="80" value="" required>
             </div>
-            <div class="row" style="margin-left:2px">
-              <div class="form-group">
-                <label for="">Sexo</label>
-                <select class="form-control" name="gender" required>
-                  <option value="">Selecione o sexo</option>
-                  <option value="Masculino">Masculino</option>
-                  <option value="Feminino">Feminino</option>
-                </select>
-              </div>
+            <div class="row">
+              <div class="col-lg-5">
+                <div class="form-group">
+                  <label for="">Sexo</label>
+                  <select class="form-control" name="gender" required>
+                    <option value="">Selecione o sexo</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                  </select>
+                </div>
+            </div>
+            <div class="col-lg-7">
               <div class="form-group">
                 <label for="">Telefone</label>
                 <input type="tel" name="phone" class="form-control input-phone" value="">
               </div>
             </div>
+            </div>
             <div class="form-group">
               <label for="">Senha *</label>
-                <input type="text" name="password" class="form-control" required>
+              <input type="password" name="password" class="form-control" required>
             </div>
 
             <div class="modal-footer">
@@ -178,23 +188,27 @@
               <label for="">E-mail</label>
               <input type="text" name="email" class="form-control" maxlength="80" value="" id="studentEmail" required>
             </div>
-            <div class="row" style="margin-left:2px">
-              <div class="form-group">
-                <label for="">Sexo</label>
-                <select class="form-control" name="gender" id="studentGender" required>
-                  <option value="">Selecione o sexo</option>
-                  <option value="Masculino">Masculino</option>
-                  <option value="Feminino">Feminino</option>
-                </select>
+            <div class="row">
+                <div class="col-lg-5">
+                  <div class="form-group">
+                    <label for="">Sexo</label>
+                    <select class="form-control" name="gender" required>
+                      <option value="">Selecione o sexo</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Feminino">Feminino</option>
+                    </select>
+                  </div>
               </div>
-              <div class="form-group">
-                <label for="">Telefone</label>
-                <input type="tel" name="phone" class="form-control input-phone" id="studentPhone" value="">
+              <div class="col-lg-7">
+                <div class="form-group">
+                  <label for="">Telefone</label>
+                  <input type="tel" name="phone" class="form-control input-phone" value="">
+                </div>
               </div>
-            </div>
+              </div>
             <div class="form-group">
               <label for="">Senha</label>
-              <input type="text" name="password" class="form-control">
+              <input type="password" name="password" class="form-control">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

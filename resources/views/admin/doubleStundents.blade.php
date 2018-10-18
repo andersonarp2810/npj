@@ -2,18 +2,26 @@
 @section('component')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-lg-10 my-5">
+    <div class="col-lg-12 my-5">
       <div class="card my-5">
         <div class="card-header">
-          <h4>Gerenciar Duplas</h4>
+          <div class="row">  
+            <div class="col-md-4">
+                <h4>Gerenciar Duplas</h4>
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-2">
+          <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModaldoubleStudent" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de nova dupla"><i class="fa fa-plus"></i> Nova Dupla</button>
+            </div>
         </div>
+      </div>
         <div class="card-body">
           <div class="col-lg-12">
             <div class="card">
               <div class="row">
                 @if ($errors->any())
                 <div class="alert alert-danger">
-                  <ul>
+                    <ul>
                     @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                     @endforeach
@@ -25,30 +33,28 @@
                 @endif
               </div>
               <div class="row">
-                <div class="col-md-4"></div>
                 <div class="col-md-4">
-                  <span class="text-center">
-                    <div class="input-group">
-                      <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
-                      <span class="input-group-addon">
-                        <i class="fa fa-search"></i>
+                    <span class="text-center">
+                        <div class="input-group">
+                          <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
+                          <span class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                          </span>
+                        </div>
                       </span>
-                    </div>
-                  </span>
                 </div>
-                <div class="col-md-4">
-                  <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModaldoubleStudent" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de nova dupla"><i class="fa fa-plus"></i> Nova Dupla</button>
-                </div>
+
+                
               </div>
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-striped">
                     <thead class="thead-dark">
                       <tr>
-                        <th style="font-size:18pt" class="text-center">Estudante1</th>
-                        <th style="font-size:18pt" class="text-center">Estudante2</th>
-                        <th style="font-size:18pt" class="text-center">GRUPO</th>
-                        <th style="font-size:18pt" class="text-center">AÇÕES</th>
+                        <th style="font-size:16pt" class="text-center">Estudante1</th>
+                        <th style="font-size:16pt" class="text-center">Estudante2</th>
+                        <th style="font-size:16pt" class="text-center">GRUPO</th>
+                        <th style="font-size:16pt" class="text-center">AÇÕES</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -59,7 +65,7 @@
                             <td style="font-size:10pt" class="text-center">{{$humans->find($doubleStudent->student2_id)->name}}</td>
                             <td style="font-size:10pt" class="text-center">{{$doubleStudent->group->name}}</td>
                             <td style="font-size:18pt;width:15%" class="text-center">
-                              <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModaldoubleStudent" onclick="editModaldoubleStudent('{{$doubleStudent->id}}','{{$humans->find($doubleStudent->student_id)->name}}','{{$humans->find($doubleStudent->student2_id)->name}}','{{$doubleStudent->group->name}}')" title="Editar Dupla"><i class="fa fa-pencil"></i></button>
+                              <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModaldoubleStudent" onclick="editModaldoubleStudent('{{$doubleStudent->id}}','{{$humans->find($doubleStudent->student_id)->name}}','{{$humans->find($doubleStudent->student2_id)->name}}','{{$doubleStudent->group->name}}')" title="Editar Dupla"><i class="fa fa-edit"></i></button>
                               <button type="button" class="btn btn-outline-danger" role="button" data-toggle="modal" data-target="#deleteModaldoubleStudent" onclick="deletedoubleStudent('{{$doubleStudent->id}}')" title="Excluir Dupla"><i class="fa fa-trash"></i></button>
                             </td>
                           </tr>
@@ -97,46 +103,51 @@
             </div>
           </div>
           <br>
-          <div class="row" style="margin-left:2px">
-            <div class="form-group">
-            <label for="">Primeiro Estudante</label>
-            <select class="form-control" name="student_id" id="student_id" onchange="verify(this.value)" required>
-              <option value="">Selecione o Estudante</option>
-              @foreach($humans as $human)
-                @if($human->user->type == 'student' && $human->status == 'active' && $human->doubleS == 'NAO')
-                  <option value="{{$human->id}}">{{$human->name}}</option>
-                @endif
-              @endforeach
-            </select>
-          </div>
-          <div class="row" style="margin-left:2px">
-            <div class="form-group">
-            <label for="">Segundo Estudante</label>
-            <select class="form-control" name="student2_id" id="student2_id" required>
-              <option value="">Selecione o Estudante</option>
-              @foreach($humans as $human)
-                <div>
-                  @if($human->user->type == 'student' && $human->status == 'active' && $human->doubleS == 'NAO')
-                    <option value="{{$human->id}}" id="r" style="display:block">{{$human->name}}</option>
-                  @endif
+          <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Primeiro Estudante</label>
+                    <select class="form-control" name="student_id" id="student_id" onchange="verify(this.value)" required>
+                      <option value="">Selecione o Estudante</option>
+                      @foreach($humans as $human)
+                        @if($human->user->type == 'student' && $human->status == 'active' && $human->doubleS == 'NAO')
+                          <option value="{{$human->id}}">{{$human->name}}</option>
+                        @endif
+                      @endforeach
+                    </select>
+                  </div>
+            </div>
+            <div class="col-md-6">
+             
+                <div class="form-group">
+                <label for="">Segundo Estudante</label>
+                <select class="form-control" name="student2_id" id="student2_id" required>
+                  <option value="">Selecione o Estudante</option>
+                  @foreach($humans as $human)
+                    <div>
+                      @if($human->user->type == 'student' && $human->status == 'active' && $human->doubleS == 'NAO')
+                        <option value="{{$human->id}}" id="r" style="display:block">{{$human->name}}</option>
+                      @endif
+                    </div>
+                  @endforeach
+                </select>
                 </div>
-              @endforeach
-            </select>
+              
             </div>
-          </div>
-          <div class="row" style="margin-left:2px">
-            <div class="form-group">
-            <label for="">Grupo</label>
-            <select class="form-control" name="group_id" required>
-              <option value="">Selecione o Grupo</option>
-              @foreach($groups as $group)
-                @if($group->status == 'active')
-                  <option value="{{$group->id}}">{{$group->name}}</option>
-                @endif
-              @endforeach
-            </select>
+          
+            <div class="col-md-12">
+              <div class="form-group">
+              <label for="">Grupo</label>
+              <select class="form-control" name="group_id" required>
+                <option value="">Selecione o Grupo</option>
+                @foreach($groups as $group)
+                  @if($group->status == 'active')
+                    <option value="{{$group->id}}">{{$group->name}}</option>
+                  @endif
+                @endforeach
+              </select>
+              </div>
             </div>
-          </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

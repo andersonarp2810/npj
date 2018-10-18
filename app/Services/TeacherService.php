@@ -14,7 +14,23 @@ use Validator;
 class TeacherService {
 
     public function index() {
+        $teacher = Human::all()->where('user_id','=',Auth::user()->id)->where('status','=','active')->first();
 
+        $group = Group::all()->where('status','=','active')->where('teacher_id','=',$teacher->id)->first();
+
+        if($group == null){
+            return redirect('Sair');
+        }
+
+        $doubleStudents = DoubleStudent::all()->where('status','=','active')->where('group_id',$group->id)->sortByDesc('qtdPetitions');;
+
+        $petitions = Petition::all()->where('group_id',$group->id);
+
+        $humans = Human::all()->where('status','=','active');
+        $user = Auth::user();
+        $count = 1;
+
+        return ['teacher'=>$teacher,'group'=>$group,'doubleStudents'=>$doubleStudents,'petitions'=>$petitions,'humans'=>$humans,'user'=>$user,'count'=>$count];
     }
 
     public function store(Request $request) {

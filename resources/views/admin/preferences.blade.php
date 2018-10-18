@@ -35,16 +35,16 @@
                     </div>
                   </div>
                   <div class="col-lg-9">
-                  <div class="form-group">
-                    <label for="">Telefone</label>
-                    <input type="tel" name="phone" class="form-control input-phone" value="{{$human->phone}}">
-                  </div>
+                    <div class="form-group">
+                      <label for="">Telefone</label>
+                      <input type="tel" name="phone" class="form-control input-phone" value="{{$human->phone}}">
+                    </div>
                   </div>
                   
                 </div>
                 <div class="form-group">
                   <label for="">Senha *</label>
-                    <input type="text" name="password" class="form-control">
+                    <input type="password" name="password" class="form-control">
                 </div>
                 <hr>
                 <div class="row justify-content-center">

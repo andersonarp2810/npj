@@ -2,10 +2,18 @@
 @section('component')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-lg-10 my-5">
+    <div class="col-lg-12 my-5">
       <div class="card my-5">
         <div class="card-header">
-          <h4>Gerenciar Defensores</h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Gerenciar Defensores</h4>
+                </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalDefender" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo defensor"><i class="fa fa-plus"></i> Novo Defensor</button>
+                </div>
+            </div>
         </div>
 
         <div class="card-body">
@@ -26,31 +34,30 @@
                 @endif
               </div>
               <div class="row">
-                <div class="col-md-4"></div>
                 <div class="col-md-4">
-                  <span class="text-center">
-                    <div class="input-group">
-                      <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
-                      <span class="input-group-addon">
-                        <i class="fa fa-search"></i>
+                    <span class="text-center">
+                        <div class="input-group">
+                          <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
+                          <span class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                          </span>
+                        </div>
                       </span>
-                    </div>
-                  </span>
                 </div>
-                <div class="col-md-4">
-                  <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalDefender" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo defensor"><i class="fa fa-plus"></i> Novo Defensor</button>
-                </div>
+                
+
+                
               </div>
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-striped">
                     <thead class="thead-dark">
                       <tr>
-                        <th style="font-size:18pt" class="text-center">NOME</th>
-                        <th style="font-size:18pt" class="text-center">E-MAIL</th>
-                        <th style="font-size:18pt" class="text-center">GÊNERO</th>
-                        <th style="font-size:18pt" class="text-center">TELEFONE</th>
-                        <th style="font-size:18pt" class="text-center">AÇÕES</th>
+                        <th style="font-size:16pt" class="text-center">NOME</th>
+                        <th style="font-size:16pt" class="text-center">E-MAIL</th>
+                        <th style="font-size:16pt" class="text-center">GÊNERO</th>
+                        <th style="font-size:16pt" class="text-center">TELEFONE</th>
+                        <th style="font-size:16pt" class="text-center">AÇÕES</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -62,7 +69,7 @@
                             <td style="font-size:10pt" class="text-center">{{$defender->gender}}</td>
                             <td style="font-size:10pt" class="text-center">{{$defender->phone}}</td>
                             <td style="font-size:18pt;width:15%" class="text-center">
-                              <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalDefender" onclick="editDefender('{{$defender->id}}','{{$defender->name}}','{{$defender->user->email}}','{{$defender->gender}}','{{$defender->phone}}')"><i class="fa fa-pencil"></i></button>
+                              <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalDefender" onclick="editDefender('{{$defender->id}}','{{$defender->name}}','{{$defender->user->email}}','{{$defender->gender}}','{{$defender->phone}}')"><i class="fa fa-edit"></i></button>
                               <button type="button" class="btn btn-outline-danger" role="button" data-toggle="modal" data-target="#deleteModalDefender" onclick="deleteDefender('{{$defender->id}}','{{$defender->name}}')"><i class="fa fa-trash"></i></button>
                             </td>
                           </tr>
@@ -108,24 +115,28 @@
             <label for="">E-mail *</label>
             <input type="text" name="email" class="form-control" maxlength="80" value="" required>
           </div>
-          <div class="row" style="margin-left:2px">
-            <div class="form-group">
-              <label for="">Sexo</label>
-              <select class="form-control" name="gender" required>
-                <option value="">Selecione o sexo</option>
-                <option value="Masculino">Masculino</option>
-                <option value="Feminino">Feminino</option>
-              </select>
+          <div class="row">
+              <div class="col-lg-5">
+                <div class="form-group">
+                  <label for="">Sexo</label>
+                  <select class="form-control" name="gender" required>
+                    <option value="">Selecione o sexo</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                  </select>
+                </div>
             </div>
-            <div class="form-group">
-              <label for="">Telefone</label>
-              <input type="tel" name="phone" class="form-control input-phone" value="">
+            <div class="col-lg-7">
+              <div class="form-group">
+                <label for="">Telefone</label>
+                <input type="tel" name="phone" class="form-control input-phone" value="">
+              </div>
             </div>
-          </div>
+            </div>
           <div class="form-group">
             <label for="">Senha *</label>
             <div class="input-group">
-              <input type="text" name="password" class="form-control" required>
+              <input type="password" name="password" class="form-control" required>
             </div>
           </div>
           <div class="modal-footer">
@@ -165,23 +176,27 @@
             <label for="">E-mail</label>
             <input type="text" name="email" class="form-control" maxlength="80" value="" id="defenderEmail" required>
           </div>
-          <div class="row" style="margin-left:2px">
-          <div class="form-group">
-            <label for="">Sexo</label>
-            <select class="form-control" name="gender" id="defenderGender" required>
-              <option value="">Selecione o sexo</option>
-              <option value="Masculino">Masculino</option>
-              <option value="Feminino">Feminino</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="">Telefone</label>
-            <input type="tel" name="phone" class="form-control input-phone" value="" id="defenderPhone">
-          </div>
-        </div>
+          <div class="row">
+              <div class="col-lg-5">
+                <div class="form-group">
+                  <label for="">Sexo</label>
+                  <select class="form-control" name="gender" required>
+                    <option value="">Selecione o sexo</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                  </select>
+                </div>
+            </div>
+            <div class="col-lg-7">
+              <div class="form-group">
+                <label for="">Telefone</label>
+                <input type="tel" name="phone" class="form-control input-phone" value="">
+              </div>
+            </div>
+            </div>
           <div class="form-group">
             <label for="">Senha</label>
-            <input type="text" name="password" class="form-control">
+            <input type="password" name="password" class="form-control">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
