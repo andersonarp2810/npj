@@ -161,8 +161,8 @@
                     <thead class="thead-dark">
                 <tr>
                   <th class="text-center">Colocação</th>
-                  <th class="text-center">Aluno1</th>
-                  <th class="text-center">Aluno2</th>
+                  <th class="text-center">Dupla</th>
+                 
                   <th class="text-center">N° de Petições</th>
                   <th class="text-center">Grupo</th>
                 </tr>
@@ -172,8 +172,10 @@
                 @forelse($doubleStudents as $doubleStudent)
                     <tr>
                       <td class="text-center">{{$count++}}</td>
-                      <td class="text-center">{{$humans->where('id',$doubleStudent->student_id)->first()->name}}</td>
-                      <td class="text-center">{{$humans->where('id',$doubleStudent->student2_id)->first()->name}}</td>
+                      <td class="text-center">
+                        {{$humans->where('id',$doubleStudent->student_id)->first()->name}} | 
+                        {{$humans->where('id',$doubleStudent->student2_id)->first()->name}}
+                      </td>
                       <td class="text-center">{{$doubleStudent->qtdPetitions}}</td>
                       <td class="text-center">{{$groups->where('id',$doubleStudent->group_id)->first()->name}}</td>
                     </tr>
