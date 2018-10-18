@@ -160,11 +160,11 @@
                   <table class="table table-striped">
                     <thead class="thead-dark">
                 <tr>
-                  <th style="font-size:18pt;width:20%" class="text-center">COLOCAÇÃO</th>
-                  <th style="font-size:18pt" class="text-center">ALUNO1</th>
-                  <th style="font-size:18pt" class="text-center">ALUNO2</th>
-                  <th style="font-size:18pt" class="text-center">N° DE PETIÇÕES</th>
-                  <th style="font-size:18pt" class="text-center">GRUPO</th>
+                  <th class="text-center">Colocação</th>
+                  <th class="text-center">Aluno1</th>
+                  <th class="text-center">Aluno2</th>
+                  <th class="text-center">N° de Petições</th>
+                  <th class="text-center">Grupo</th>
                 </tr>
               </thead>
               <tbody>
@@ -204,9 +204,9 @@
                     <table class="table table-striped">
                       <thead class="thead-dark">
                         <tr>
-                          <th style="font-size:18pt;width:20%" class="text-center">COLOCAÇÃO</th>
-                          <th style="font-size:18pt" class="text-center">GRUPO</th>
-                          <th style="font-size:18pt" class="text-center">N° DE PETIÇÕES</th>
+                          <th class="text-center">Colocação</th>
+                          <th class="text-center">Grupo</th>
+                          <th class="text-center">N° de Petições</th>
                         </tr>
                      </thead>
                     <tbody>

@@ -9,7 +9,6 @@
                         <button type="button" class="btn btn-md btn-primary float-right" role="button" data-toggle="modal" data-target="#newModalDefender" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo defensor"><i class="fa fa-plus"></i> Novo Defensor</button>
                     </h4>
         </div>
-
         <div class="card-body">
           <div class="col-lg-12">
            
