@@ -2,14 +2,20 @@
 @section('component')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-lg-10 my-5">
+    <div class="col-lg-12 my-5">
       <div class="card my-5">
         <div class="card-header">
-          <h4>Gerenciar Alunos</h4>
+          <h4>
+            Gerenciar Alunos
+            <button type="button" class="btn btn-primary float-right" role="button" data-toggle="modal" data-target="#newModalStudent" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo aluno">
+              <i class="fa fa-plus"></i>
+              Novo Aluno
+            </button>
+          </h4>
         </div>
         <div class="card-body">
-          <div class="col-lg-12">
-            <div class="card">
+          <div>
+            <div>
               <div class="row">
                 @if ($errors->any())
                 <div class="alert alert-danger">
@@ -21,52 +27,58 @@
                 </div>
                 @endif
                 @if(Session::has('status'))
-                  <p class="alert alert-info" style="width:20%;">{{ Session::get('status') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ Session::get('status') }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>                  
                 @endif
               </div>
-              <div class="row">
-                <div class="col-md-4"></div>
+
+              <div class="row justify-content-center mb-3">
                 <div class="col-md-4">
-                  <span class="text-center">
-                    <div class="input-group">
-                      <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
-                      <span class="input-group-addon">
-                        <i class="fa fa-search"></i>
+                  <div class="input-group">
+                    <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="fas fa-search"></i>
                       </span>
                     </div>
-                  </span>
-                </div>
-                <div class="col-md-4">
-                  <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalStudent" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo aluno"><i class="fa fa-plus"></i> Novo Aluno</button>
+                  </div>
                 </div>
               </div>
-              <div class="card-body">
+
                 <div class="table-responsive">
                   <table class="table table-striped">
                     <thead class="thead-dark">
                       <tr>
-                        <th style="font-size:18pt" class="text-center">NOME</th>
-                        <th style="font-size:18pt" class="text-center">E-MAIL</th>
-                        <th style="font-size:18pt" class="text-center">GÊNERO</th>
-                        <th style="font-size:18pt" class="text-center">TELEFONE</th>
-                        <th style="font-size:18pt" class="text-center">DUPLA</th>
-                        <th style="font-size:18pt" class="text-center">AÇÕES</th>
+                        <th class="text-center">Nome</th>
+                        <th class="text-center">E-mail</th>
+                        <th class="text-center">Gênero</th>
+                        <th class="text-center">Telefone</th>
+                        <th class="text-center">Dupla?</th>
+                        <th class="text-center">Ações</th>
                       </tr>
                     </thead>
                     <tbody>
 
                       @forelse($students as $student)
                         @if($student->user->type == "student")
-                          <tr class="object" name="{{$student->name}}">
-                            <td style="font-size:10pt" class="text-center">{{$student->name}}</td>
-                            <td style="font-size:10pt" class="text-center">{{$student->user->email}}</td>
-                            <td style="font-size:10pt" class="text-center">{{$student->gender}}</td>
-                            <td style="font-size:10pt" class="text-center">{{$student->phone}}</td>
-                            <td style="font-size:10pt" class="text-center">{{$student->doubleS}}</td>
+                          <tr class="my-auto align-middle" name="{{$student->name}}">
+                            <td class="text-center align-middle">{{$student->name}}</td>
+                            <td class="text-center align-middle">{{$student->user->email}}</td>
+                            <td class="text-center align-middle">{{$student->gender}}</td>
+                            <td class="text-center align-middle">{{$student->phone}}</td>
+                            <td class="text-center align-middle">{{$student->doubleS}}</td>
 
-                            <td style="font-size:10pt;width:15%" class="text-center">
-                              <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalStudent" onclick="editStudent('{{$student->id}}','{{$student->name}}','{{$student->user->email}}','{{$student->gender}}','{{$student->phone}}')" title="Editar Aluno"><i class="fa fa-pencil"></i></button>
-                              <button type="button" class="btn btn-outline-danger" role="button" data-toggle="modal" data-target="#deleteModalStudent" onclick="deleteStudent('{{$student->id}}','{{$student->name}}')" title="Excluir Aluno"><i class="fa fa-trash"></i></button>
+                            <td class="text-center align-middle">
+                              <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalStudent" onclick="editStudent('{{$student->id}}','{{$student->name}}','{{$student->user->email}}','{{$student->gender}}','{{$student->phone}}')" title="Editar Aluno">
+                                <i class="fas fa-pen"></i>
+                              </button>
+                              <button type="button" class="btn btn-outline-danger" role="button" data-toggle="modal" data-target="#deleteModalStudent" onclick="deleteStudent('{{$student->id}}','{{$student->name}}')" title="Excluir Aluno">
+                                <i class="fa fa-trash"></i>
+                              </button>
                             </td>
                           </tr>
                         @endif
@@ -76,13 +88,13 @@
                     </tbody>
                   </table>
                 </div>
-              </div>
+
             </div>
           </div>
         </div>
       </div>
     </div>
-  
+
 
 
   <!-- Modal -->
