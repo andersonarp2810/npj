@@ -92,11 +92,9 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-8">
-            </div>
+          <div class="row">            
             <div class="col-md-4">
-              <small class="pull-right">* Campos Obrigatórios</small>
+              <small class="text-danger">* Campos Obrigatórios</small>
             </div>
           </div>
           <form action="{{URL::to('Admin/Grupo/Cadastrar')}}" method="post" enctype="multipart/form-data">

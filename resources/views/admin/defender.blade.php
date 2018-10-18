@@ -89,11 +89,9 @@
       <div class="modal-body">
         <form action="{{URL::to('Admin/Defensor/Cadastrar')}}" method="post" enctype="multipart/form-data">
           {{ csrf_field() }}
-          <div class="row">
-            <div class="col-md-8">
-            </div>
+          <div class="row">            
             <div class="col-md-4">
-              <small class="pull-right">* Campos Obrigatórios</small>
+              <small class="text-danger">* Campos Obrigatórios</small>
             </div>
           </div>
           <div class="form-group">

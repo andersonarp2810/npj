@@ -47,8 +47,7 @@
                   <table class="table table-striped">
                     <thead class="thead-dark">
                       <tr>
-                        <th class="text-center">Estudante1</th>
-                        <th class="text-center">Estudante2</th>
+                        <th class="text-center">Dupla</th>                        
                         <th class="text-center">Grupo</th>
                         <th class="text-center">Ações</th>
                       </tr>
@@ -57,8 +56,10 @@
                       @forelse($doubleStudents as $doubleStudent)
                         @if($humans->find($doubleStudent->student_id) && $humans->find($doubleStudent->student2_id))
                           <tr class="my-auto align-middle" name="{{$humans->find($doubleStudent->student_id)->name}}">
-                            <td class="text-center align-middle">{{$humans->find($doubleStudent->student_id)->name}}</td>
-                            <td class="text-center align-middle">{{$humans->find($doubleStudent->student2_id)->name}}</td>
+                            <td class="text-center align-middle">
+                              {{$humans->find($doubleStudent->student_id)->name}} | 
+                              {{$humans->find($doubleStudent->student2_id)->name}}
+                            </td>                            
                             <td class="text-center align-middle">{{$doubleStudent->group->name}}</td>
                             <td class="text-center align-middle">
                               <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModaldoubleStudent" onclick="editModaldoubleStudent('{{$doubleStudent->id}}','{{$humans->find($doubleStudent->student_id)->name}}','{{$humans->find($doubleStudent->student2_id)->name}}','{{$doubleStudent->group->name}}')" title="Editar Dupla"><i class="fa fa-edit"></i></button>
@@ -67,7 +68,9 @@
                           </tr>
                         @endif
                       @empty
-                      <td class="text-center">Nenhuma Dupla registrada!</td>
+                      <tr class="my-auto align-middle">
+                        <td class="text-center" colspan="3">Nenhuma Dupla registrada!</td>
+                      </tr>                      
                       @endforelse
                     </tbody>
                   </table>
@@ -91,11 +94,9 @@
       <div class="modal-body">
         <form action="{{URL::to('Admin/Dupla/Cadastrar')}}" method="post" enctype="multipart/form-data">
           {{ csrf_field() }}
-          <div class="row">
-            <div class="col-md-8">
-            </div>
+          <div class="row">            
             <div class="col-md-4">
-              <small class="pull-right">* Campos Obrigatórios</small>
+              <small class="text-danger">* Campos Obrigatórios</small>
             </div>
           </div>
           <br>
