@@ -3,12 +3,12 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-lg-12 my-5">
-    
+
       <div class="card my-5">
         <div class="card-header">
               <h4>
                 Gerenciar Professores
-                <button type="button" class="btn btn-primary float-right" role="button" data-toggle="modal" data-target="#newModalStudent" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo aluno">
+                <button type="button" class="btn btn-primary float-right" role="button" data-toggle="modal" data-target="#newModalTeacher" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo aluno">
                   <i class="fa fa-plus"></i>
                   Novo Professor
                 </button>
@@ -17,7 +17,7 @@
 
         <div class="card-body">
           <div class="col-lg-12">
-            
+
               <div class="row">
                 @if ($errors->any())
                 <div class="alert alert-danger">
@@ -79,18 +79,18 @@
                           </tr>
                         @endif
                       @empty
-                      <td class="text-center">Nenhum Professor registrado!</td>
+                      <tr class="my-auto align-middle">
+                        <td class="text-center" colspan="6">Nenhum Professor registrado!</td>
+                      </tr>
                       @endforelse
                     </tbody>
                   </table>
                 </div>
-              
-           
           </div>
         </div>
       </div>
     </div>
-  
+
 
 
   <!-- Modal -->
@@ -98,19 +98,18 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">Novo Professor </h4>
+          <h4 class="modal-title" id="myModalLabel">Novo Professor</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
           <form action="{{URL::to('Admin/Professor/Cadastrar')}}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
-            <div class="row">
-              <div class="col-md-8">
-              </div>
+            <div class="row mb-3">
               <div class="col-md-4">
-                <small class="pull-right" style="color:red">* Campos Obrigatórios</small>
+                <small class="text-danger">* Campos Obrigatórios</small>
               </div>
             </div>
+
             <div class="form-group">
               <label for="">Nome *</label>
               <input type="text" name="name" class="form-control" maxlength="80" value="" required>

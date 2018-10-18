@@ -94,7 +94,6 @@
                     </tbody>
                   </table>
                 </div>
-
             </div>
           </div>
         </div>
@@ -108,14 +107,14 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">Novo Aluno </h4>
+          <h4 class="modal-title" id="myModalLabel">Novo Aluno</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
           <form action="{{URL::to('Admin/Aluno/Cadastrar')}}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="row">
-              <div class="col-md-4" style="margin-left:60%">
+              <div class="col-md-4">
                 <small class="pull-right" style="color:red">* Campos Obrigatórios</small>
               </div>
             </div>
