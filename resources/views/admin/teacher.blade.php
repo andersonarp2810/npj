@@ -8,7 +8,7 @@
         <div class="card-header">
               <h4>
                 Gerenciar Professores
-                <button type="button" class="btn btn-primary float-right" role="button" data-toggle="modal" data-target="#newModalStudent" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo aluno">
+                <button type="button" class="btn btn-primary float-right" role="button" data-toggle="modal" data-target="#newModalTeacher" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo aluno">
                   <i class="fa fa-plus"></i>
                   Novo Professor
                 </button>

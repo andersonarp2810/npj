@@ -6,7 +6,7 @@
       <div class="card my-5">
         <div class="card-header">
              <h4>Gerenciar Grupos
-                <button type="button" class="btn btn-primary float-right" role="button" data-toggle="modal" data-target="#newModalStudent" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo aluno">
+                <button type="button" class="btn btn-primary float-right" role="button" data-toggle="modal" data-target="#newModalGroup" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo aluno">
                     <i class="fa fa-plus"></i>
                     Novo Grupo
                   </button>

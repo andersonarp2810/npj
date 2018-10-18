@@ -5,20 +5,14 @@
     <div class="col-lg-12 my-5">
       <div class="card my-5">
         <div class="card-header">
-            <div class="row">
-                <div class="col-md-4">
-                    <h4>Gerenciar Defensores</h4>
-                </div>
-                <div class="col-md-6"></div>
-                <div class="col-md-2">
-                  <button type="button" class="btn btn-md btn-primary pull-right" role="button" data-toggle="modal" data-target="#newModalDefender" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo defensor"><i class="fa fa-plus"></i> Novo Defensor</button>
-                </div>
-            </div>
+                    <h4>Gerenciar Defensores
+                        <button type="button" class="btn btn-md btn-primary float-right" role="button" data-toggle="modal" data-target="#newModalDefender" data-toggle="tooltip" data-placement="left" title="Clique para abrir o formulário de novo defensor"><i class="fa fa-plus"></i> Novo Defensor</button>
+                    </h4>
         </div>
 
         <div class="card-body">
           <div class="col-lg-12">
-            <div class="card">
+           
               <div class="row">
                 @if ($errors->any())
                 <div class="alert alert-danger">
@@ -33,41 +27,38 @@
                   <p class="alert alert-info" style="width:20%;">{{ Session::get('status') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                 @endif
               </div>
-              <div class="row">
-                <div class="col-md-4">
-                    <span class="text-center">
-                        <div class="input-group">
-                          <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
-                          <span class="input-group-addon">
-                            <i class="fa fa-search"></i>
-                          </span>
-                        </div>
-                      </span>
+              <div class="row mb-3">
+                  <div class="col-md-4">
+                    <div class="input-group">
+                      <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fas fa-search"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                
-
-                
-              </div>
-              <div class="card-body">
+             
                 <div class="table-responsive">
                   <table class="table table-striped">
                     <thead class="thead-dark">
                       <tr>
-                        <th style="font-size:16pt" class="text-center">NOME</th>
-                        <th style="font-size:16pt" class="text-center">E-MAIL</th>
-                        <th style="font-size:16pt" class="text-center">GÊNERO</th>
-                        <th style="font-size:16pt" class="text-center">TELEFONE</th>
-                        <th style="font-size:16pt" class="text-center">AÇÕES</th>
+                        <th class="text-center">Nome</th>
+                        <th class="text-center">E-mail</th>
+                        <th class="text-center">Gênero</th>
+                        <th class="text-center">Telefone</th>
+                        <th class="text-center">Ações</th>
                       </tr>
                     </thead>
                     <tbody>
                       @forelse($defenders as $defender)
                         @if($defender->user->type == "defender" && $defender->status == "active")
-                          <tr class="object" name="{{$defender->name}}">
-                            <td style="font-size:10pt" class="text-center">{{$defender->name}}</td>
-                            <td style="font-size:10pt" class="text-center">{{$defender->user->email}}</td>
-                            <td style="font-size:10pt" class="text-center">{{$defender->gender}}</td>
-                            <td style="font-size:10pt" class="text-center">{{$defender->phone}}</td>
+                          <tr class="my-auto align-middle" name="{{$defender->name}}">
+                            <td class="text-center align-middle">{{$defender->name}}</td>
+                            <td class="text-center align-middle">{{$defender->user->email}}</td>
+                            <td class="text-center align-middle">{{$defender->gender}}</td>
+                            <td class="text-center align-middle">{{$defender->phone}}</td>
                             <td style="font-size:18pt;width:15%" class="text-center">
                               <button type="button" class="btn btn-outline-warning" role="button" data-toggle="modal" data-target="#editModalDefender" onclick="editDefender('{{$defender->id}}','{{$defender->name}}','{{$defender->user->email}}','{{$defender->gender}}','{{$defender->phone}}')"><i class="fa fa-edit"></i></button>
                               <button type="button" class="btn btn-outline-danger" role="button" data-toggle="modal" data-target="#deleteModalDefender" onclick="deleteDefender('{{$defender->id}}','{{$defender->name}}')"><i class="fa fa-trash"></i></button>
@@ -79,8 +70,7 @@
                       @endforelse
                     </tbody>
                   </table>
-                </div>
-              </div>
+             
             </div>
           </div>
         </div>
