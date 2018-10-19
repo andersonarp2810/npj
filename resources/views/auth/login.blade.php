@@ -5,7 +5,7 @@ NPJ - SISTEMA
 @endsection
 
 @section('content')
-    <div class="bg-home">
+    <div class="container bg-home">
         <div style="height: 100vh;" class="row align-items-center justify-content-center">
             <div class="col-md-5">
                 
@@ -26,21 +26,25 @@ NPJ - SISTEMA
                                         <div class="form-group ls-login-user">
 
                                             <input class="form-control ls-login-bg-user input-lg form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" type="email" aria-label="Email" placeholder="Email" name="email" value="{{ old('email') }}" required autofocus>
-                                            @if ($errors->has('email'))
+                                            <!--
+                                            @#if ($errors->has('email'))
                                                 <span class="invalid-feedback">
                                                     <strong>Email inválido</strong>
                                                 </span>
-                                            @endif
+                                            @#endif
+                                            -->
                                         </div>
 
                                         <div class="form-group ls-login-password">
 
-                                            <input class="form-control ls-login-bg-password input-lg form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" id="userPassword" type="password" name="password"  aria-label="Senha" placeholder="Senha" required>
-                                            @if ($errors->has('password'))
+                                            <input class="form-control ls-login-bg-password input-lg form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" id="userPassword" type="password" name="password"  aria-label="Senha" placeholder="Senha" required>
+                                            
+                                            @if ($errors->has('email'))
                                                 <span class="invalid-feedback">
-                                                    <strong>Senha Inválida</strong>
+                                                    <!--strong>Senha Inválida</strong-->
+                                                    <strong>Credenciais inválidas</strong>
                                                 </span>
-                                            @endif
+                                            @endif                                            
                                         </div>
 
                                         <input type="submit" value="Entrar" class="btn btn-dark btn-lg btn-block mt-4">
