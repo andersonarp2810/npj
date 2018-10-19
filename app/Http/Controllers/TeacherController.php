@@ -60,7 +60,7 @@ class TeacherController extends Controller
 
      $teacher = Human::find($request['id']);//Pega o id do professor
      
-    return $this->service->destroy($teacher, $request);
+    return $this->service->destroy($request, $teacher);
   }
 
   public function preferences()

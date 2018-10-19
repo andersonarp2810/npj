@@ -77,7 +77,7 @@ class TeacherService {
         return redirect()->back();
     }
 
-    public function destroy(Teacher $teacher, Request $request) {
+    public function destroy(Request $request, Human $teacher) {
         if($teacher != null && $teacher->status == 'active'){
             $groups = Group::all();
         foreach($groups as $group){
