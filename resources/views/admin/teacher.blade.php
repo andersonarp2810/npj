@@ -60,7 +60,7 @@
                     <tbody>
                       @forelse($teachers as $teacher)
                         @if($teacher->user->type == "teacher")
-                          <tr class="my-auto align-middle" name="{{$teacher->name}}">
+                          <tr class="object align-middle" name="{{$teacher->name}}">
                             <td class="text-center align-middle">{{$teacher->name}}</td>
                             <td class="text-center align-middle">{{$teacher->user->email}}</td>
                             <td class="text-center align-middle">{{$teacher->gender}}</td>

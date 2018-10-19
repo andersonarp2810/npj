@@ -37,7 +37,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+              </div>
              
                 <div class="table-responsive">
                   <table class="table table-striped">
@@ -53,7 +53,7 @@
                     <tbody>
                       @forelse($defenders as $defender)
                         @if($defender->user->type == "defender" && $defender->status == "active")
-                          <tr class="my-auto align-middle" name="{{$defender->name}}">
+                          <tr class="object align-middle" name="{{$defender->name}}">
                             <td class="text-center align-middle">{{$defender->name}}</td>
                             <td class="text-center align-middle">{{$defender->user->email}}</td>
                             <td class="text-center align-middle">{{$defender->gender}}</td>

@@ -57,7 +57,7 @@
                     <tbody>
                       @forelse($groups as $group)
                         @if($group->status == 'active')
-                            <tr class="my-auto align-middle" name="{{$group->name}}">
+                            <tr class="object align-middle" name="{{$group->name}}">
                               <td class="text-center">{{$group->name}}</td>
                               <td class="text-center">{{$humans->find($group->teacher_id)->name}}</td>
                               <td class="text-center">{{$doubleStudents->where('group_id',$group->id)->count()}}</td>
