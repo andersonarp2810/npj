@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('content')
+@section('component')
 <div class="card">
     <h4 class="card-title">Gerenciar Grupos</h4>
     <div class="card-body">
@@ -46,12 +46,8 @@
                 </thead>
                 <tbody>
                     @foreach($logs as $log)
-                    <tr class="object" name="{{'log' . $log->id}}">
-                        @if($log->user->type == 'guest')
-                        <td style="font-size:10pt" class="text-center">Não autenticado</td>
-                        @else
-                        <td style="font-size:10pt" class="text-center">{{$log->user->human->name}}</td>
-                        @endif
+                    <tr class="object" name="{{$log->user->type == 'guest' ? 'Não autenticado' : $log->user->human->name}}">
+                        <td style="font-size:10pt" class="text-center">{{$log->user->type == 'guest' ? 'Não autenticado' : $log->user->human->name}}</td>
                         <td style="font-size:10pt" class="text-center">{{$log->user->type}}</td>
                         <td style="font-size:10pt" class="text-center">{{$log->route}}</td>
                         <td style="font-size:10pt" class="text-center">{{$log->request}}</td>
