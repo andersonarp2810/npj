@@ -1,151 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Responsive admin dashboard and web application ui kit. ">
-  <meta name="keywords" content="blank, starter">
+@extends('layouts.base')
+
+@section('content')
+
+<!-- Sidebar -->
+@sidebar([
+    'url' => "Admin",
+    'items' => [
+        [
+            'item' => 'Alunos', 'itemUrl' => '/Admin/Alunos', 'icon' => 'user'
+        ], 
+        [
+            'item' => 'Duplas', 'itemUrl' => '/Admin/Duplas', 'icon' => 'user-friends'
+        ],
+        [
+            'item' => 'Professores', 'itemUrl' => '/Admin/Professores', 'icon' => 'user-graduate'
+        ],
+        [
+            'item' => 'Grupos', 'itemUrl' => '/Admin/Grupos', 'icon' => 'users'
+        ],
+        [
+            'item' => 'Defensores', 'itemUrl' => '/Admin/Defensores', 'icon' => 'user-tie'
+        ],
+    ]
+])
+@endsidebar
+
+<!-- END Sidebar -->
 
 
+<div id="main">
+<!-- Topbar -->
+@component('components.topbar')  
+  {{Auth::user()->email}}  
+@endcomponent
 
-  <title>NPJ &mdash; Bem-vindo</title>
 
-  <!-- Styles -->
-  <link href="{{URL::asset('assets/css/core.min.css')}}" rel="stylesheet">
-  <link href="{{URL::asset('assets/css/app.css')}}" rel="stylesheet">
-  <link href="{{URL::asset('assets/css/style.min.css')}}" rel="stylesheet">
-  <link href="{{URL::asset('assets/css/fonts.css')}}" rel="stylesheet">
-  <link href="{{URL::asset('assets/css/bootstrap.css')}}" rel="stylesheet">
-  <link href="{{URL::asset('css/estilo.css')}}" rel="stylesheet">
-  <link href="{{URL::asset('css/fontawesome.css')}}" rel="stylesheet">
+<!-- END Topbar -->
 
-  <!-- Favicons -->
-  <link rel="apple-touch-icon" href="{{URL::asset('assets/img/apple-touch-icon.png')}}">
-  <link rel="icon" href="{{URL::asset('assets/img/favicon.png')}}">
-</head>
-
-<body>
-
-  <!-- Sidebar -->
-  <div class="sidenav" style="width:15%;height:110%">
-    <header class="sidebar-header">
-      <span class="logo">
-        <a href="{{URL::to('Admin')}}"><h6 class="text-center" style="color:red">NPJ-SISTEMA</h6></a>
-      </span>
-    </header>
-
-    <nav class="sidebar-navigation">
-      <ul class="menu">
-        <hr>
-          <li class="menu-item active">
-            <a href="{{URL::to('Admin')}}">
-              <i class="fa fa-home"></i>&nbsp;<span class="title" style="font-size:20px">HOME</span>
-            </a>
-          </li>
-        </hr>
-
-        <hr>
-        <li class="menu-item">
-          <a href="{{URL::to('Admin/Alunos')}}">
-            <span class="title" style="font-size:20px">ALUNOS</span>
-          </a>
+<!-- Main container -->
+<main>
+  <div>
+    @yield('component')
+  </div>
+</main>
+  <!-- Footer -->
+  <footer class="mt-3">    
+    <nav class="navbar bottom navbar-light bg-light">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          Copyright © 2018 NExTi.
         </li>
-        <li class="menu-item" style="margin-left:5%">
-          <a href="{{URL::to('Admin/Duplas')}}">
-            <span class="title" style="font-size:15px">DUPLAS</span>
-          </a>
-        </li>
-      </hr>
-        <hr>
-
-        <li class="menu-item">
-          <a href="{{URL::to('Admin/Professores')}}">
-            <span class="title" style="font-size:20px">PROFESSORES</span>
-          </a>
-        </li>
-        <li class="menu-item" style="margin-left:5%">
-          <a href="{{URL::to('Admin/Grupos')}}">
-            <span class="title" style="font-size:15px">GRUPOS</span>
-          </a>
-        </li>
-      </hr>
-      <hr>
-        <li class="menu-item">
-          <a href="{{URL::to('Admin/Defensores')}}">
-            <span class="title" style="font-size:20px">DEFENSORES</span>
-          </a>
-        </li>
-      </hr>
-      <hr>
-        <li class="menu-item">
-          <a href="{{URL::to('Admin/Preferencias')}}">
-            <span class="title" style="font-size:12px"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;PREFERÊNCIAS</span>
-          </a>
-        </li>
-      </hr>
       </ul>
     </nav>
-  </div>
-  <!-- END Sidebar -->
+  </footer>
+  <!-- END Footer -->
+  @component('components.bottombar')  
+    {{Auth::user()->email}}  
+  @endcomponent
 
-
-  <!-- Topbar -->
-  <header class="topbar" style="margin-left:15%">
-    <div class="topbar-left">
-      <p>Olá, {{Auth::user()->email}} - Bem-vindo de volta</p>
-    </div>
-
-    <div class="topbar-right">
-      <ul class="topbar-btns">
-        <li class="dropdown d-none d-md-block">
-          <button type="button" name="button" class="btn btn-outline-danger" onClick="location.href='{{URL::to('Sair')}}'">SAIR</button>
-        </li>
-      </ul>
-
-    </div>
-  </header>
-  <!-- END Topbar -->
-
-
-  <!-- Main container -->
-  <main style="margin-left:15%">
-    <div class="main-content">
-
-
-      @yield('content')
-
-
-    </div><!--/.main-content -->
-
-
-    <!-- Footer -->
-    <footer class="site-footer" style="margin-top:2%">
-      <div class="row">
-        <div class="col-md-6">
-          <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
-            <li class="nav-item">
-              <p class="text-center text-md-left">Copyright © 2018 Soares n.g.</a></p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </footer>
-    <!-- END Footer -->
-
-  </main>
-  <!-- END Main container -->
-
-
-  <!-- Scripts -->
-  <script src="{{ asset('assets/js/core.min.js')}}"></script>
-  <script src="{{ asset('assets/js/app.min.js')}}"></script>
-  <script src="{{ asset('assets/js/script.min.js')}}"></script>
-  <script src="{{ asset('assets/js/dropzone.js')}}"></script>
-  <script src="{{ asset('assets/js/jquery.mask.min.js')}}"></script>
-  <script src="{{ asset('assets/js/jquery.min.js')}}"></script>
-  <script src="{{ asset('assets/js/jquery.mask.min.js')}}"></script>
-  <script src="{{ asset('assets/js/jquery.maskmoney.min.js')}}"></script>
+<!-- END Main container -->
+</div>
+  
   <!-- Scripts Page -->
   <script type="text/javascript">
 
@@ -283,5 +198,4 @@
         }
 
       </script>
-</body>
-</html>
+@endsection
