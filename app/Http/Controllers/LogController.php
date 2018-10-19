@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Log;
+use App\Entities\Log;
 use Illuminate\Http\Request;
+use Auth;
 
 class LogController extends Controller
 {
@@ -15,71 +16,14 @@ class LogController extends Controller
     public function index()
     {
         //
+        if(Auth::user()->type!='admin'){
+            return redirect()->back();
+        }
+
+        $logs = Log::all()->sortByDesc('created_at'); # ordenar por mais recente
+
+        return view('admin.log')->with(['logs' => $logs]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Log $log)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Log $log)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Log $log)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Log $log)
-    {
-        //
-    }
+    #logs são gerados automaticamente e não devem sofrer qualquer modificação (eu acho) então aqui só vai ter isso mesmo até segunda ordem
 }

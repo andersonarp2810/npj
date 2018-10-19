@@ -18,15 +18,16 @@ class LogMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $params = Route::getCurrentRequest()->all();
-        unset($params['_token']);
-        unset($params['password']);
+        $params = $request->all();
+        unset($params['_token']); # não interessa, não é legível
+        unset($params['password']); # óbvio
 
 
         $log = [
             'user_id' => Auth::guest() ? null : Auth::user()->id,
             'route' => Route::current()->uri,
             'request' => json_encode($params),
+            # ação (get, post, etc.) aparece se der dd() mas é null aqui? friscura véa
         ];
 
 

@@ -86,6 +86,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Admin'], function () {
 
     Route::post('Defensor/Excluir', 'DefenderController@destroy');
 
+    /*
+    ///////////////////////////////////////////
+    /////////////////Logs//////////////////////
+    ///////////////////////////////////////////
+     */
+    Route::get('Logs', 'LogController@index');
+
 });
 
 Route::group(['middleware' => 'auth', 'prefix' => 'Aluno'], function () {
