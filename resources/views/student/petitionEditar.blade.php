@@ -1,5 +1,5 @@
 @extends('layouts.student')
-@section('content')
+@section('component')
   <div style="width:100%">
     <div style="width:60%;position:relative;float:left">
       <script src="{{ asset('tools/ckeditor/ckeditor.js')}}"></script>
@@ -78,4 +78,4 @@
       </div>
     </div>
   </div>
-@stop
+@endsection

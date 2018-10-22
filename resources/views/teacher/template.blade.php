@@ -1,7 +1,7 @@
 @extends('layouts.teacher')
 @section('component')
 <div class="container">
-  <div class="row justify-content-center my-5 ">
+  <div class="row justify-content-center my-5">
     <div class="col-lg-12 my-5">
       <div class="card">
         <div class="card-header">
@@ -61,7 +61,7 @@
                             <td class="text-center align-middle">{{$template->title}}</td>
                             <td class="text-center align-middle">
                               <button type="button" class="btn btn-outline-success" role="button" onClick="location.href='Template/Show/{{$template->id}}'" title="Editar Template"><i class="fa fa-eye"></i></button>
-                              <button type="button" class="btn btn-outline-warning" role="button" onClick="location.href='Template/Edit/{{$template->id}}'" title="Editar Template"><i class="fa fa-pencil"></i></button>
+                              <button type="button" class="btn btn-outline-warning" role="button" onClick="location.href='Template/Edit/{{$template->id}}'" title="Editar Template"><i class="fa fa-edit"></i></button>
                             </td>
                           </tr>
                       @empty

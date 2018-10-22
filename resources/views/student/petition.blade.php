@@ -89,7 +89,7 @@
                               <td style="font-size:10pt;width:20%" class="text-center">
                                   <button type="button" class="btn btn-outline-success" role="button" onClick="location.href='Peticao/Show/{{$petition->id}}'" title="Visualizar Petição"><i class="fa fa-eye"></i></button>
                                   @if($petition->student_ok != 'true')
-                                    <button type="button" class="btn btn-outline-warning" role="button" onClick="location.href='Peticao/Edit/{{$petition->id}}'" title="Editar Petição"><i class="fa fa-trash"></i></button>
+                                    <button type="button" class="btn btn-outline-warning" role="button" onClick="location.href='Peticao/Edit/{{$petition->id}}'" title="Editar Petição"><i class="fa fa-edit"></i></button>
                                   @endif
                                   <!-- Quando a Petição for rascunho -->
                                   @if($petition->student_ok == '')
