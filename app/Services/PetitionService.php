@@ -104,11 +104,9 @@ class PetitionService
                 $fname = $file->getClientOriginalName();
 
                 Photo::create([
-                    'photo' => Storage::disk('public')->put($fname, $file),
+                    'photo' => Storage::disk('public')->put('petition/' . $petition->id, $file),
                     'petition_id' => $petition->id,
                 ]);
-                //$diskPublic = Storage::disk('public');
-                //$diskPublic->put('petition/' . $petition->id . '/' . $fname, $file);
             }
         }
 
@@ -140,8 +138,6 @@ class PetitionService
                     'photo' => Storage::disk('public')->put($fname, $file),
                     'petition_id' => $petition->id,
                 ]);
-                //$diskPublic = Storage::disk('public');
-                //$diskPublic->put('petition/' . $petition->id . '/' . $fname, $file);
             }
         }
     }
@@ -183,9 +179,6 @@ class PetitionService
                     'photo' => $photo->photo,
                     'petition_id' => $newPetition->id, //id da nova Petition
                 ]);
-                //$diskPublic = Storage::disk('public');
-                //Storage::disk('public')->put('petition/'.$petition->id,$file),
-                //$diskPublic->copy('petition/' . $petition->id . '/' . $photo->photo, 'petition/' . $newPetition->id . '/' . $po->photo);
             }
         }
         $this->addImages($request, $newPetition);
