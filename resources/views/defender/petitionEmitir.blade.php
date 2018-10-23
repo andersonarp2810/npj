@@ -20,8 +20,8 @@
           @foreach($photos as $photo)
             @if($photo->photo != "" && $photo->photo != null)
             <div class="row" style="padding-top:4%">
-              <img src="{{URL::asset('storage/'.'petition/'.$petition->id.'/'.$photo->photo)}}" class="img-responsive img-thumbnail" style="width:450px; height:250px; margin:0 auto">
-              <a href="{{URL::asset('storage/'.'petition/'.$petition->id.'/'.$photo->photo)}}" download>Baixar Imagem</a>
+              <img src="{{URL::asset('storage/'.$photo->photo)}}" class="img-responsive img-thumbnail" style="max-width:450px; max-height:250px; margin:0 auto">
+              <a href="{{URL::asset('storage/'.$photo->photo)}}" target="_blank">{{$photo->photo}}</a>
             </div><br>
             @endif
           @endforeach
