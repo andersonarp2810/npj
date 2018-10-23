@@ -190,7 +190,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Defensor'], function () {
     ///////////////////////////////////////////
      */
     Route::get('', 'DefenderController@index');
-    Route::get('Preferencias', 'DefensorController@preferences');
+    Route::get('Preferencias', 'DefenderController@preferences');
     Route::post('Preferencias/Editar', 'DefensorController@preferencesEditar');
 
     /*

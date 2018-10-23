@@ -107,8 +107,8 @@ class PetitionService
                     'photo' => Storage::disk('public')->put($fname, $file),
                     'petition_id' => $petition->id,
                 ]);
-                $diskPublic = Storage::disk('public');
-                $diskPublic->put('petition/' . $petition->id . '/' . $fname, $file);
+                //$diskPublic = Storage::disk('public');
+                //$diskPublic->put('petition/' . $petition->id . '/' . $fname, $file);
             }
         }
 
@@ -140,8 +140,8 @@ class PetitionService
                     'photo' => Storage::disk('public')->put($fname, $file),
                     'petition_id' => $petition->id,
                 ]);
-                $diskPublic = Storage::disk('public');
-                $diskPublic->put('petition/' . $petition->id . '/' . $fname, $file);
+                //$diskPublic = Storage::disk('public');
+                //$diskPublic->put('petition/' . $petition->id . '/' . $fname, $file);
             }
         }
     }
@@ -183,9 +183,9 @@ class PetitionService
                     'photo' => $photo->photo,
                     'petition_id' => $newPetition->id, //id da nova Petition
                 ]);
-                $diskPublic = Storage::disk('public');
+                //$diskPublic = Storage::disk('public');
                 //Storage::disk('public')->put('petition/'.$petition->id,$file),
-                $diskPublic->copy('petition/' . $petition->id . '/' . $photo->photo, 'petition/' . $newPetition->id . '/' . $po->photo);
+                //$diskPublic->copy('petition/' . $petition->id . '/' . $photo->photo, 'petition/' . $newPetition->id . '/' . $po->photo);
             }
         }
         $this->addImages($request, $newPetition);
@@ -297,6 +297,7 @@ class PetitionService
     {
 
         $photos = Photo::all()->where('petition_id', $petition->id);
+        #dd($photos);
         $humans = Human::all()->where('status', 'active');
         $template = Template::find($petition->template_id);
         $comments = Comment::all()->where('petition_id', $petition->id);
