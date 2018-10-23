@@ -183,18 +183,25 @@ class PetitionController extends Controller
 
         if ($petition != null) {
             $hu = Human::all()->where('user_id', Auth::user()->id)->first();
+            $autorizado = false;
             if (Auth::user()->type == 'student') {
                 $doubleHu = DoubleStudent::all()->where('student_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
                 if ($doubleHu == null) {
                     $doubleHu = DoubleStudent::all()->where('student2_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
                 } // somente quem for da dupla pode acessar
-            }
 
-            if ($doubleHu != null) { //se o usuario estiver consultando a sua peticao entoa OK
+                if ($doubleHu != null) { //se o usuario estiver consultando a sua peticao entoa OK
+                    $autorizado = true;
+                }
+            } else if (Auth::user()->type == 'teacher' || Auth::user()->type == 'defender') {
+                $autorizado = true;
+            }
+            if ($autorizado) {
                 $dados = $this->service->show($petition);
                 $view = Auth::user()->type . ".petitionShow";
                 return view($view)->with($dados);
             }
+
         }
         return redirect()->back();
 
