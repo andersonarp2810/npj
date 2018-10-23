@@ -55,7 +55,7 @@
                     <tbody>
                       @forelse($doubleStudents as $doubleStudent)
                         @if($humans->find($doubleStudent->student_id) && $humans->find($doubleStudent->student2_id))
-                          <tr class="my-auto align-middle" name="{{$humans->find($doubleStudent->student_id)->name}}">
+                          <tr class="object align-middle" name="{{$humans->find($doubleStudent->student_id)->name}}">
                             <td class="text-center align-middle">
                               {{$humans->find($doubleStudent->student_id)->name}} | 
                               {{$humans->find($doubleStudent->student2_id)->name}}
