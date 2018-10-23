@@ -22,7 +22,7 @@
           <textarea  class="ckeditor" maxlength="99999" name="content" required>{{$petition->content}}</textarea>
         </div>
         <br>
-        @if($IsPhotos == 'true')
+        
         <div class="row">
             <label for="">DOCUMENTAÇÃO:</label>
             @foreach($photos as $photo)
@@ -32,13 +32,13 @@
             @endforeach
         </div>
         <br>
-        @elseif($IsPhotos == 'false')
+        
         <div class="row">
           <label for="">DOCUMENTAÇÃO:</label>
           <input type="file" name="images[]" class="form-control" multiple>
         </div>
         <br>
-        @endif
+        
         <div class="row">
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" onClick="location.href='{{URL::to('Aluno/Peticoes')}}'">CANCELAR</button>

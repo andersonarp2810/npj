@@ -104,7 +104,7 @@ class PetitionService
                 $fname = $file->getClientOriginalName();
 
                 Photo::create([
-                    'photo' => Storage::disk('public')->put('petition/' . $petition->id, $file),
+                    'photo' => Storage::disk('public')->putFileAs('petition/' . $petition->petitionFirst, $file, $fname),
                     'petition_id' => $petition->id,
                 ]);
             }
@@ -135,7 +135,7 @@ class PetitionService
                 $fname = $file->getClientOriginalName();
 
                 Photo::create([
-                    'photo' => Storage::disk('public')->put($fname, $file),
+                    'photo' => Storage::disk('public')->putFileAs('petition/' . $petition->petitionFirst, $file, $fname),
                     'petition_id' => $petition->id,
                 ]);
             }
