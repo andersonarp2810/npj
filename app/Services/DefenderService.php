@@ -60,7 +60,7 @@ class DefenderService
         return redirect()->back();
     }
 //--------------------------------------------------------------------------------------------------
-    public function destroy(Defender $defender, Request $request)
+    public function destroy(Request $request, Human $defender, User $defender_User)
     {
         if ($defender != null) {
             if ($defender->status == "active" && $defender_User->type == "defender") {

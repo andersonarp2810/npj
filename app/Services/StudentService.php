@@ -74,7 +74,7 @@ class StudentService
         return redirect()->back();
     }
 
-    public function delete(Request $request)
+    public function destroy(Request $request, Human $student)
     {
         if ($student != null) { //se estudante existir
             if ($student->status == "active" && $student->user->type == "student") { //se estudante for active e for do type student
