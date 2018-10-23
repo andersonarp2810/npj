@@ -26,7 +26,7 @@
         <label for="">DOCUMENTAÇÃO:</label>
         @foreach($photos as $photo)
           @if($photo->photo != "" && $photo->photo != null)
-            <img src="{{URL::asset('storage/'.'petition/'.$petition->id.'/'.$photo->photo)}}" class="img-responsive img-thumbnail" style="width:450px; height:250px; margin:0 auto">
+            <img src="{{URL::asset('storage/'.$photo->photo)}}" class="img-responsive img-thumbnail" style="width:450px; height:250px; margin:0 auto">
           @endif
         @endforeach
       </div>
