@@ -221,7 +221,7 @@ class PetitionController extends Controller
                 }
                 if ($petition != null && $petition->visible == 'true') {
                     $dados = $this->service->avaliar($petition);
-                    return view('defender.petitionAvaliable')->with($dados);
+                    return view(Auth::user()->type . '.petitionAvaliable')->with($dados);
                 }
             }
         }
