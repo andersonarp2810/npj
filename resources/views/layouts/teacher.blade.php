@@ -45,7 +45,7 @@
       <nav class="navbar bottom navbar-light bg-light">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
-            Copyright © 2018 NExTi.
+            Copyright © 2018 NexTI.
           </li>
         </ul>
       </nav>
