@@ -8,6 +8,23 @@
         </button>
       </div>
     </div>
+
+    <!-- pra mostrar quando a petição é salva -->
+    <div class="row">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+      <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+    @endif
+    @if(Session::has('status'))
+      <p class="alert alert-info" style="width:20%;">{{ Session::get('status') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+    @endif
+    </div>
+
     <div class="row justify-content-center">
       <div class="col-lg-10">
       <script src="{{ asset('tools/ckeditor/ckeditor.js')}}"></script>

@@ -296,11 +296,18 @@ class PetitionService
     {
 
         $photos = Photo::all()->where('petition_id', $petition->id);
-        #dd($photos);
         $humans = Human::all()->where('status', 'active');
         $template = Template::find($petition->template_id);
         $comments = Comment::all()->where('petition_id', $petition->id);
 
         return ['petition' => $petition, 'photos' => $photos, 'humans' => $humans, 'template' => $template, 'comments' => $comments];
+    }
+
+    public function emitir(Petition $petition)
+    {
+        $photos = Photo::all()->where('petition_id', $petition->id);
+        $comments = Comment::all()->where('petition_id', $petition->id);
+
+        return ['humans' => $humans, 'temps' => $temps, 'petition' => $petition, 'photos' => $photos, 'comments' => $comments];
     }
 }
