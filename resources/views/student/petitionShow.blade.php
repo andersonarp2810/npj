@@ -5,17 +5,22 @@
     <div class="col-lg-10">
       <script src="{{ asset('tools/ckeditor/ckeditor.js')}}"></script>
       @if($petitions->where('visible','true')->where('student_ok','!=','true')->first())
-      <div class="row" style="margin-left:70%">
-        <div>
-          @if($petition->visible != 'true')
-          <button type="button" class="btn btn-dark" onclick="mudarPeticao()" title="Clique para trocar peticao"><i
-              class="fa fa-refresh"></i></button>
-          @else
-          <button type="button" class="btn btn-dark" onclick="mudarPeticao()" disabled><i class="fa fa-refresh"></i></button>
-          @endif
+      <div class="row">
+        <div class="col-1">
+          <div class="align-middle my-auto">
+            @if($petition->visible != 'true')
+            <button type="button" class="btn btn-dark" onclick="mudarPeticao()" title="Clique para trocar peticao">
+              <i class="fas fa-sync my-1"></i>
+            </button>
+            @else
+            <button type="button" class="btn btn-dark" onclick="mudarPeticao()" disabled>
+              <i class="fas fa-sync my-1"></i>
+            </button>
+            @endif
+          </div>
         </div>
-        <div>
-          <select class="form-control" onchange="location.href=this.value" id="idPetition" style="width:100%;">
+        <div class="col-3">
+          <select class="custom-select form-control" onchange="location.href=this.value" id="idPetition" style="width:100%;">
             @if($petition->visible == 'true')
             <option value="{{$petition->id}}">Versão Atual {{$petition->version}}.0</option>
             @else
@@ -34,7 +39,7 @@
         </div>
       </div>
       @elseif($petitions->where('visible','true')->where('student_ok','true')->where('defender_ok','true')->first())
-      <div class="row" style="margin-left:65%">
+      <div class="row">
         <div>
           <button type="button" class="btn btn-dark" onclick="copiarPeticao()" title="Clique para copiar peticao">COPY</button>
         </div>
@@ -59,7 +64,7 @@
       </div>
       @endif
       <div class="row justify-content-center">
-        <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#comments"
+        <button class="btn btn-outline-primary float-right" type="button" data-toggle="modal" data-target="#comments"
           aria-expanded="false" aria-controls="comments">
           Ver comentários
         </button>
@@ -82,13 +87,18 @@
       </div>
       <br>
       @if($photos->count() != 0)
+      <label for="">Documentação:</label>
       <div class="row">
-        <label for="">Documentação:</label>
         @foreach($photos as $photo)
         @if($photo->photo == "" || $photo->photo == null)
-        <img src="{{URL::asset('storage/1')}}" class="img-responsive img-thumbnail" style="width:120px; height:120px; margin:0 auto">
+        <div class="col">
+          <img id="myImg" src="{{URL::asset('storage/1')}}" class="img-responsive img-thumbnail" onclick="showImage($(this))">
+        </div>
         @else
-        <img src="{{URL::asset('storage/'.$photo->photo)}}" class="img-responsive img-thumbnail" style="width:450px; height:250px; margin:0 auto">
+        <div class="col">
+          <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;"
+            onclick="showImage($(this))">
+        </div>
         @endif
         @endforeach
       </div>
@@ -151,4 +161,29 @@
       </div>
     </div>
 
+    <div id="myModal" class="img-modal">
+      <span id="close" class="img-close">&times;</span>
+      <img class="img-modal-content" id="img-view">
+    </div>
+
+    <script>
+      // Get the modal
+      var modal = document.getElementById('myModal');
+
+      // Get the image and insert it inside the modal - use its "alt" text as a caption
+      function showImage(el) {
+        console.log(el.context.src);
+        modal.style.display = "block";
+        var modalImg = document.getElementById("img-view");
+        modalImg.src = el.context.src;
+      }
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks on <span> (x), close the modal
+      document.getElementById("close").onclick = function () {
+        modal.style.display = "none";
+      }
+    </script>
     @endsection

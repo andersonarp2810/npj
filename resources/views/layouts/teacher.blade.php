@@ -58,7 +58,7 @@
   <!-- END Main container -->
   </div>
 
-  <!-- Scripts Page -->
+  <!-- Scripts -->
   <script type="text/javascript">
 
         //funcao da PAGINA home
