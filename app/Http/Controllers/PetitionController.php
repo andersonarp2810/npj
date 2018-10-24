@@ -78,6 +78,7 @@ class PetitionController extends Controller
                     } else if ($request->botao == 'SALVAR') { //aluno vai apenas salvar as alterações e nao vai ENVIAR a Petição RECUSADA
                         $this->service->updateDraft($request, $petition);
                         $request->session()->flash('status', 'Alterações foram salvas com Sucesso!!');
+                        return redirect('Aluno/Peticao/Edit/' . $petition->id);
                     }
                     return redirect('Aluno/Peticoes');
 
@@ -95,6 +96,7 @@ class PetitionController extends Controller
                     } else if ($request->botao == 'SALVAR') { //aluno vai salvar Petição RASCUNHO editada
                         $this->service->updateDraft($request, $petition);
                         $request->session()->flash('status', 'Alterações foram salvas com Sucesso!!');
+                        return redirect('Aluno/Peticao/Edit/' . $petition->id);
                     }
 
                     return redirect('Aluno/Peticoes');
