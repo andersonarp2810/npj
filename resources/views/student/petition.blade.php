@@ -89,7 +89,7 @@
                               <td style="font-size:10pt;width:20%" class="text-center">
                                   <button type="button" class="btn btn-outline-success" role="button" onClick="location.href='Peticao/Show/{{$petition->id}}'" title="Visualizar Petição"><i class="fa fa-eye"></i></button>
                                   @if($petition->student_ok != 'true')
-                                    <button type="button" class="btn btn-outline-warning" role="button" onClick="location.href='Peticao/Edit/{{$petition->id}}'" title="Editar Petição"><i class="fa fa-trash"></i></button>
+                                    <button type="button" class="btn btn-outline-warning" role="button" onClick="location.href='Peticao/Edit/{{$petition->id}}'" title="Editar Petição"><i class="fa fa-edit"></i></button>
                                   @endif
                                   <!-- Quando a Petição for rascunho -->
                                   @if($petition->student_ok == '')
@@ -99,7 +99,9 @@
                             </tr>
                           @endif
                         @empty
-                        <td class="text-center">Nenhuma Petição registrada!</td>
+                        <tr>
+                          <td class="text-center" colspan="4">Nenhuma Petição registrada!</td>
+                        </tr>
                         @endforelse
                       </tbody>
                     </table>
@@ -144,10 +146,9 @@
             </div>
        
             <div class="modal-footer ">
-              <button type="button" class="btn btn-danger" onClick="location.href='{{URL::to('Aluno/Peticoes')}}'">CANCELAR</button>
-              <button type="submit" class="btn btn-primary">CONFIRMAR</button>
+              <button type="button" class="btn btn-danger"data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Criar</button>
             </div>
-         
         </form>
       </div>
     </div>

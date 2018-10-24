@@ -1,7 +1,15 @@
 @extends('layouts.student')
-@section('content')
-  <div style="width:100%">
-    <div style="width:60%;position:relative;float:left">
+@section('component')
+  <div class="container">
+    <div class="row justify-content-center my-3">
+      <div class="text-center">
+      <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#comments" aria-expanded="false" aria-controls="collapseExample">
+          Ver comentários
+        </button>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
       <script src="{{ asset('tools/ckeditor/ckeditor.js')}}"></script>
       <form action="{{URL::to('Aluno/Peticao/Editar')}}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -14,70 +22,117 @@
         </div>
         <br>
         <div class="row">
-          <label for="">DESCRIÇÃO</label>
+          <label for="">Descrição</label>
           <input class="form-control" name="description" value="{{$petition->description}}" />
         </div><br>
         <div class="row">
-          <h2>CONTEÚDO:</h2><br>
+          <label>Conteúdo:</label><br>
           <textarea  class="ckeditor" maxlength="99999" name="content" required>{{$petition->content}}</textarea>
         </div>
         <br>
         
+        <label>Documentação:</label>
         <div class="row">
-            <label for="">DOCUMENTAÇÃO:</label>
+            <br>
             @foreach($photos as $photo)
               @if($photo->photo != "" || $photo->photo != null)
-                <img src="{{URL::asset('storage/'.$photo->photo)}}" class="img-responsive img-thumbnail" style="max-width:450px; max-height:250px; margin:0 auto">
-                <a href="{{URL::asset('storage/'.$photo->photo)}}" target="_blank">{{$photo->photo}}</a>
+              <div class="col">
+                <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage($(this))">
                 <button type="button" class="btn btn-danger" onClick="location.href='{{URL::to('Aluno/Peticao/Edit/' . $petition->id . '/DeletePhoto/' . $photo->id )}}'">APAGAR IMAGEM</button>
+              </div>
               @endif
             @endforeach
         </div>
         <br>
         
         <div class="row">
-          <label for="">DOCUMENTAÇÃO:</label>
+          <label for="">Documentação:</label>
           <input type="file" name="images[]" class="form-control" multiple>
         </div>
         <br>
-        
-        <div class="row">
+        <div class="row justify-content-center">
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" onClick="location.href='{{URL::to('Aluno/Peticoes')}}'">CANCELAR</button>
-            <button type="submit" name="botao" class="btn btn-primary" value="SALVAR">SALVAR</button>
-            <button type="submit" name="botao" class="btn btn-success" value="ENVIAR">ENVIAR</button>
+            <button type="button" class="btn btn-danger" onClick="location.href='{{URL::to('Aluno/Peticoes')}}'">Cancelar</button>
+            <button type="submit" name="botao" class="btn btn-primary" value="SALVAR">Salvar</button>
+            <button type="submit" name="botao" class="btn btn-success" value="ENVIAR">Enviar</button>
           </div>
         </div>
       </form>
     </div>
 
-    <div style="width:30%;padding-left: 10%;position:relative;float:left">
-      <h2 style="margin-left:10px">COMENTÁRIOS:</h2><br>
-      <p>
-        <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-          MOSTRAR
-        </button>
-      </p>
-      <div class="collapse" id="collapseExample">
-      @forelse($comments as $comment)
-        @if($comment->human->user->type == 'teacher')
-        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;border-radius: 10px;border: 1px solid #000;">
-          <div class="card-header" style="margin-left:15px">&nbsp;&nbsp;PROFESSOR:&nbsp;{{$comment->human->name}}</div>
-          <!--<div class="card-body">-->
-            <textarea rows="12" maxlength="99999" style="resize:none;" disabled>{{$comment->content}}</textarea>
-          <!--</div>-->
-        </div>
-        @endif
-          <div class="card text-white bg-warning mb-3" style="max-width: 18rem;border-radius: 10px;border: 1px solid #000;">
-            @if($comment->human->user->type == 'defender')
-            <div class="card-header" style="margin-left:15px">&nbsp;&nbsp;DEFENSOR:&nbsp;{{$comment->human->name}}</div>
-              <textarea rows="12" maxlength="99999" style="resize:none;" disabled>{{$comment->content}}</textarea>
+
+  <div class="modal fade" id="comments" tabindex="-1" role="dialog" aria-labelledby="comments" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Comentários</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-        @endif
-      @empty
-        <h3 class="text-center">Nenhum Comentário!</h3>
-      @endforelse
+          <div class="modal-body">
+            <ul>
+              @forelse($comments as $comment)
+              @if($comment->human->user->type == 'teacher')
+              <li>
+                <strong>
+                  Orientador:
+                </strong>
+                {{$comment->human->name}}
+                <br>
+                <strong>Comentário:</strong>
+                <span>{{$comment->content}}</span>
+              </li>
+              @endif
+
+              @if($comment->human->user->type == 'defender')
+              <li>
+                <strong>
+                  Defensor:
+                </strong>
+                {{$comment->human->name}}
+                <br>
+                <strong>Comentário:</strong>
+                {{$comment->content}}
+              </li>
+              @endif
+            </ul>
+            @empty
+            <h3 class="text-center">Nenhum Comentário!</h3>
+            @endforelse
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
-@stop
+  
+  <div id="myModal" class="modal">
+      <span id="close" class="close">&times;</span>
+      <img class="modal-content" id="img-view">
+    </div>
+
+    <script>
+      // Get the modal
+      var modal = document.getElementById('myModal');
+
+      // Get the image and insert it inside the modal - use its "alt" text as a caption
+      function showImage(el) {
+        console.log(el.context.src);
+        modal.style.display = "block";
+        var modalImg = document.getElementById("img-view");
+        modalImg.src = el.context.src;
+      }
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks on <span> (x), close the modal
+      document.getElementById("close").onclick = function () {
+        modal.style.display = "none";
+      }
+    </script>
+@endsection
