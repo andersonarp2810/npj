@@ -58,14 +58,6 @@
   <!-- END Main container -->
   </div>
 
-  <!-- Scripts -->
-  <script src="{{ asset('assets/js/core.min.js')}}"></script>
-  <script src="{{ asset('assets/js/app.min.js')}}"></script>
-  <script src="{{ asset('assets/js/script.min.js')}}"></script>
-  <script src="{{ asset('assets/js/dropzone.js')}}"></script>
-  <script src="{{ asset('assets/js/jquery.mask.min.js')}}"></script>
-  <script src="{{ asset('assets/js/jquery.min.js')}}"></script>
-  <script src="{{ asset('assets/js/jquery.maskmoney.min.js')}}"></script>
   <!-- Scripts Page -->
   <script type="text/javascript">
 
