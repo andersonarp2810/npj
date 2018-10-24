@@ -1,13 +1,13 @@
 @extends('layouts.defender')
 @section('component')
 <div class="container-fluid">
-  <div id="option1" style="display:block">
+  <div class="row justify-content-center mt-3">
     <div class="text-center">
       <h1 class="h1 h1-responsive text-center">Status das Petições</h1>
     </div>
-    <br>
+  </div>
 
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center mt-3">
       <div class="col-lg-4 col-md-4 col-12 mb-3">
         <div class="card">
           <div class="card-header bg-primary text-white">
@@ -109,5 +109,5 @@
 
     </div>
   </div>
-</div>
+
 @endsection
