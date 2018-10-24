@@ -169,7 +169,7 @@ small {
 }
 
 /* The Modal (background) */
-.modal {
+.img-modal {
   display: none;
   /* Hidden by default */
   position: fixed;
@@ -193,27 +193,15 @@ small {
 }
 
 /* Modal Content (image) */
-.modal-content {
+.img-modal-content {
   margin: auto;
   display: block;
   width: 80%;
   max-width: 700px;
-}
-
-/* Caption of Modal Image */
-#caption {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-  text-align: center;
-  color: #ccc;
-  padding: 10px 0;
-  height: 150px;
 }
 
 /* Add Animation */
-.modal-content,
+.img-modal-content,
 #caption {
   -webkit-animation-name: zoom;
   -webkit-animation-duration: 0.6s;
@@ -242,7 +230,7 @@ small {
 }
 
 /* The Close Button */
-.close {
+.img-close {
   position: absolute;
   top: 15px;
   right: 35px;
@@ -252,8 +240,8 @@ small {
   transition: 0.3s;
 }
 
-.close:hover,
-.close:focus {
+.img-close:hover,
+.img-close:focus {
   color: #bbb;
   text-decoration: none;
   cursor: pointer;
@@ -261,7 +249,7 @@ small {
 
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px) {
-  .modal-content {
+  .img-modal-content {
     width: 100%;
   }
 }

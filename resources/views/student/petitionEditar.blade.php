@@ -110,9 +110,9 @@
 
   </div>
   
-  <div id="myModal" class="modal">
-      <span id="close" class="close">&times;</span>
-      <img class="modal-content" id="img-view">
+  <div id="myModal" class="img-modal">
+      <span id="close" class="img-close">&times;</span>
+      <img class="img-modal-content" id="img-view">
     </div>
 
     <script>
