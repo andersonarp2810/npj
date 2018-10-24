@@ -36,9 +36,14 @@
             <br>
             @foreach($photos as $photo)
               @if($photo->photo != "" || $photo->photo != null)
-              <div class="col">
-                <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage($(this))">
-                <button type="button" class="btn btn-danger" onClick="location.href='{{URL::to('Aluno/Peticao/Edit/' . $petition->id . '/DeletePhoto/' . $photo->id )}}'">APAGAR IMAGEM</button>
+              <div class="col-3 mb-3">
+                <div class="text-center">
+                  <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
+                  <br>                
+                  <button type="button" class="btn btn-sm btn-danger" onClick="location.href='{{URL::to('Aluno/Peticao/Edit/' . $petition->id . '/DeletePhoto/' . $photo->id )}}'">
+                    <span class="fas fa-trash"></span>
+                  </button>                
+                </div>
               </div>
               @endif
             @endforeach
@@ -120,11 +125,11 @@
       var modal = document.getElementById('myModal');
 
       // Get the image and insert it inside the modal - use its "alt" text as a caption
-      function showImage(el) {
-        console.log(el.context.src);
+      function showImage(el) {  
+        console.log(el);
         modal.style.display = "block";
         var modalImg = document.getElementById("img-view");
-        modalImg.src = el.context.src;
+        modalImg.src = el.src;
       }
 
       // Get the <span> element that closes the modal
