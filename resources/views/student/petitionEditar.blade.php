@@ -29,6 +29,7 @@
               @if($photo->photo != "" || $photo->photo != null)
                 <img src="{{URL::asset('storage/'.$photo->photo)}}" class="img-responsive img-thumbnail" style="max-width:450px; max-height:250px; margin:0 auto">
                 <a href="{{URL::asset('storage/'.$photo->photo)}}" target="_blank">{{$photo->photo}}</a>
+                <button type="button" class="btn btn-danger" onClick="location.href='{{URL::to('Aluno/Peticao/Edit/' . $petition->id . '/DeletePhoto/' . $photo->id )}}'">APAGAR IMAGEM</button>
               @endif
             @endforeach
         </div>

@@ -265,6 +265,12 @@ class PetitionService
 
     }
 
+    public function deletePhoto($photo_id){
+        $photo = Photo::find($photo_id);
+        Storage::disk('public')->delete($photo->photo);
+        $photo->delete();
+    }
+
     public function edit(Petition $petition)
     {
         $templates = Template::all();

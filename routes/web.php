@@ -129,6 +129,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Aluno'], function () {
 
     Route::post('Peticao/Delete', 'PetitionController@delete');
 
+    Route::get('Peticao/Edit/{petition_id}/DeletePhoto/{photo_id}', 'PetitionController@deletePhoto');
+
 });
 
 //-----------------------------------------------------------------------------
@@ -174,6 +176,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Professor'], function () {
     Route::get('Peticoes', 'PetitionController@index'); //ver as peticoes do grupo
     Route::get('Peticao/Avaliar/{id}', 'PetitionController@avaliar');
     Route::post('Peticao/Template', 'PetitionController@template'); //ver as peticoes do grupo
+
+    // falta metodos de editar petição que o professor deve poder
+
+    Route::delete('Peticao/Edit/{petition_id}/DeletePhoto/{photo_id}', 'PetitionController@deletePhoto');
 
     /*
     ///////////////////////////////////////////

@@ -244,4 +244,33 @@ class PetitionController extends Controller
         }
 
     }
+
+    public function deletePhoto(Request $request, $petition_id, $photo_id)
+    {
+        //rota tem que ter dois id ex http://localhost:8000/Aluno/Peticao/Edit/16/DeletePhoto/1
+        $petition = Petition::find($petition_id);
+
+        if ($petition != null) {
+            $hu = Human::all()->where('user_id', Auth::user()->id)->first();
+            $autorizado = false;
+            if (Auth::user()->type == 'student') {
+                $doubleHu = DoubleStudent::all()->where('student_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
+                if ($doubleHu == null) {
+                    $doubleHu = DoubleStudent::all()->where('student2_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
+                } // somente quem for da dupla pode acessar
+
+                if ($doubleHu != null) { //se o usuario estiver consultando a sua peticao entoa OK
+                    $autorizado = true;
+                }
+            } else if (Auth::user()->type == 'teacher') {
+                //professor também deve poder editar
+                $autorizado = true;
+            }
+            if ($autorizado) {
+                $this->service->deletePhoto($photo_id);
+            }
+
+        }
+        return redirect()->back();
+    }
 }
