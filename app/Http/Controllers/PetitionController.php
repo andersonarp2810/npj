@@ -78,6 +78,7 @@ class PetitionController extends Controller
                     } else if ($request->botao == 'SALVAR') { //aluno vai apenas salvar as alterações e nao vai ENVIAR a Petição RECUSADA
                         $this->service->updateDraft($request, $petition);
                         $request->session()->flash('status', 'Alterações foram salvas com Sucesso!!');
+                        return redirect('Aluno/Peticao/Edit/' . $petition->id);
                     }
                     return redirect('Aluno/Peticoes');
 
@@ -95,6 +96,7 @@ class PetitionController extends Controller
                     } else if ($request->botao == 'SALVAR') { //aluno vai salvar Petição RASCUNHO editada
                         $this->service->updateDraft($request, $petition);
                         $request->session()->flash('status', 'Alterações foram salvas com Sucesso!!');
+                        return redirect('Aluno/Peticao/Edit/' . $petition->id);
                     }
 
                     return redirect('Aluno/Peticoes');
@@ -236,9 +238,8 @@ class PetitionController extends Controller
         $temps = Template::all()->where('status', 'active');
         $petition = Petition::find($id);
         if ($petition != null && $petition->defender_id == $defender->id && $petition->visible == 'true') {
-            $photos = Photo::all()->where('petition_id', $petition->id);
-            $comments = Comment::all()->where('petition_id', $petition->id);
-            return view('defender.petitionEmitir')->with(['humans' => $humans, 'temps' => $temps, 'petition' => $petition, 'photos' => $photos, 'comments' => $comments]);
+            $dados = $this->service->avaliar($petition);
+            return view('defender.petitionEmitir')->with($dados);
         } else {
             return redirect()->back();
         }
