@@ -79,7 +79,9 @@
                       @if(($petition->defender_ok == 'false' && $petition->teacher_ok == 'true') ||
                       $petition->defender_ok == '')
                       <button type="button" class="btn btn-outline-success" role="button" onClick="location.href='Peticao/Show/{{$petition->id}}'"
-                        title="Visualizar Petição"><i class="fa fa-eye"></i></button>
+                        title="Visualizar Petição">
+                        <i class="fas    fa-eye"></i>
+                      </button>
                       @endif
                       @if($petition->student_ok == 'true' && $petition->teacher_ok == 'true' && $petition->defender_ok !=
                       'true')

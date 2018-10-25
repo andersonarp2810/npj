@@ -48,7 +48,7 @@
         </div>
         <br>
         
-        <label>Documentação:</label>
+        <label class="row">Documentação:</label>
         <div class="row">
             <br>
             @foreach($photos as $photo)
@@ -67,10 +67,10 @@
         </div>
         <br>
         
-        <div class="row">
-          <label for="">Documentação:</label>
-          <input type="file" name="images[]" class="form-control" multiple>
+        <div class="row">          
+          <input type="file" name="images[]" multiple>          
         </div>
+
         <br>
         <div class="row justify-content-center">
           <div class="modal-footer">
