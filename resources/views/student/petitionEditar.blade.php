@@ -5,14 +5,15 @@
       <div class="text-center">
       <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#comments" aria-expanded="false" aria-controls="collapseExample">
           Ver comentários
+          <span class="fas fa-comments ml-2"></span>
         </button>
       </div>
     </div>
 
     <!-- pra mostrar quando a petição é salva -->
-    <div class="row">
+    <div class="row justify-content-center">
     @if ($errors->any())
-    <div class="alert alert-danger">
+    <div class="alert alert-danger col-lg-6">
       <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -21,7 +22,9 @@
     </div>
     @endif
     @if(Session::has('status'))
-      <p class="alert alert-info" style="width:20%;">{{ Session::get('status') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+      <p class="alert alert-info">
+      {{ Session::get('status') }}
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
     @endif
     </div>
 
@@ -48,7 +51,7 @@
         </div>
         <br>
         
-        <label>Documentação:</label>
+        <label class="row">Documentação:</label>
         <div class="row">
             <br>
             @foreach($photos as $photo)
@@ -67,16 +70,25 @@
         </div>
         <br>
         
-        <div class="row">
-          <label for="">Documentação:</label>
-          <input type="file" name="images[]" class="form-control" multiple>
+        <div class="row">          
+          <input type="file" name="images[]" multiple>          
         </div>
+
         <br>
         <div class="row justify-content-center">
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" onClick="location.href='{{URL::to('Aluno/Peticoes')}}'">Cancelar</button>
-            <button type="submit" name="botao" class="btn btn-primary" value="SALVAR">Salvar</button>
-            <button type="submit" name="botao" class="btn btn-success" value="ENVIAR">Enviar</button>
+            <button type="button" class="btn btn-secondary" onClick="location.href='{{URL::to('Aluno/Peticoes')}}'">
+              Cancelar
+              <span class="fas fa-times ml-2"></span>
+            </button>
+            <button type="submit" name="botao" class="btn btn-primary" value="SALVAR">
+              Salvar
+              <span class="fas fa-save ml-2"></span>
+            </button>
+            <button type="submit" name="botao" class="btn btn-success" value="ENVIAR">
+              Enviar
+              <span class="fas fa-share ml-2"></span>
+            </button>
           </div>
         </div>
       </form>
@@ -120,7 +132,7 @@
               @endif
             </ul>
             @empty
-            <h3 class="text-center">Nenhum Comentário!</h3>
+            <h4 class="h4 h4-responsive text-center">Nenhum Comentário!</h4>
             @endforelse
           </div>
           <div class="modal-footer">
@@ -137,24 +149,4 @@
       <img class="img-modal-content" id="img-view">
     </div>
 
-    <script>
-      // Get the modal
-      var modal = document.getElementById('myModal');
-
-      // Get the image and insert it inside the modal - use its "alt" text as a caption
-      function showImage(el) {  
-        console.log(el);
-        modal.style.display = "block";
-        var modalImg = document.getElementById("img-view");
-        modalImg.src = el.src;
-      }
-
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[0];
-
-      // When the user clicks on <span> (x), close the modal
-      document.getElementById("close").onclick = function () {
-        modal.style.display = "none";
-      }
-    </script>
 @endsection

@@ -55,7 +55,7 @@
                   @if($petition->defender_id == $defender->id || ($petition->student_ok == 'true' &&
                   $petition->teacher_ok == 'true' && $petition->defender_ok == '' && $petition->defender_id == ''))
                   <tr class="object" name="{{$petition->description}}">
-                    <td style="font-size:10pt" class="text-center">
+                    <td class="text-center align-middle">
                       @if($petition->student_ok == 'true' && $petition->teacher_ok == 'true' && $petition->defender_ok !=
                       'true')
                       AGUARDANDO DEFENSOR
@@ -68,23 +68,29 @@
                       @endif
 
                     </td>
-                    <td style="font-size:10pt" class="text-center">
+                    <td class="text-center align-middle">
                       {{$petition->description}}
                     </td>
                     <td style="font-size:18pt;width:15%" class="text-center">
                       @if($petition->defender_ok == 'true' && $petition->defender_id == $defender->id)
                       <button type="button" class="btn btn-outline-success" role="button" onClick="location.href='Peticao/Emitir/{{$petition->id}}'"
-                        title="Emitir Petição">EMITIR</button>
+                        title="Emitir Petição">
+                        <span class="fas fa-file-download"></span>
+                      </button>
                       @endif
                       @if(($petition->defender_ok == 'false' && $petition->teacher_ok == 'true') ||
                       $petition->defender_ok == '')
                       <button type="button" class="btn btn-outline-success" role="button" onClick="location.href='Peticao/Show/{{$petition->id}}'"
-                        title="Visualizar Petição"><i class="fa fa-eye"></i></button>
+                        title="Visualizar Petição">
+                        <i class="fas fa-eye"></i>
+                      </button>
                       @endif
                       @if($petition->student_ok == 'true' && $petition->teacher_ok == 'true' && $petition->defender_ok !=
                       'true')
                       <button type="button" class="btn btn-outline-primary" role="button" onClick="location.href='Peticao/Avaliar/{{$petition->id}}'"
-                        title="Avaliar Petição">AVALIAR</button>
+                        title="Avaliar Petição">
+                        <span class="fas fa-gavel"></span>
+                      </button>
                       @endif
                     </td>
                   </tr>

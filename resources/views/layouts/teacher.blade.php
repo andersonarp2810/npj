@@ -12,10 +12,10 @@
               'item' => 'Duplas', 'itemUrl' => '/Professor/Duplas', 'icon' => 'user-friends'
           ],
           [
-              'item' => 'Petições', 'itemUrl' => '/Professor/Peticoes', 'icon' => 'user-graduate'
+              'item' => 'Petições', 'itemUrl' => '/Professor/Peticoes', 'icon' => 'file'
           ],
           [
-              'item' => 'Templates', 'itemUrl' => '/Professor/Templates', 'icon' => 'users'
+              'item' => 'Templates', 'itemUrl' => '/Professor/Templates', 'icon' => 'file-alt'
           ],
         
       ]
