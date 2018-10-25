@@ -308,6 +308,6 @@ class PetitionService
         $photos = Photo::all()->where('petition_id', $petition->id);
         $comments = Comment::all()->where('petition_id', $petition->id);
 
-        return ['humans' => $humans, 'temps' => $temps, 'petition' => $petition, 'photos' => $photos, 'comments' => $comments];
+        return ['petition' => $petition, 'photos' => $photos];
     }
 }

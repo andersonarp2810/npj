@@ -233,12 +233,12 @@ class PetitionController extends Controller
 
     public function emitir(Request $request, $id)
     {
-        $defender = Human::all()->where('user_id', Auth::user()->id)->first();
-        $humans = Human::all()->where('status', 'active');
-        $temps = Template::all()->where('status', 'active');
+        #$defender = Human::all()->where('user_id', Auth::user()->id)->first();
+        #$humans = Human::all()->where('status', 'active');
+        #$temps = Template::all()->where('status', 'active');
         $petition = Petition::find($id);
         if ($petition != null && $petition->defender_id == $defender->id && $petition->visible == 'true') {
-            $dados = $this->service->avaliar($petition);
+            $dados = $this->service->emitir($petition);
             return view('defender.petitionEmitir')->with($dados);
         } else {
             return redirect()->back();
