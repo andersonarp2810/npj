@@ -4,6 +4,7 @@
   <div class="row justify-content-center mt-3">
     <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#comments" aria-expanded="false" aria-controls="collapseExample">
       Ver comentários
+      <span class="fas fa-comments ml-2"></span>
     </button>
   </div>
   <div class="row justify-content-center mt-3">
@@ -35,11 +36,11 @@
           @foreach($photos as $photo)
             @if($photo->photo == "" || $photo->photo == null)
             <div class="col-3">
-              <img src="{{URL::asset('storage/1')}}" class="img-responsive img-thumbnail" style="width:120px; height:120px; margin:0 auto">
+              <img id="myImg" src="{{URL::asset('storage/1')}}" class="img-responsive img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
             </div>
             @else
             <div class="col-3">
-              <img src="{{URL::asset('storage/'.$photo->photo)}}" class="img-responsive img-thumbnail" style="max-width:450px; max-height:250px; margin:0 auto">
+              <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-responsive img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
             </div>
             @endif
           @endforeach
@@ -48,7 +49,7 @@
       @endif
       <div class="row">
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onClick="location.href='{{URL::to('Aluno/Peticoes')}}'">
+          <button type="button" class="btn btn-secondary" onClick="location.href='{{URL::to('Defensor/Peticoes')}}'">
             <span class="fas fa-arrow-left mr-2"></span>
             Voltar
           </button>
@@ -94,4 +95,9 @@
       </div>
     </div>
 
-@stop
+    <div id="myModal" class="img-modal">
+      <span id="close" class="img-close">&times;</span>
+      <img class="img-modal-content" id="img-view">
+    </div>
+
+@endsection

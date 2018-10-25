@@ -8,7 +8,7 @@
   'url' => "Defensor",
     'items' => [
         [
-            'item' => 'Petições', 'itemUrl' => '/Defensor/Peticoes', 'icon' => 'user'
+            'item' => 'Petições', 'itemUrl' => '/Defensor/Peticoes', 'icon' => 'file-alt'
         ], 
       
     ]
