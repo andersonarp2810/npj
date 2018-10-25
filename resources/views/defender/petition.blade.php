@@ -55,7 +55,7 @@
                   @if($petition->defender_id == $defender->id || ($petition->student_ok == 'true' &&
                   $petition->teacher_ok == 'true' && $petition->defender_ok == '' && $petition->defender_id == ''))
                   <tr class="object" name="{{$petition->description}}">
-                    <td style="font-size:10pt" class="text-center">
+                    <td class="text-center align-middle">
                       @if($petition->student_ok == 'true' && $petition->teacher_ok == 'true' && $petition->defender_ok !=
                       'true')
                       AGUARDANDO DEFENSOR
@@ -68,7 +68,7 @@
                       @endif
 
                     </td>
-                    <td style="font-size:10pt" class="text-center">
+                    <td class="text-center align-middle">
                       {{$petition->description}}
                     </td>
                     <td style="font-size:18pt;width:15%" class="text-center">

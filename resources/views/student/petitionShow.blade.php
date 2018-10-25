@@ -41,10 +41,13 @@
       @elseif($petitions->where('visible','true')->where('student_ok','true')->where('defender_ok','true')->first())
       <div class="row">
         <div>
-          <button type="button" class="btn btn-dark" onclick="copiarPeticao()" title="Clique para copiar peticao">COPY</button>
+          <button type="button" class="btn btn-secondary mr-2" onclick="copiarPeticao()" title="Clique para copiar peticao">
+            Copiar
+            <span class="fas fa-copy"></span>
+          </button>
         </div>
         <div>
-          <select class="form-control" onchange="location.href=this.value" id="idPetition" style="width:100%;">
+          <select class="custom-select" onchange="location.href=this.value" id="idPetition" style="width:100%;">
             @if($petition->visible == 'true')
             <option value="{{$petition->id}}">Versão Atual {{$petition->version}}.0</option>
             @else
@@ -67,6 +70,7 @@
         <button class="btn btn-outline-primary float-right" type="button" data-toggle="modal" data-target="#comments"
           aria-expanded="false" aria-controls="comments">
           Ver comentários
+          <span class="fas fa-comments ml-2"></span>
         </button>
       </div>
       <div class="row">
@@ -106,7 +110,7 @@
       @endif
       <div class="row">
         <div class="modal-footer">
-          <button type="button" class="btn btn-dark" onClick="location.href='{{URL::to('Aluno/Peticoes')}}'">
+          <button type="button" class="btn btn-secondary" onClick="location.href='{{URL::to('Aluno/Peticoes')}}'">
             <span class="fas fa-arrow-left mr-2"></span>
             Voltar
           </button>
@@ -151,7 +155,7 @@
               @endif
             </ul>
             @empty
-            <h3 class="text-center">Nenhum Comentário!</h3>
+            <h4 class="h4 h4-responsive text-center">Nenhum Comentário!</h4>
             @endforelse
           </div>
           <div class="modal-footer">
