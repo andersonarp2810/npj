@@ -86,11 +86,21 @@
 
 
         //validacao Duplas
-        function verify(e){
-          var r = $("#r").val();
-          console.log(r);
-          if(e == r){
-            document.getElementById('r').style.display = "none";
+        function verify(select, mudado){
+          //select == opção selecionada e mudado == se for na select da esquerda ou da direita
+          if(mudado == 1){
+            var options = $(".segundos");
+          } else if(mudado == 2){
+            var options = $(".primeiros");
+          }
+          console.log(select);
+          console.log(options);
+          for (let index = 0; index < options.length; index++) {
+            console.log(options[index].value + " - " + select);
+            options[index].style.display = "block";
+            if(options[index].value == select){
+              options[index].style.display = "none";
+            }
           }
         }
         //validacao Duplas
