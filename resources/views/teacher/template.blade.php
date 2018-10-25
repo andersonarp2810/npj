@@ -41,7 +41,7 @@
              
                 <div class="table-responsive">
                   <table class="table table-condensed table-striped table-bordered">
-                    <thead class="table">
+                    <thead class="thead-dark">
                       <tr>
                         <th class="text-center">Status</th>
                         <th class="text-center">Título</th>

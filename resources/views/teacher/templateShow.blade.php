@@ -12,7 +12,9 @@
         <textarea  class="ckeditor" maxlength="99999" name="content" disabled>{{$template->content}}</textarea>
         <div class="row">
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" onClick="location.href='{{URL::to('Professor/Templates')}}'">VOLTAR</button>
+            <button type="button" class="btn btn-secondary" onClick="location.href='{{URL::to('Professor/Templates')}}'">
+            <i class="fas fa-arrow-left mr-2"></i>
+              Voltar</button>
           </div>
         </div>
     </div>
