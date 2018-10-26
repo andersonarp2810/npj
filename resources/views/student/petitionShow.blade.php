@@ -128,46 +128,41 @@
             </button>
           </div>
           <div class="modal-body">
-            <div class="row">
+          <div class="row">
               <div class="col-6">
                 <div class="text-center">
                   <strong>Orientador</strong>
                 </div>
-                <ul> 
-                  @forelse($profComments as $comment)
+                <ul>
+                  @foreach($profComments as $comment)
                   <li>
                     {{$comment->human->name}}
                     <br>
                     <strong>Comentário:</strong>
                     <span>{{$comment->content}}</span>
                   </li>
-                  <hr>                  
-                  @empty
-                  <p>Nenhum Comentário!</p>
-                  @endforelse
+                  @endforeach
                 </ul>
+                @if(count($profComments) < 1)
+                <p class="text-center">Nenhum Comentário!</p>
+                @endif
               </div>
-              
+
               <div class="col-6">
                 <div class="text-center">
                   <strong>Defensor</strong>
                 </div>
                 <ul>
-                  @foreach($comments as $comment)                
-                    @if($comment->human->user->type == 'defender')
+                  @foreach($defComments as $comment)
                     <li>
-                      <strong>
-                        Defensor:
-                      </strong>
                       {{$comment->human->name}}
                       <br>
                       <strong>Comentário:</strong>
                       {{$comment->content}}
                     </li>
-                    @endif
                   @endforeach
                 </ul>
-                @if($comments->where('human->user->type', 'defender')->count() < 1)
+                @if(count($defComments) < 1)
                 <p class="text-center">Nenhum Comentário!</p>
                 @endif
               </div>

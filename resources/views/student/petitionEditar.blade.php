@@ -50,7 +50,7 @@
           <textarea  class="ckeditor" maxlength="99999" name="content" required>{{$petition->content}}</textarea>
         </div>
         <br>
-        
+
         <label class="row">Documentação:</label>
         <div class="row">
             <br>
@@ -59,19 +59,19 @@
               <div class="col-3 mb-3">
                 <div class="text-center">
                   <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
-                  <br>                
+                  <br>
                   <button type="button" class="btn btn-sm btn-danger" onClick="location.href='{{URL::to('Aluno/Peticao/Edit/' . $petition->id . '/DeletePhoto/' . $photo->id )}}'">
                     <span class="fas fa-trash"></span>
-                  </button>                
+                  </button>
                 </div>
               </div>
               @endif
             @endforeach
         </div>
         <br>
-        
-        <div class="row">          
-          <input type="file" name="images[]" multiple>          
+
+        <div class="row">
+          <input type="file" name="images[]" multiple>
         </div>
 
         <br>
@@ -96,7 +96,7 @@
 
 
   <div class="modal fade" id="comments" tabindex="-1" role="dialog" aria-labelledby="comments" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Comentários</h5>
@@ -110,45 +110,40 @@
                 <div class="text-center">
                   <strong>Orientador</strong>
                 </div>
-                <ul> 
-                  @forelse($profComments as $comment)
+                <ul>
+                  @foreach($profComments as $comment)
                   <li>
                     {{$comment->human->name}}
                     <br>
                     <strong>Comentário:</strong>
                     <span>{{$comment->content}}</span>
                   </li>
-                  <hr>                  
-                  @empty
-                  <p>Nenhum Comentário!</p>
-                  @endforelse
+                  @endforeach
                 </ul>
+                @if(count($profComments) < 1)
+                <p class="text-center">Nenhum Comentário!</p>
+                @endif
               </div>
-              
+
               <div class="col-6">
                 <div class="text-center">
                   <strong>Defensor</strong>
                 </div>
                 <ul>
-                  @foreach($comments as $comment)                
-                    @if($comment->human->user->type == 'defender')
+                  @foreach($defComments as $comment)
                     <li>
-                      <strong>
-                        Defensor:
-                      </strong>
                       {{$comment->human->name}}
                       <br>
                       <strong>Comentário:</strong>
                       {{$comment->content}}
                     </li>
-                    @endif
                   @endforeach
                 </ul>
-                @if($comments->where('human->user->type', 'defender')->count() < 1)
+                @if(count($defComments) < 1)
                 <p class="text-center">Nenhum Comentário!</p>
                 @endif
               </div>
-            
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -158,7 +153,7 @@
     </div>
 
   </div>
-  
+
   <div id="myModal" class="img-modal">
       <span id="close" class="img-close">&times;</span>
       <img class="img-modal-content" id="img-view">
