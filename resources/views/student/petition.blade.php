@@ -60,23 +60,16 @@
                                 {{$petition->version}}.0
                               </td>
                               <td class="text-center align-middle">
-                                @if($petition->student_ok == '')
-                                  RASCUNHO
-                                @endif
-                                @if($petition->teacher_ok == 'false' && $petition->student_ok == 'false')
-                                  (PROFESSOR RECUSADA - AGUARDANDO ALUNO)
-                                @endif
-                                @if($petition->student_ok == 'true' && $petition->teacher_ok != 'true')
-                                  AGUARDANDO PROFESSOR
-                                @endif
-                                @if($petition->student_ok == 'true' && $petition->teacher_ok == 'true' && $petition->defender_ok != 'true')
-                                  AGUARDANDO DEFENSOR
-                                @endif
                                 @if($petition->defender_ok == 'true')
-                                  FINALIZADA
-                                @endif
-                                @if($petition->defender_ok == 'false' && $petition->student_ok == 'false')
-                                  (DEFENSOR RECUSADA - AGUARDANDO ALUNO)
+                                  Finalizada
+                                @elseif($petition->student_ok == '')
+                                  Rascunho
+                                @elseif($petition->teacher_ok == 'false' && $petition->student_ok == 'false')
+                                  Recusada - Professor
+                                @elseif($petition->student_ok == 'true' && $petition->teacher_ok != 'true')
+                                  Avaliação - Professor
+                                @elseif($petition->student_ok == 'true' && $petition->teacher_ok == 'true')
+                                  Avaliação - Defensor
                                 @endif
                               </td>
                               <td class="text-center align-middle">
