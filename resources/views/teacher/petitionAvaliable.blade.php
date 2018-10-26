@@ -31,22 +31,34 @@
         </div>
         <br>
   
-        <label for="">Documentação:</label>
+        @if(count($photos) >= 1)
         <div class="row">
+            <label>Documentação:</label>
             @foreach($photos as $photo)
               @if($photo->photo == "" || $photo->photo == null)
-              <div class="col-3">
+              <div class="col-3 mb-3 text-center">
                 <img id="myImg" src="{{URL::asset('storage/1')}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
               </div>
               @else
-              <div class="col-3">
+              <div class="col-3 mb-3 text-center">
                 <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
               </div>                  
               @endif
             @endforeach
-        </div>
+          </div>
+          @else
+          <div class="row">
+            <div>
+              <label>Documentação:</label>        
+              <p class="text-secondary">Nenhuma documentação em anexo.</p>
+            </div>
+          </div>          
+          @endif
         <br>
-        <textarea  cols="100" rows="10" maxlength="99999" name="comment" id="comment" placeholder="Preencha caso necessite de correção!" ></textarea>
+        <div class="row">
+          <label>Comentário:</label>
+          <textarea  cols="100" rows="10" maxlength="99999" name="comment" id="comment" placeholder="Preencha caso necessite de correção!" ></textarea>
+        </div>
         <div class="row justify-content-center mt-3">
           <div class="text-center">
             <button type="button" class="btn btn-secondary" onClick="location.href='{{URL::to('Professor/Peticoes')}}'">

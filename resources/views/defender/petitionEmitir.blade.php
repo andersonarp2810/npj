@@ -21,21 +21,32 @@
         <input type="hidden" class="ckeditor" name="content" value="{{$petition->content}}"/>
 
         <br>
-        <label for="">Documentação:</label>
-        <div class="row">
-          @foreach($photos as $photo)
-            @if($photo->photo != "" && $photo->photo != null)
-              <div class="col-3 mb-3">
-                <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
-                <a href="{{URL::asset('storage/'.$photo->photo)}}" download>Baixar Imagem</a>
-              </div>
-              <br>
+          @if(count($photos) >= 1)
+          <div class="row">
+            <label for="">Documentação:</label>
+            @foreach($photos as $photo)
+              @if($photo->photo != "" && $photo->photo != null)
+                <div class="col-3 mb-3 text-center">
+                  <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
+                  <a class="btn btn-sm btn-primary" href="{{URL::asset('storage/'.$photo->photo)}}" download>
+                    <span class="fas fa-download"></span>
+                  </a>
+                </div>              
               @endif
+            </div>
           @endforeach
-        </div>
+
+          @else
+          <div class="row">
+            <div>
+              <label>Documentação:</label>        
+              <p class="text-secondary">Nenhuma documentação em anexo.</p>
+            </div>
+          </div>          
+          @endif
         <br>
         <div class="row">
-          <div class="modal-footer">
+          <div>
             <button type="button" class="btn btn-secondary" onClick="location.href='{{URL::to('Defensor/Peticoes')}}'">
               <span class="fas fa-arrow-left mr-2"></span>
               Voltar
