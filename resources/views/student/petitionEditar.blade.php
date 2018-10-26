@@ -105,35 +105,50 @@
             </button>
           </div>
           <div class="modal-body">
-            <ul>
-              @forelse($comments as $comment)
-              @if($comment->human->user->type == 'teacher')
-              <li>
-                <strong>
-                  Orientador:
-                </strong>
-                {{$comment->human->name}}
-                <br>
-                <strong>Comentário:</strong>
-                <span>{{$comment->content}}</span>
-              </li>
-              @endif
-
-              @if($comment->human->user->type == 'defender')
-              <li>
-                <strong>
-                  Defensor:
-                </strong>
-                {{$comment->human->name}}
-                <br>
-                <strong>Comentário:</strong>
-                {{$comment->content}}
-              </li>
-              @endif
-            </ul>
-            @empty
-            <h4 class="h4 h4-responsive text-center">Nenhum Comentário!</h4>
-            @endforelse
+          <div class="row">
+              <div class="col-6">
+                <div class="text-center">
+                  <strong>Orientador</strong>
+                </div>
+                <ul> 
+                  @forelse($profComments as $comment)
+                  <li>
+                    {{$comment->human->name}}
+                    <br>
+                    <strong>Comentário:</strong>
+                    <span>{{$comment->content}}</span>
+                  </li>
+                  <hr>                  
+                  @empty
+                  <p>Nenhum Comentário!</p>
+                  @endforelse
+                </ul>
+              </div>
+              
+              <div class="col-6">
+                <div class="text-center">
+                  <strong>Defensor</strong>
+                </div>
+                <ul>
+                  @foreach($comments as $comment)                
+                    @if($comment->human->user->type == 'defender')
+                    <li>
+                      <strong>
+                        Defensor:
+                      </strong>
+                      {{$comment->human->name}}
+                      <br>
+                      <strong>Comentário:</strong>
+                      {{$comment->content}}
+                    </li>
+                    @endif
+                  @endforeach
+                </ul>
+                @if($comments->where('human->user->type', 'defender')->count() < 1)
+                <p class="text-center">Nenhum Comentário!</p>
+                @endif
+              </div>
+            
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

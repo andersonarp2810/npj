@@ -265,7 +265,8 @@ class PetitionService
 
     }
 
-    public function deletePhoto($photo_id){
+    public function deletePhoto($photo_id)
+    {
         $photo = Photo::find($photo_id);
         Storage::disk('public')->delete($photo->photo);
         $photo->delete();
@@ -289,12 +290,12 @@ class PetitionService
         $photos = Photo::all()->where('petition_id', $petition->id);
         $comments = Comment::all()->where('petition_id', $petition->id);
 
-        $profComments = $comments->reject(function($c){
-            return $c->human->user->type == 'teacher';
-        });
-        $defComments =  $comments->reject(function($c){
-            return $c->human->user->type == 'defender';
-        });
+        $profComments = $comments->reject(function ($c) {
+            return $c->human->user->type != 'teacher';
+        })->all();
+        $defComments = $comments->reject(function ($c) {
+            return $c->human->user->type != 'defender';
+        })->all();
 
         return ['petition' => $petition, 'humans' => $humans, 'temps' => $temps, 'petitions' => $petitions, 'photos' => $photos, 'comments' => $comments, 'profComments' => $profComments, 'defComments' => $defComments];
     }
