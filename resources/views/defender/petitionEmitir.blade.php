@@ -27,6 +27,7 @@
             @if($photo->photo != "" && $photo->photo != null)
               <div class="col-3 mb-3">
                 <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
+                <a href="{{URL::asset('storage/'.$photo->photo)}}" download>Baixar Imagem</a>
               </div>
               <br>
               @endif
