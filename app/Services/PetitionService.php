@@ -277,8 +277,14 @@ class PetitionService
         $photos = Photo::all()->where('petition_id', $petition->id);
         $IsPhotos = $photos->count() != 0 ? 'true' : 'false';
         $comments = Comment::all()->where('petition_id', $petition->id);
+        $profComments = $comments->reject(function($c){
+            return $c->human->user->type == 'teacher';
+        })->all();
+        $defComments =  $comments->reject(function($c){
+            return $c->human->user->type == 'defender';
+        })->all();
 
-        return ['petition' => $petition, 'templates' => $templates, 'photos' => $photos, 'IsPhotos' => $IsPhotos, 'comments' => $comments];
+        return ['petition' => $petition, 'templates' => $templates, 'photos' => $photos, 'IsPhotos' => $IsPhotos, 'comments' => $comments, 'profComments' => $profComments, 'defComments' => $defComments];
     }
 
     public function show(Petition $petition)
@@ -306,15 +312,27 @@ class PetitionService
         $humans = Human::all()->where('status', 'active');
         $template = Template::find($petition->template_id);
         $comments = Comment::all()->where('petition_id', $petition->id);
+        $profComments = $comments->reject(function($c){
+            return $c->human->user->type == 'teacher';
+        })->all();
+        $defComments =  $comments->reject(function($c){
+            return $c->human->user->type == 'defender';
+        })->all();
 
-        return ['petition' => $petition, 'photos' => $photos, 'humans' => $humans, 'template' => $template, 'comments' => $comments];
+        return ['petition' => $petition, 'photos' => $photos, 'humans' => $humans, 'template' => $template, 'comments' => $comments, 'profComments' => $profComments, 'defComments' => $defComments];
     }
 
     public function emitir(Petition $petition)
     {
         $photos = Photo::all()->where('petition_id', $petition->id);
         $comments = Comment::all()->where('petition_id', $petition->id);
+        $profComments = $comments->reject(function($c){
+            return $c->human->user->type == 'teacher';
+        })->all();
+        $defComments =  $comments->reject(function($c){
+            return $c->human->user->type == 'defender';
+        })->all();
 
-        return ['petition' => $petition, 'photos' => $photos];
+        return ['petition' => $petition, 'photos' => $photos, 'profComments' => $profComments, 'defComments' => $defComments];
     }
 }
