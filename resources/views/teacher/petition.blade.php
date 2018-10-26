@@ -63,11 +63,11 @@
                             @elseif($petition->student_ok == 'true' && $petition->teacher_ok != 'true')
                               Avaliação Pendente
                             @elseif($petition->student_ok == 'true' && $petition->teacher_ok == 'true' && $petition->defender_ok != 'true')
-                              Avaliação - Defensor
+                              Avaliação Pendente - Defensor
                             @elseif($petition->student_ok == 'false' && $petition->defender_ok == 'false')
                               Recusada - Defensor
                             @elseif($petition->teacher_ok == 'false' && $petition->student_ok == 'false')
-                              Recusada - Aguardando Aluno
+                              Recusada - Aguardando Correção
                             @endif
                             </td>
                             <td class="text-center align-middle">
