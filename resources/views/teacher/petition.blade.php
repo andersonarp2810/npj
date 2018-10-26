@@ -74,9 +74,15 @@
                               {{$petition->description}}
                             </td>
                             <td class="text-center align-middle">
+                              @if($petition->student_ok == 'true' && $petition->teacher_ok != 'true')
                               <button type="button" class="btn btn-outline-primary" role="button" onClick="location.href='Peticao/Avaliar/{{$petition->id}}'" title="Avaliar Petição">
                                 <span class="fas fa-gavel"></span>
                               </button>
+                              @else
+                              <button type="button" class="btn btn-outline-success" role="button" onClick="location.href='Peticao/Show/{{$petition->id}}'" title="Visualizar Petição">
+                                <span class="fas fa-eye"></span>
+                              </button>
+                              @endif
                             </td>
                           </tr>
                         @endif
