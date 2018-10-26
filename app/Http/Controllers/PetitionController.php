@@ -233,7 +233,7 @@ class PetitionController extends Controller
 
     public function emitir(Request $request, $id)
     {
-        #$defender = Human::all()->where('user_id', Auth::user()->id)->first();
+        $defender = Human::all()->where('user_id', Auth::user()->id)->first();
         #$humans = Human::all()->where('status', 'active');
         #$temps = Template::all()->where('status', 'active');
         $petition = Petition::find($id);

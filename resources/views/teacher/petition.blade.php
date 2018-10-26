@@ -45,16 +45,34 @@
                     <thead class="thead-dark">
                       <tr>
                         <th class="text-center">Versão</th>
+                        <th class="text-center">Status</th>
                         <th class="text-center">Descrição</th>
                         <th class="text-center">Ações</th>
                       </tr>
                     </thead>
                     <tbody>
                       @forelse($petitions as $petition)
-                        @if($petition->student_ok == 'true' && $petition->teacher_ok != 'true')
+                        @if($petition->student_ok != '')
                           <tr class="object align-middle" name="{{$petition->description}}">
-                            <td class="text-center align-middle">{{$petition->version}}.0</td>
-                            <td class="text-center align-middle">{{$petition->description}}</td>
+                            <td class="text-center align-middle">
+                              {{$petition->version}}.0
+                            </td>
+                            <td class="text-center align-middle">
+                            @if($petition->defender_ok == 'true')
+                              Finalizada
+                            @elseif($petition->student_ok == 'true' && $petition->teacher_ok != 'true')
+                              Avaliação Pendente
+                            @elseif($petition->student_ok == 'true' && $petition->teacher_ok == 'true' && $petition->defender_ok != 'true')
+                              Avaliação - Defensor
+                            @elseif($petition->student_ok == 'false' && $petition->defender_ok == 'false')
+                              Recusada - Defensor
+                            @elseif($petition->teacher_ok == 'false' && $petition->student_ok == 'false')
+                              Recusada - Aguardando Aluno
+                            @endif
+                            </td>
+                            <td class="text-center align-middle">
+                              {{$petition->description}}
+                            </td>
                             <td class="text-center align-middle">
                               <button type="button" class="btn btn-outline-primary" role="button" onClick="location.href='Peticao/Avaliar/{{$petition->id}}'" title="Avaliar Petição">
                                 <span class="fas fa-gavel"></span>
