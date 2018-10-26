@@ -7,7 +7,7 @@
   'url' => "Aluno",
     'items' => [
         [
-            'item' => 'Petições', 'itemUrl' => '/Aluno/Peticoes', 'icon' => 'user'
+            'item' => 'Petições', 'itemUrl' => '/Aluno/Peticoes', 'icon' => 'file-alt'
         ], 
       
     ]
