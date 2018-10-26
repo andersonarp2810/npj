@@ -289,7 +289,14 @@ class PetitionService
         $photos = Photo::all()->where('petition_id', $petition->id);
         $comments = Comment::all()->where('petition_id', $petition->id);
 
-        return ['petition' => $petition, 'humans' => $humans, 'temps' => $temps, 'petitions' => $petitions, 'photos' => $photos, 'comments' => $comments];
+        $profComments = $comments->reject(function($c){
+            return $c->human->user->type == 'teacher';
+        });
+        $defComments =  $comments->reject(function($c){
+            return $c->human->user->type == 'defender';
+        });
+
+        return ['petition' => $petition, 'humans' => $humans, 'temps' => $temps, 'petitions' => $petitions, 'photos' => $photos, 'comments' => $comments, 'profComments' => $profComments, 'defComments' => $defComments];
     }
 
     public function avaliar(Petition $petition)

@@ -176,6 +176,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Professor'], function () {
     Route::get('Peticoes', 'PetitionController@index'); //ver as peticoes do grupo
     Route::get('Peticao/Avaliar/{id}', 'PetitionController@avaliar');
     Route::post('Peticao/Template', 'PetitionController@template'); //ver as peticoes do grupo
+    Route::get('Peticao/Show/{id}', 'PetitionController@show');
 
     // falta metodos de editar petição que o professor deve poder
 
