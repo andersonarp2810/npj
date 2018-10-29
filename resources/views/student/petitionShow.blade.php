@@ -119,7 +119,7 @@
     </div>
 
     <div class="modal fade" id="comments" tabindex="-1" role="dialog" aria-labelledby="comments" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Comentários</h5>
@@ -128,35 +128,45 @@
             </button>
           </div>
           <div class="modal-body">
-            <ul>
-              @forelse($comments as $comment)
-              @if($comment->human->user->type == 'teacher')
-              <li>
-                <strong>
-                  Orientador:
-                </strong>
-                {{$comment->human->name}}
-                <br>
-                <strong>Comentário:</strong>
-                <span>{{$comment->content}}</span>
-              </li>
-              @endif
+          <div class="row">
+              <div class="col-6">
+                <div class="text-center">
+                  <strong>Orientador</strong>
+                </div>
+                <ul>
+                  @foreach($profComments as $comment)
+                  <li>
+                    {{$comment->human->name}}
+                    <br>
+                    <strong>Comentário:</strong>
+                    <span>{{$comment->content}}</span>
+                  </li>
+                  @endforeach
+                </ul>
+                @if(count($profComments) < 1)
+                <p class="text-center">Nenhum Comentário!</p>
+                @endif
+              </div>
 
-              @if($comment->human->user->type == 'defender')
-              <li>
-                <strong>
-                  Defensor:
-                </strong>
-                {{$comment->human->name}}
-                <br>
-                <strong>Comentário:</strong>
-                {{$comment->content}}
-              </li>
-              @endif
-            </ul>
-            @empty
-            <h4 class="h4 h4-responsive text-center">Nenhum Comentário!</h4>
-            @endforelse
+              <div class="col-6">
+                <div class="text-center">
+                  <strong>Defensor</strong>
+                </div>
+                <ul>
+                  @foreach($defComments as $comment)
+                    <li>
+                      {{$comment->human->name}}
+                      <br>
+                      <strong>Comentário:</strong>
+                      {{$comment->content}}
+                    </li>
+                  @endforeach
+                </ul>
+                @if(count($defComments) < 1)
+                <p class="text-center">Nenhum Comentário!</p>
+                @endif
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

@@ -104,11 +104,11 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="">Primeiro Estudante</label>
-                    <select class="form-control" name="student_id" id="student_id" onchange="verify(this.value)" required>
+                    <select class="form-control" name="student_id" id="student_id" onchange="verify(this.value, 1)" required>
                       <option value="">Selecione o Estudante</option>
                       @foreach($humans as $human)
                         @if($human->user->type == 'student' && $human->status == 'active' && $human->doubleS == 'NAO')
-                          <option value="{{$human->id}}">{{$human->name}}</option>
+                          <option value="{{$human->id}}" class="primeiros">{{$human->name}}</option>
                         @endif
                       @endforeach
                     </select>
@@ -118,12 +118,12 @@
              
                 <div class="form-group">
                 <label for="">Segundo Estudante</label>
-                <select class="form-control" name="student2_id" id="student2_id" required>
+                <select class="form-control" name="student2_id" id="student2_id" onchange="verify(this.value, 2)" required>
                   <option value="">Selecione o Estudante</option>
                   @foreach($humans as $human)
                     <div>
                       @if($human->user->type == 'student' && $human->status == 'active' && $human->doubleS == 'NAO')
-                        <option value="{{$human->id}}" id="r" style="display:block">{{$human->name}}</option>
+                        <option value="{{$human->id}}" class="segundos" style="display:block">{{$human->name}}</option>
                       @endif
                     </div>
                   @endforeach
