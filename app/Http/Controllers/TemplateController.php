@@ -62,7 +62,7 @@ class TemplateController extends Controller
     public function editStatus(Request $request)
     {
         if (Auth::user()->type == 'teacher') {
-            $this->service->editStatus($request);
+            $status = $this->service->editStatus($request);
             return response()->json(['status' => $status]);
         } else {
             return redirect()->back();
