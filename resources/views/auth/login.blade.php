@@ -7,17 +7,16 @@ NPJ - SISTEMA
 @section('content')
     <div class="container bg-home">
         <div style="height: 100vh;" class="row align-items-center justify-content-center">
-            <div class="col-md-5">
+            <div class="col-lg-5 col-md-8 col-10">
                 
                 <div style="border-radius: 2%" class="card">
                     <div class="card-body">
                         <div class="box-parent-login">
                             <div class="well bg-white box-login">
-                                <h1 style="font-size: 70px" class="ls-login-logo text-center">
-                                    NPJ                                
-                                    <!--<img src="{{URL::asset('storage/logo.png')}}" class="img-responsive img-thumbnail" style="width:450px; height:160px; margin:0 auto">-->
-                                </h1>
-                                <h5 class="text-center mb-4">Núcleo de Práticas Jurídicas</h5>
+                                <div class="text-center mb-3">
+                                    <img src="{{URL::asset('assets/img/logo-NPJ.png')}}" class="img-fluid" style="height:100px;">
+                                </div>
+                                
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
 
