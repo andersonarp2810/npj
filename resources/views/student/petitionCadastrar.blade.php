@@ -25,9 +25,18 @@
         <br>
         <div class="row justify-content-center">
           <div class="text-center">
-            <button type="button" class="btn btn-danger" onClick="location.href='{{URL::to('Aluno/Peticoes')}}'">Cancelar</button>
-            <button type="submit" name="botao" class="btn btn-primary" value="SALVAR">Salvar</button>
-            <button type="submit" name="botao" class="btn btn-success" value="ENVIAR">Enviar</button>
+            <button type="button" class="btn btn-secondary" onClick="location.href='{{URL::to('Aluno/Peticoes')}}'">
+              Cancelar
+              <span class="fas fa-times ml-2"></span>
+            </button>
+            <button type="submit" name="botao" class="btn btn-primary" value="SALVAR">
+              Salvar
+              <span class="fas fa-save ml-2"></span>
+            </button>
+            <button type="submit" name="botao" class="btn btn-success" value="ENVIAR">
+              Enviar
+              <span class="fas fa-share ml-2"></span>
+            </button>
           </div>
         </div>
       </form>

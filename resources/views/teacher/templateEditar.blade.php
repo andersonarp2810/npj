@@ -7,17 +7,21 @@
         <form action="{{URL::to('Professor/Template/Editar')}}" method="post" enctype="multipart/form-data">
           {{ csrf_field() }}
           <input type="hidden" name="idTemplate" value="{{$template->id}}">
-          <label for="">TÍTULO</label>
+          <label for="">Título:</label>
           <input class="form-control" type="text" name="title" value="{{$template->title}}" required/>
-          <br><br>
-          <label for="">CONTEÚDO</label>
+          <br>
+          <label for="">Conteúdo:</label>
           <textarea  class="ckeditor" maxlength="99999" name="content" required>{{$template->content}}</textarea>
           <div class="row">
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" onClick="location.href='{{URL::to('Professor/Templates')}}'">
-                <i class="fas fa-arrow-left"></i>
-                Voltar</button>
-              <button type="submit" class="btn btn-primary">Salvar</button>
+                <span class="fas fa-arrow-left mr-2"></span>
+                Voltar
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Salvar
+                <span class="fas fa-save"></span>
+              </button>
             </div>
           </div>
     </div>

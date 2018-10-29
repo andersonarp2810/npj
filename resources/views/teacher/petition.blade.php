@@ -56,12 +56,16 @@
                             <td class="text-center align-middle">{{$petition->version}}.0</td>
                             <td class="text-center align-middle">{{$petition->description}}</td>
                             <td class="text-center align-middle">
-                              <button type="button" class="btn btn-outline-primary" role="button" onClick="location.href='Peticao/Avaliar/{{$petition->id}}'" title="Avaliar Petição">AVALIAR</button>
+                              <button type="button" class="btn btn-outline-primary" role="button" onClick="location.href='Peticao/Avaliar/{{$petition->id}}'" title="Avaliar Petição">
+                                <span class="fas fa-gavel"></span>
+                              </button>
                             </td>
                           </tr>
                         @endif
-                      @empty
-                      <td class="text-center">Nenhuma Petição à ser Avaliada!</td>
+                        @empty
+                        <tr>
+                          <td class="text-center" colspan="3">Nenhuma Petição à ser Avaliada!</td>
+                        </tr>
                       @endforelse
                     </tbody>
                   </table>

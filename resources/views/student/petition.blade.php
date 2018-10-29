@@ -12,9 +12,9 @@
         <div class="card-body">
             <div class="col-lg-12">
 
-                <div class="row">
+                <div class="row justify-content-center">
                   @if ($errors->any())
-                  <div class="alert alert-danger">
+                  <div class="alert alert-danger col-lg-6">
                     <ul>
                       @foreach ($errors->all() as $error)
                       <li>{{ $error }}</li>
@@ -23,7 +23,7 @@
                   </div>
                   @endif
                   @if(Session::has('status'))
-                    <p class="alert alert-info" style="width:20%;">{{ Session::get('status') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                    <p class="alert alert-info">{{ Session::get('status') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                   @endif
                 </div>
                   <div class="row mb-3">
@@ -56,10 +56,10 @@
                         @forelse($petitions as $petition)
                         @if($petition->visible == 'true')
                             <tr class="object" name="{{$petition->description}}">
-                              <td style="width:20%;font-size:10pt;text-align:center">
+                              <td class="text-center align-middle">
                                 {{$petition->version}}.0
                               </td>
-                              <td style="font-size:10pt" class="text-center">
+                              <td class="text-center align-middle">
                                 @if($petition->student_ok == '')
                                   RASCUNHO
                                 @endif
@@ -73,20 +73,20 @@
                                   AGUARDANDO DEFENSOR
                                 @endif
                                 @if($petition->defender_ok == 'true')
-                                  PETIÇÃO FINALIZADA
+                                  FINALIZADA
                                 @endif
                                 @if($petition->defender_ok == 'false' && $petition->student_ok == 'false')
                                   (DEFENSOR RECUSADA - AGUARDANDO ALUNO)
                                 @endif
                               </td>
-                              <td style="font-size:10pt" class="text-center">
+                              <td class="text-center align-middle">
                                 @if($petition->template_id != null)
                                   {{$petition->description}}
                                 @else
                                   NULL
                                 @endif
                               </td>
-                              <td style="font-size:10pt;width:20%" class="text-center">
+                              <td class="text-center align-middle">
                                   <button type="button" class="btn btn-outline-success" role="button" onClick="location.href='Peticao/Show/{{$petition->id}}'" title="Visualizar Petição"><i class="fa fa-eye"></i></button>
                                   @if($petition->student_ok != 'true')
                                     <button type="button" class="btn btn-outline-warning" role="button" onClick="location.href='Peticao/Edit/{{$petition->id}}'" title="Editar Petição"><i class="fa fa-edit"></i></button>
@@ -168,12 +168,15 @@
             <i class="fa fa-exclamation-circle fa-x6" aria-hidden="true"></i>
           </div>
           <h3 class="text-center"><strong style="color:red;">Atenção!</strong></h3>
-          <p class="text-center">Caso deseje excluir a PETIÇÃO clique no botão confirmar</p>
+          <p class="text-center">Deseja realmente excluir a petição?</p>
           <h4 class="text-center"><strong id="deleteDescriptionPetition"></strong></h4>
           <br>
           <div class="text-center">
-            <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Fechar</button>
-            <button type="submit" class="btn btn-danger btn-lg">Confirmar</button>
+            <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-danger btn-lg">
+              Excluir
+              <span class="fas fa-trash ml-2"></span>
+            </button>
           </div>
         </form>
       </div>
