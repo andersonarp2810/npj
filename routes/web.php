@@ -106,7 +106,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Aluno'], function () {
     Route::get('Preferencias', 'StudentController@preferences');
     Route::post('Preferencias/Editar', 'StudentController@preferencesEditar');
 
-//Escolher Template
+    //Escolher Template
     Route::post('Template/Escolher', 'PetitionController@escolherTemplate');
 
     /*
@@ -198,7 +198,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Defensor'], function () {
      */
     Route::get('', 'DefenderController@index');
     Route::get('Preferencias', 'DefenderController@preferences');
-    Route::post('Preferencias/Editar', 'DefensorController@preferencesEditar');
+    Route::post('Preferencias/Editar', 'DefenderController@preferencesEditar');
 
     /*
     ///////////////////////////////////////////

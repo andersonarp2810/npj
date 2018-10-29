@@ -1,9 +1,7 @@
 <div id="mySidenav" class="sidenav d-none d-lg-block gradient">
-  <div class="sidenav-header">   
-    <a href="{{URL::to($url .'/')}}"> 
-      <img src="{{URL::asset('assets/img/fap.png')}}" alt="" height="50px">
-      <!-- <img src="" alt="logo" style="height: 50"/> -->    
-  
+  <div class="sidenav-header text-center" >   
+    <a style="padding: 0;" class="mt-3" href="{{URL::to($url .'/')}}"> 
+      <img src="{{URL::asset('assets/img/logo-NPJ-white.png')}}" alt="" height="60px">
    </a>
   </div>
 

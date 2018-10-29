@@ -79,7 +79,7 @@ class TeacherService
         return redirect()->back()->withErrors($validate)->withInput();
     }
 
-    public function update(Human $human, User $user, Request $request)
+    public function editar(Human $human, User $user, Request $request)
     {
         if ($request['password'] != null) {
             $user->password = bcrypt($request['password']);

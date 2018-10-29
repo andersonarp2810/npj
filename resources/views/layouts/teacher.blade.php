@@ -1,7 +1,9 @@
 
   @extends('layouts.base')
-
+  
   @section('content')
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="{{URL::asset('css/bootstrap4.css')}}">
   
   <!-- Sidebar -->
   @sidebar([

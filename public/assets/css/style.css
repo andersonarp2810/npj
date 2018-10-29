@@ -47,7 +47,10 @@
 
 .sidenav-header>img {
   margin-top: 5px;
-  margin-left: 30px;
+}
+
+.sidenav-header>a {
+ padding: 5;
 }
 
 .sidenav-footer {
