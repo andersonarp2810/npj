@@ -93,6 +93,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Admin'], function () {
      */
     Route::get('Logs', 'LogController@index');
 
+    /*
+    ///////////////////////////////////////////
+    /////////////////Assistidos////////////////
+    ///////////////////////////////////////////
+     */
+    Route::resource('Assistidos', 'AssistedController');
+
 });
 
 Route::group(['middleware' => 'auth', 'prefix' => 'Aluno'], function () {
@@ -130,6 +137,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Aluno'], function () {
     Route::post('Peticao/Delete', 'PetitionController@delete');
 
     Route::get('Peticao/Edit/{petition_id}/DeletePhoto/{photo_id}', 'PetitionController@deletePhoto');
+
+
+    /*
+    ///////////////////////////////////////////
+    /////////////////Assistidos////////////////
+    ///////////////////////////////////////////
+     */
+    Route::resource('Assistidos', 'AssistedController');
 
 });
 

@@ -28,10 +28,12 @@ class CreatePetitionsTable extends Migration
           $table->integer('version');
           $table->enum("visible",array('true','false'));//controle de versão(versão utilizada fica true, versão nao utiilzada fica false)
           $table->integer('petitionFirst')->nullable();
+          $table->integer('assisted_id')->nullable();
 
 
           $table->foreign('template_id')->references('id')->on('templates');
           $table->foreign('doubleStudent_id')->references('id')->on('double_students');
+          $table->foreign('assisted_id')->references('id')->on('assisteds');
 
           $table->timestamps();
       });
