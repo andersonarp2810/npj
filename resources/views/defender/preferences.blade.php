@@ -1,4 +1,4 @@
-@extends('layouts.student')
+@extends('layouts.defender')
 @section('component')
 <div class="container">
   <div class="row justify-content-center my-5">
