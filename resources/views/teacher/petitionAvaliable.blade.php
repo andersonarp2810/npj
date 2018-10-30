@@ -33,7 +33,7 @@
   
         @if(count($photos) >= 1)
         <label>Documentação:</label>
-        <div class="row">
+        <div class="row align-items-center">
             @foreach($photos as $photo)
               @if($photo->photo == "" || $photo->photo == null)
               <div class="col-3 mb-3">

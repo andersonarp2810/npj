@@ -52,7 +52,7 @@
         <br>
 
         <label class="row">Documentação:</label>
-        <div class="row">
+        <div class="row align-items-center">
             <br>
             @foreach($photos as $photo)
               @if($photo->photo != "" || $photo->photo != null)
@@ -64,7 +64,7 @@
                   <a target="_blank" href="{{URL::asset('storage/'.$photo->photo)}}">Abrir {{explode('/', $photo->photo)[2]}} em nova guia</a>
                   @endif
                   <br>
-                  <button type="button" class="btn btn-sm btn-danger" onClick="location.href='{{URL::to('Aluno/Peticao/Edit/' . $petition->id . '/DeletePhoto/' . $photo->id )}}'">
+                  <button type="button" class="btn btn-sm btn-danger mt-1" onClick="location.href='{{URL::to('Aluno/Peticao/Edit/' . $petition->id . '/DeletePhoto/' . $photo->id )}}'">
                     <span class="fas fa-trash"></span>
                   </button>
                 </div>

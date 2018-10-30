@@ -22,8 +22,8 @@
 
         <br>
           @if(count($photos) >= 1)
-          <div class="row">
-            <label for="">Documentação:</label>
+          <label for="">Documentação:</label>
+          <div class="row align-items-center">
             @foreach($photos as $photo)
               @if($photo->photo != "" && $photo->photo != null)
                 <div class="col-3 mb-3 text-center">
@@ -32,13 +32,13 @@
                     @else
                     <a target="_blank" href="{{URL::asset('storage/'.$photo->photo)}}">Abrir {{explode('/', $photo->photo)[2]}} em nova guia</a>
                     @endif
-                  <a class="btn btn-sm btn-primary" href="{{URL::asset('storage/'.$photo->photo)}}" download>
+                  <a class="btn btn-sm btn-primary mt-1" href="{{URL::asset('storage/'.$photo->photo)}}" download>
                     <span class="fas fa-download"></span>
                   </a>
                 </div>              
               @endif
+              @endforeach
             </div>
-          @endforeach
 
           @else
           <div class="row">

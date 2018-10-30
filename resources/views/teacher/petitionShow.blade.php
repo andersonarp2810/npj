@@ -85,8 +85,8 @@
       </div>
       <br>
       @if($photos->count() != 0)
-      <div class="row">
-        <label for="">Documentação:</label>
+      <label for="">Documentação:</label>
+      <div class="row align-items-center">
         @foreach($photos as $photo)
         @if($photo->photo == "" || $photo->photo == null)
         <div class="col-3 mb-3">
@@ -94,8 +94,11 @@
         </div>
         @else
         <div class="col-3 mb-3">
-          <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;"
-            onclick="showImage(this)">
+            @if(explode('/', File::mimeType('storage/'.$photo->photo))[0] == 'image')
+            <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
+            @else
+            <a target="_blank" href="{{URL::asset('storage/'.$photo->photo)}}">Abrir {{explode('/', $photo->photo)[2]}} em nova guia</a>
+            @endif
         </div>
         @endif
         @endforeach

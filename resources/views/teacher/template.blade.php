@@ -7,7 +7,7 @@
         <div class="card-header">
             <h4>
                 Gerenciar Templates
-                <button type="button" class="btn btn-md btn-primary float-right" onClick="location.href='{{URL::to('Professor/Template/Add')}}'" title="Clique para abrir o formulário de novo Template" ><i class="fa fa-plus"></i>Novo Template</button>
+                <button type="button" class="btn btn-md btn-primary float-right" onClick="location.href='{{URL::to('Professor/Template/Add')}}'" title="Clique para abrir o formulário de novo Template" ><i class="fas fa-plus mr-2"></i>Novo Template</button>
             </h4>
         </div>
         <div class="card-body">
