@@ -99,9 +99,12 @@
           <img id="myImg" src="{{URL::asset('storage/1')}}" class="img-responsive img-thumbnail" onclick="showImage(this)">
         </div>
         @else
-        <div class="col-3 mb-3">
-          <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;"
-            onclick="showImage(this)">
+        <div class="col-3 mb-3">          
+            @if(explode('/', File::mimeType('storage/'.$photo->photo))[0] == 'image')
+            <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
+            @else
+            <a target="_blank" href="{{URL::asset('storage/'.$photo->photo)}}">Abrir {{explode('/', $photo->photo)[2]}} em nova guia</a>
+            @endif
         </div>
         @endif
         @endforeach
