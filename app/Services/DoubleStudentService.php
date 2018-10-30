@@ -37,13 +37,15 @@ class DoubleStudentService
             'group_id' => $request['group_id'],
             'qtdPetitions' => 0,
         ]);
-
+        
+        /*
         $student = Human::find($request['student_id']);
-        $student->doubleS = 'SIM';
+        $student->doubleS = 'SIM'; //para que alunos em mais de um semestre possa tar em outras duplas
         $student->save();
         $student2 = Human::find($request['student2_id']);
-        $student2->doubleS = 'SIM';
+        //$student2->doubleS = 'SIM'; //para que alunos em mais de um semestre possa tar em outras duplas
         $student2->save();
+        */
 
         $request->session()->flash('status', 'Dupla cadastrada com sucesso!');
         return redirect()->back();
