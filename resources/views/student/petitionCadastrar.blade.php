@@ -19,7 +19,7 @@
         <div class="row">
           <div class="col-md-6">
             <label>Documentação</label>
-            <input type="file" name="images[]" multiple>
+            <input type="file" accept="image/*" name="images[]" multiple>
           </div>
         </div>
         <br>

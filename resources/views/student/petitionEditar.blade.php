@@ -71,7 +71,7 @@
         <br>
 
         <div class="row">
-          <input type="file" name="images[]" multiple>
+          <input type="file" accept="image/*" name="images[]" multiple>
         </div>
 
         <br>
