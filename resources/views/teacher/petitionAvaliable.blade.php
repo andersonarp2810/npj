@@ -32,11 +32,11 @@
         <br>
   
         @if(count($photos) >= 1)
+        <label>Documentação:</label>
         <div class="row">
-            <label>Documentação:</label>
             @foreach($photos as $photo)
               @if($photo->photo == "" || $photo->photo == null)
-              <div class="col-3 mb-3 text-center">
+              <div class="col-3 mb-3">
                 <img id="myImg" src="{{URL::asset('storage/1')}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
               </div>
               @else
@@ -50,14 +50,14 @@
               @endif
             @endforeach
           </div>
-          @else
+        @else
           <div class="row">
             <div>
               <label>Documentação:</label>        
               <p class="text-secondary">Nenhuma documentação em anexo.</p>
             </div>
           </div>          
-          @endif
+        @endif
         <br>
         <div class="row">
           <label>Comentário:</label>
