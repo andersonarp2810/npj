@@ -58,7 +58,11 @@
               @if($photo->photo != "" || $photo->photo != null)
               <div class="col-3 mb-3">
                 <div class="text-center">
+                  @if(str_split(File::mimeType('storage/'.$photo->photo), 5)[0] == 'image')
                   <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
+                  @else
+                  <a target="_blank" href="{{URL::asset('storage/'.$photo->photo)}}">Abrir {{$photo->photo}} em nova guia</a>
+                  @endif
                   <br>
                   <button type="button" class="btn btn-sm btn-danger" onClick="location.href='{{URL::to('Aluno/Peticao/Edit/' . $petition->id . '/DeletePhoto/' . $photo->id )}}'">
                     <span class="fas fa-trash"></span>
