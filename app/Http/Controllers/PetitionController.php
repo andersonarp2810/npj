@@ -66,10 +66,12 @@ class PetitionController extends Controller
 
     public function update(Request $request)
     {
-        if (Auth::user()->type == 'student') { // autenticação
+        $user = Auth::user();
+        $tipo = $user->type == 'student' ? 'Aluno' : 'Professor';
+        if ($user->type == 'student' || $user->type == 'teacher') { // autenticação
             $petition = Petition::find($request['id']);
             if ($petition != null) { // não requisitar id indisponível
-                if ($petition->student_ok == 'false') { //aluno esta editando Peticao RECUSADA
+                if ($petition->student_ok == 'false' || ($petition->student_ok == 'true' && $petition->teacher_ok != 'true')) { //aluno esta editando Peticao RECUSADA
                     if ($request->botao == 'ENVIAR') { //aluno vai ENVIAR a Petição RECUSADA editada
                         $this->service->newVersion($request, $petition);
 
@@ -78,9 +80,9 @@ class PetitionController extends Controller
                     } else if ($request->botao == 'SALVAR') { //aluno vai apenas salvar as alterações e nao vai ENVIAR a Petição RECUSADA
                         $this->service->updateDraft($request, $petition);
                         $request->session()->flash('status', 'Alterações foram salvas com Sucesso!!');
-                        return redirect('Aluno/Peticao/Edit/' . $petition->id);
+                        return redirect($tipo . '/Peticao/Edit/' . $petition->id);
                     }
-                    return redirect('Aluno/Peticoes');
+                    return redirect($tipo . '/Peticoes');
 
                 } else if ($petition->student_ok == null) { //aluno esta editando Peticao RASCUNHO
                     if ($request->botao == 'ENVIAR') { //aluno vai enviar Petição RASCUNHO editada
@@ -96,10 +98,10 @@ class PetitionController extends Controller
                     } else if ($request->botao == 'SALVAR') { //aluno vai salvar Petição RASCUNHO editada
                         $this->service->updateDraft($request, $petition);
                         $request->session()->flash('status', 'Alterações foram salvas com Sucesso!!');
-                        return redirect('Aluno/Peticao/Edit/' . $petition->id);
+                        return redirect($tipo . '/Peticao/Edit/' . $petition->id);
                     }
 
-                    return redirect('Aluno/Peticoes');
+                    return redirect($tipo . '/Peticoes');
                 }
             } else { // se petição nula
                 return redirect()->back();
@@ -163,16 +165,26 @@ class PetitionController extends Controller
         $petition = Petition::find($id);
 
         if ($petition != null) {
-            $hu = Human::all()->where('user_id', Auth::user()->id)->first();
-            $doubleHu = DoubleStudent::all()->where('student_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
-            if ($doubleHu == null) {
-                $doubleHu = DoubleStudent::all()->where('student2_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
-            } // somente quem for da dupla pode editar
+            $autorizado = false;
+            if ($petition->visible == 'true') { //se a petição não foi deletada
+                $hu = Human::all()->where('user_id', Auth::user()->id)->first();
+                $doubleHu = DoubleStudent::all()->where('student_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
+                if ($doubleHu == null) {
+                    $doubleHu = DoubleStudent::all()->where('student2_id', $hu->id)->where('id', $petition->doubleStudent_id)->first();
+                } // somente quem for da dupla pode editar
 
-            if ($doubleHu != null && $petition->visible == 'true' && $petition->student_ok != 'true') {
-                // se usuário é da dupla, se a petição não foi deletada e se não foi enviada
-                $dados = $this->service->edit($petition);
-                return view('student.petitionEditar')->with($dados);
+                if ($doubleHu != null && $petition->student_ok != 'true') {
+                    // se usuário é da dupla e se não foi enviada
+                    $autorizado = true;
+                } else if (Auth::user()->type == 'teacher' && $petition->teacher_ok != 'true' && $petition->student_ok == 'true') {
+                    $autorizado = true;
+                }
+
+                if ($autorizado) {
+                    $dados = $this->service->edit($petition);
+                    $view = Auth::user()->type . ".petitionEditar";
+                    return view($view)->with($dados);
+                }
             }
         }
         return redirect()->back();

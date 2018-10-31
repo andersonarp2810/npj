@@ -78,6 +78,9 @@
                               <button type="button" class="btn btn-outline-primary" role="button" onClick="location.href='Peticao/Avaliar/{{$petition->id}}'" title="Avaliar Petição">
                                 <span class="fas fa-gavel"></span>
                               </button>
+                              <button type="button" class="btn btn-outline-warning" role="button" onClick="location.href='Peticao/Edit/{{$petition->id}}'" title="Editar Petição">
+                                <i class="fa fa-edit"></i>
+                              </button>
                               @else
                               <button type="button" class="btn btn-outline-success" role="button" onClick="location.href='Peticao/Show/{{$petition->id}}'" title="Visualizar Petição">
                                 <span class="fas fa-eye"></span>

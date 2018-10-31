@@ -156,10 +156,10 @@ class PetitionService
 //cria nova versao da peticao
         $totalVersao = Petition::all()->where('petitionFirst', $petition->petitionFirst)->count();
 
-        $newPetition = Petition::create([
+        $newPetition = new Petition([
             'description' => $request['description'],
             'content' => $request['content'],
-            'student_ok' => 'true', //era 'false' agr é 'true'
+            'student_ok' => $petition->student_ok, 
             'teacher_ok' => $petition->teacher_ok,
             'defender_ok' => $petition->defender_ok,
             'defender_id' => $petition->defender_id,
@@ -170,6 +170,14 @@ class PetitionService
             'visible' => 'true',
             'petitionFirst' => $petition->petitionFirst,
         ]);
+
+        if($petition->student_ok != 'true'){ // aluno corrigindo 
+            $newPetition['student_ok'] = 'true';
+        } else { // professor corrigindo
+            $newPetition['teacher_ok'] = 'true';
+        }
+
+        $newPetition->save();
 
         $photos = Photo::all()->where('petition_id', $petition->id);
         if ($photos != null) {

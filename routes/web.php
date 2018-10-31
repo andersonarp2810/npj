@@ -180,7 +180,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Professor'], function () {
 
     // falta metodos de editar petição que o professor deve poder
 
-    Route::delete('Peticao/Edit/{petition_id}/DeletePhoto/{photo_id}', 'PetitionController@deletePhoto');
+    
+    Route::get('Peticao/Edit/{id}', 'PetitionController@edit');
+
+    Route::post('Peticao/Editar', 'PetitionController@update');
+
+    Route::get('Peticao/Edit/{petition_id}/DeletePhoto/{photo_id}', 'PetitionController@deletePhoto');
 
     /*
     ///////////////////////////////////////////
