@@ -20,11 +20,40 @@
             @endif
             </div>
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <span class="text-center">
                     <div class="input-group">
-                        <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value)">
+                        <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value, 0)">
+                        <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                    </span>
+                </div>
+                <div class="col-md-3">
+                    <span class="text-center">
+                    <div class="input-group">
+                        <input type="search" name="" class="form-control" value="" placeholder="Buscar por tipo de usuário..." onkeyup="filtroDeBusca(this.value, 1)">
+                        <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                    </span>
+                </div>
+                <div class="col-md-3">
+                    <span class="text-center">
+                    <div class="input-group">
+                        <input type="search" name="" class="form-control" value="" placeholder="Buscar por URL..." onkeyup="filtroDeBusca(this.value, 2)">
+                        <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                    </span>
+                </div>
+                <div class="col-md-3">
+                    <span class="text-center">
+                    <div class="input-group">
+                        <input type="search" name="" class="form-control" value="" placeholder="Buscar por data..." onkeyup="filtroDeBusca(this.value, 3)">
                         <span class="input-group-addon">
                         <i class="fa fa-search"></i>
                         </span>
@@ -46,7 +75,7 @@
                 </thead>
                 <tbody>
                     @foreach($logs as $log)
-                    <tr class="object" name="{{$log->user->type == 'guest' ? 'Não autenticado' : $log->user->human->name}}">
+                    <tr class="object" name="{{($log->user->type == 'guest' ? 'Não autenticado' : $log->user->human->name) . '/' . $log->user->type . '/' . $log->route . '/' . $log->created_at}}">
                         <td style="font-size:10pt" class="text-center">{{$log->user->type == 'guest' ? 'Não autenticado' : $log->user->human->name}}</td>
                         <td style="font-size:10pt" class="text-center">{{$log->user->type}}</td>
                         <td style="font-size:10pt" class="text-center">{{$log->route}}</td>

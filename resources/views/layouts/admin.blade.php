@@ -192,14 +192,15 @@
         }
 
 
-        function filtroDeBusca(nome){
+        function filtroDeBusca(nome, filtro){
+          //filtro => 0 = nome, 1 = tipo de usuário, 2 = rota, 3 = data
           var objs = document.getElementsByClassName("object");
 
           $('.object').show();
 
           if (nome != "") {
             for (var i = 0; i < objs.length; i++) {
-              if (objs[i].getAttribute('name').toLowerCase().search(nome.toLowerCase())) {
+              if (objs[i].getAttribute('name').toLowerCase().split("/")[filtro].search(nome.toLowerCase())) {
                 objs[i].style.display = "none";
               }
             }
