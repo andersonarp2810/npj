@@ -25,7 +25,7 @@ class AssistedController extends Controller
         $user = Auth::user();
         if ($user->type == 'student' || $user->type == 'admin') {
             $assisteds = Assisted::all()->where('status', 'active');
-            return view(Auth::user()->type . '.index', ['assisteds' => $assisteds]);
+            return view($user->type . '.assistedIndex', ['assisteds' => $assisteds]);
         }
 
         return redirect()->back();
@@ -42,7 +42,7 @@ class AssistedController extends Controller
         //
         $user = Auth::user();
         if ($user->type == 'student' || $user->type == 'admin') {
-            return view(Auth::user()->type . '.create');
+            return view(Auth::user()->type . '.assistedCreate');
         }
 
         return redirect()->back();
@@ -74,7 +74,7 @@ class AssistedController extends Controller
     public function show(Assisted $assisted)
     {
         //
-        return view(Auth::user()->type . '.show', ['assisted' => $assisted]);
+        return view(Auth::user()->type . '.assistedShow', ['assisted' => $assisted]);
     }
 
     /**
@@ -88,7 +88,7 @@ class AssistedController extends Controller
         //
         $user = Auth::user();
         if ($user->type == 'student' || $user->type == 'admin') {
-            return view(Auth::user()->type . '.edit', ['assisted' => $assisted]);
+            return view(Auth::user()->type . '.assistedEdit', ['assisted' => $assisted]);
         }
 
         return redirect()->back();
@@ -126,6 +126,16 @@ class AssistedController extends Controller
             $this->service->destroy($assisted);
         }
 
+        return redirect()->back();
+    }
+
+    public function peticoes(Assisted $assisted)
+    {
+        $user = Auth::user();
+        if ($user->type == 'student' || $user->type == 'admin') {
+            $petitions = Petition::all()->where('assisted_id', $assisted->id)->where('status', 'active');
+            return view($user->type . 'assistedPetition', ['petitions' => $petitions, 'assisted' => $assisted]);
+        }
         return redirect()->back();
     }
 }
