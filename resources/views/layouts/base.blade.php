@@ -43,9 +43,12 @@
 
         // Get the image and insert it inside the modal - use its "alt" text as a caption
         function showImage(el) {
+            console.log('entrou');
             modal.style.display = "block";
+            console.log('blocou');
             var modalImg = document.getElementById("img-view");
             modalImg.src = el.src;
+            console.log('imagjou');
         }
 
         // Get the <span> element that closes the modal

@@ -35,7 +35,7 @@
       <div class="row align-items-center">
         @foreach($photos as $photo)
           @if($photo->photo != "" && $photo->photo != null)
-          <div class="col-3">
+          <div class="col-3 mb-3">
               @if(explode('/', File::mimeType('storage/'.$photo->photo))[0] == 'image')
               <img id="myImg" src="{{URL::asset('storage/'.$photo->photo)}}" class="img-fluid img-thumbnail" style="width:200px; height:200px;" onclick="showImage(this)">
               @else
@@ -129,8 +129,12 @@
         </div>
       </div>
     </div>
+  </div>
+
     <div id="myModal" class="img-modal">
       <span id="close" class="img-close">&times;</span>
       <img class="img-modal-content" id="img-view">
     </div>
+
+</div>
 @stop
