@@ -17,13 +17,13 @@ class StudentService
     {
         $student = Human::all()->where('user_id', '=', Auth::user()->id)->where('status', '=', 'active')->first();
 
-        if ($student->doubleS == 'SIM') {
-            $doubleStudent = DoubleStudent::all()->where('student_id', '=', $student->id)->where('status', 'active')->first();
+        $doubleStudent = DoubleStudent::all()->where('student_id', '=', $student->id)->where('status', 'active')->first();
 
-            if ($doubleStudent == null) {
-                $doubleStudent = DoubleStudent::all()->where('status', '=', 'active')->where('student2_id', '=', $student->id)->first();
-            }
+        if ($doubleStudent == null) { // se não for o aluno 1 da dupla talvez seja o 2
+            $doubleStudent = DoubleStudent::all()->where('status', '=', 'active')->where('student2_id', '=', $student->id)->first();
+        }
 
+        if ($doubleStudent != null) { // se for da dupla
             $petitions = Petition::all()->where('doubleStudent_id', '=', $doubleStudent->id);
             $group = Group::all()->where('status', '=', 'active')->where('id', '=', $doubleStudent->group_id)->first();
             $teacher = Human::all()->where('id', '=', $group->teacher_id)->where('status', '=', 'active')->first();
@@ -32,46 +32,60 @@ class StudentService
 
             return ['student' => $student, 'doubleStudent' => $doubleStudent, 'petitions' => $petitions, 'group' => $group, 'teacher' => $teacher, 'humans' => $humans, 'user' => $user];
         } else {
-            return redirect()->back();
+            return redirect()->back()
+                ->withInput($request->except(['password', 'password_confirmation']))
+                ->with('error', 'Aluno não registrado em nenhuma dupla.');
         }
     }
 
     public function store(Request $request)
     {
-        $user = User::create([
-            'type' => 'student',
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+        $verifica = User::all()->where('email', $request->email)->first();
 
-        $human = Human::create([
-            'status' => 'active',
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'age' => $request->age,
-            'gender' => $request->gender,
-            'doubleS' => 'NAO',
-            'user_id' => $user->id, //id do human Student
-        ]);
+        if ($verifica == null) {
+            $user = User::create([
+                'type' => 'student',
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
 
-        $request->session()->flash('status', 'Aluno cadastrado com sucesso!');
+            $human = Human::create([
+                'status' => 'active',
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'age' => $request->age,
+                'gender' => $request->gender,
+                'doubleS' => 'NAO',
+                'user_id' => $user->id, //id do human Student
+            ]);
 
-        return redirect()->back();
+            $request->session()->flash('status', 'Aluno cadastrado com sucesso!');
+            return redirect()->back();
+        }
+
+        $request->session()->flash('erro', 'Email já cadastrado!');
+        return redirect()->back()->withInput($request->except(['password', 'password_confirmation']));
     }
 
     public function update(Human $human, User $user, Request $request)
     {
-        if ($request['password'] != null) {
-            $user->password = bcrypt($request['password']);
+        $verifica = User::all()->where('status', 'active')->where('email', $request->email)->first();
+
+        if ($verifica == null || $user->email == $request->email) {
+            if ($request['password'] != null) {
+                $user->password = bcrypt($request['password']);
+            }
+            $human->name = $request['name'];
+            $human->gender = $request['gender'];
+            $human->phone = $request['phone'];
+            $user->email = $request['email'];
+            $user->save();
+            $human->save();
+            $request->session()->flash('status', 'Aluno editado com sucesso!');
+            return redirect()->back();
         }
-        $human->name = $request['name'];
-        $human->gender = $request['gender'];
-        $human->phone = $request['phone'];
-        $user->email = $request['email'];
-        $user->save();
-        $human->save();
-        $request->session()->flash('status', 'Aluno editado com sucesso!');
-        return redirect()->back();
+        $request->session()->flash('erro', 'Email já cadastrado!');
+        return redirect()->back()->withInput($request->except(['password', 'password_confirmation']));
     }
 
     public function destroy(Request $request, Human $student)

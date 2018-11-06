@@ -53,7 +53,7 @@ class Handler extends ExceptionHandler
                    ->with('error', 'A requisição expirou por inatividade. Por favor, tente novamente.');
         }
 
-        if ($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException){
+        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException){
             return redirect()
                    ->back()
                    ->withInput($request->except(['password', 'password_confirmation']))
