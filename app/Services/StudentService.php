@@ -132,7 +132,7 @@ class StudentService
         $user->email = $request['email'];
 
         if ($request['password'] != null) {
-            $user->password = $request['password'];
+            $user->password = bcrypt($request['password']);
         }
         $human->save();
         $user->save();
