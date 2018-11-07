@@ -22,6 +22,15 @@ NPJ - SISTEMA
 
                                     <fieldset>
 
+                                        @if(Session::has('erro'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            {{ Session::get('erro') }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>                  
+                                        @endif
+
                                         <div class="form-group ls-login-user">
 
                                             <input class="form-control ls-login-bg-user input-lg form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" type="email" aria-label="Email" placeholder="Email" name="email" value="{{ old('email') }}" required autofocus>

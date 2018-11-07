@@ -50,14 +50,21 @@ class Handler extends ExceptionHandler
             return redirect()
                    ->back()
                    ->withInput($request->except(['password', 'password_confirmation']))
-                   ->with('error', 'A requisição expirou por inatividade. Por favor, tente novamente.');
+                   ->with('erro', 'A requisição expirou por inatividade. Por favor, tente novamente.');
         }
 
-        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException){
+        else if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException){
             return redirect()
                    ->back()
                    ->withInput($request->except(['password', 'password_confirmation']))
-                   ->with('error', 'Página não encontrada.');
+                   ->with('erro', 'Página não encontrada.');
+        }
+
+        else if($exception instanceof \Illuminate\Database\QueryException){
+            return redirect()
+                   ->back()
+                   ->withInput($request->except(['password', 'password_confirmation']))
+                   ->with('erro', 'Erro de conexão.');
         }
 
         return parent::render($request, $exception);

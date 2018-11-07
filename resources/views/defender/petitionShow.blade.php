@@ -63,54 +63,54 @@
 </div>
 
 <div class="modal fade" id="comments" tabindex="-1" role="dialog" aria-labelledby="comments" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Comentários</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Comentários</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="text-center">
+              <strong>Orientador</strong>
+            </div>
+            <ul>
+              @foreach($profComments as $comment)
+              <li>
+                {{$comment->human->name}}
+                <br>
+                <strong>Comentário:</strong>
+                <span>{{$comment->content}}</span>
+              </li>
+              @endforeach
+            </ul>
+            @if(count($profComments) < 1)
+            <p class="text-center">Nenhum Comentário!</p>
+            @endif
           </div>
-          <div class="modal-body">
-          <div class="row">
-              <div class="col-6">
-                <div class="text-center">
-                  <strong>Orientador</strong>
-                </div>
-                <ul>
-                  @foreach($profComments as $comment)
-                  <li>
-                    {{$comment->human->name}}
-                    <br>
-                    <strong>Comentário:</strong>
-                    <span>{{$comment->content}}</span>
-                  </li>
-                  @endforeach
-                </ul>
-                @if(count($profComments) < 1)
-                <p class="text-center">Nenhum Comentário!</p>
-                @endif
-              </div>
 
-              <div class="col-6">
-                <div class="text-center">
-                  <strong>Defensor</strong>
-                </div>
-                <ul>
-                  @foreach($defComments as $comment)
-                    <li>
-                      {{$comment->human->name}}
-                      <br>
-                      <strong>Comentário:</strong>
-                      {{$comment->content}}
-                    </li>
-                  @endforeach
-                </ul>
-                @if(count($defComments) < 1)
-                <p class="text-center">Nenhum Comentário!</p>
-                @endif
-              </div>
+          <div class="col-6">
+            <div class="text-center">
+              <strong>Defensor</strong>
+            </div>
+            <ul>
+                @foreach($defComments as $comment)
+                <li>
+                  {{$comment->human->name}}
+                  <br>
+                  <strong>Comentário:</strong>
+                  {{$comment->content}}
+                </li>
+                @endforeach
+            </ul>
+            @if(count($defComments) < 1)
+            <p class="text-center">Nenhum Comentário!</p>
+            @endif
           </div>
+        </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
           </div>
@@ -119,10 +119,10 @@
     </div>
   </div>
 
-    <div id="myModal" class="img-modal">
+  <div id="myModal" class="img-modal">
       <span id="close" class="img-close">&times;</span>
       <img class="img-modal-content" id="img-view">
-    </div>
+  </div>
 </div>
 
 @endsection
