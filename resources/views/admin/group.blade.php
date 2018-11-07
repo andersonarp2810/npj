@@ -49,7 +49,7 @@
                       <tr>
                         <th class="text-center">Nome</th>
                         <th class="text-center">Professor</th>
-                        <th class="text-center">QTD Duplas</th>
+                        <th class="text-center">Duplas</th>
       <!--                  <th>QTD PETIÇÕES</th>-->
                         <th class="text-center">Ações</th>
                       </tr>
