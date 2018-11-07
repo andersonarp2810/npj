@@ -23,7 +23,7 @@
                 <div class="col-md-3">
                     <span class="text-center">
                     <div class="input-group">
-                        <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeBusca(this.value, 0)">
+                        <input type="search" name="" class="form-control" value="" placeholder="Buscar por nome..." onkeyup="filtroDeLog(this.value, 0)">
                         <span class="input-group-addon">
                         <i class="fa fa-search"></i>
                         </span>
@@ -33,7 +33,7 @@
                 <div class="col-md-3">
                     <span class="text-center">
                     <div class="input-group">
-                        <input type="search" name="" class="form-control" value="" placeholder="Buscar por tipo de usuário..." onkeyup="filtroDeBusca(this.value, 1)">
+                        <input type="search" name="" class="form-control" value="" placeholder="Buscar por tipo de usuário..." onkeyup="filtroDeLog(this.value, 1)">
                         <span class="input-group-addon">
                         <i class="fa fa-search"></i>
                         </span>
@@ -43,7 +43,7 @@
                 <div class="col-md-3">
                     <span class="text-center">
                     <div class="input-group">
-                        <input type="search" name="" class="form-control" value="" placeholder="Buscar por URL..." onkeyup="filtroDeBusca(this.value, 2)">
+                        <input type="search" name="" class="form-control" value="" placeholder="Buscar por URL..." onkeyup="filtroDeLog(this.value, 2)">
                         <span class="input-group-addon">
                         <i class="fa fa-search"></i>
                         </span>
@@ -53,7 +53,7 @@
                 <div class="col-md-3">
                     <span class="text-center">
                     <div class="input-group">
-                        <input type="search" name="" class="form-control" value="" placeholder="Buscar por data..." onkeyup="filtroDeBusca(this.value, 3)">
+                        <input type="search" name="" class="form-control" value="" placeholder="Buscar por data..." onkeyup="filtroDeLog(this.value, 3)">
                         <span class="input-group-addon">
                         <i class="fa fa-search"></i>
                         </span>
