@@ -104,7 +104,7 @@ class PetitionService
                 $fname = $file->getClientOriginalName();
 
                 Photo::create([
-                    'photo' => Storage::disk('public')->putFileAs('petition/' . $petition->petitionFirst, $file, $fname),
+                    'photo' => Storage::disk(env('STORAGE_TYPE', 'dropbox'))->putFileAs('petition/' . $petition->petitionFirst, $file, $fname),
                     'petition_id' => $petition->id,
                 ]);
             }
@@ -135,7 +135,7 @@ class PetitionService
                 $fname = $file->getClientOriginalName();
 
                 Photo::create([
-                    'photo' => Storage::disk('public')->putFileAs('petition/' . $petition->petitionFirst, $file, $fname),
+                    'photo' => Storage::disk(env('STORAGE_TYPE', 'dropbox'))->putFileAs('petition/' . $petition->petitionFirst, $file, $fname),
                     'petition_id' => $petition->id,
                 ]);
             }
@@ -264,7 +264,7 @@ class PetitionService
         $photos = Photo::all()->where('petition_id', $petition->id);
 
         if ($photos != null) {
-            Storage::disk('public')->delete('petition' . $petition->id);
+            Storage::disk(env('STORAGE_TYPE', 'dropbox'))->delete('petition' . $petition->id);
             foreach ($photos as $photo) {
                 $photo->delete();
             }
@@ -276,7 +276,7 @@ class PetitionService
     public function deletePhoto($photo_id)
     {
         $photo = Photo::find($photo_id);
-        Storage::disk('public')->delete($photo->photo);
+        Storage::disk(env('STORAGE_TYPE', 'dropbox'))->delete($photo->photo);
         $photo->delete();
     }
 
