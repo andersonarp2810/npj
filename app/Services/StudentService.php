@@ -32,9 +32,7 @@ class StudentService
 
             return ['student' => $student, 'doubleStudent' => $doubleStudent, 'petitions' => $petitions, 'group' => $group, 'teacher' => $teacher, 'humans' => $humans, 'user' => $user];
         } else {
-            return redirect()->back()
-                ->withInput($request->except(['password', 'password_confirmation']))
-                ->with('error', 'Aluno não registrado em nenhuma dupla.');
+            return ['error' => 'Aluno não registrado em nenhuma dupla.'];
         }
     }
 

@@ -11,6 +11,8 @@ use App\User;
 use Auth;
 use Validator;
 
+use Iluminate\Http\Response;
+
 use App\Services\StudentService;
 
 class StudentController extends Controller
@@ -27,9 +29,11 @@ class StudentController extends Controller
 
     } else if(Auth::user()->type == 'student') {
       $dados = $this->service->index();
-      return view('student.home')->with($dados);
-    } else {//se o aluno nao tiver dupla
-      return redirect('Sair');
+      if (!$dados['error']){
+        return view('student.home')->with($dados);
+      } else {//se o aluno nao tiver dupla
+        return redirect('Sair')->with('erro', $dados['error']);
+      }
     }
   }
 
