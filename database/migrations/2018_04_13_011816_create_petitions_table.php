@@ -15,11 +15,12 @@ class CreatePetitionsTable extends Migration
     {
       Schema::create('petitions', function (Blueprint $table) {
           $table->increments('id');
-          $table->longText('description',1000);
+          $table->text('description');
 
-          $table->longText('content',9000);
+          $table->longText('content');
           $table->enum("student_ok",array('true','false'))->nullable();
           $table->enum("teacher_ok",array('true','false'))->nullable();
+          $table->enum("supervisor_ok", array('true', 'false'))->nullable();
           $table->enum("defender_ok",array('true','false'))->nullable();
           $table->integer('template_id')->unsigned();//referencia de qual template é
           $table->integer('defender_id')->nullable();//referencia qual defensor pegou e avaliou a peticao
