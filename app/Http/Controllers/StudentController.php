@@ -29,7 +29,7 @@ class StudentController extends Controller
 
     } else if(Auth::user()->type == 'student') {
       $dados = $this->service->index();
-      if (!$dados['error']){
+      if ($dados){
         return view('student.home')->with($dados);
       } else {//se o aluno nao tiver dupla
         return redirect('Sair')->with('erro', $dados['error']);

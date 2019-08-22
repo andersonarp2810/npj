@@ -48,8 +48,8 @@
                 </thead>
                 <tbody>
                   @forelse($petitions as $petition)
-                    @if($petition->defender_id == $defender->id || ($petition->student_ok == 'true' &&
-                      $petition->teacher_ok == 'true' && $petition->defender_ok == '' && $petition->defender_id == ''))
+                    @if(($petition->student_ok == 'true' &&
+                      $petition->teacher_ok == 'true' && $petition->supervisor_ok == ''))
                       <tr class="object" name="{{$petition->description}}">
                         <td class="text-center align-middle">
                           @if($petition->student_ok == 'true' && $petition->teacher_ok == 'true' && $petition->defender_ok != 'true')
