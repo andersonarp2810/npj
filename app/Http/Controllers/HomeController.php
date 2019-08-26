@@ -32,7 +32,11 @@ class HomeController extends Controller
         return redirect('Aluno');
       }elseif(Auth::user()->type == "teacher"){
         return redirect('Professor');
-      }elseif(Auth::user()->type == "defender"){
+      }
+      elseif(Auth::user()->type == "supervisor"){
+        return redirect('Supervisor');
+      }
+      elseif(Auth::user()->type == "defender"){
         return redirect('Defensor');
       }
       return view('auth.login');

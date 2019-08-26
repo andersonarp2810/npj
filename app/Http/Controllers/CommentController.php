@@ -32,7 +32,15 @@ class CommentController extends Controller
 
             return redirect('Defensor/Peticoes');
 
-        } else {
+        } 
+        else if( Auth::user()->type == 'supervisor'){
+
+            $this->service->supervisorStore($request, $petition);
+
+            return redirect('Supervisor/Peticoes');
+        }
+
+        else {
             $request->session()->flash('status', 'Você não possui Autorização de Acesso!!');
             return redirect()->back();
         }

@@ -32,7 +32,13 @@ class PetitionController extends Controller
 
             return view('teacher.petition')->with($dados);
 
-        } else if (Auth::user()->type == 'defender') {
+        }
+        else if (Auth::user()->type == 'supervisor'){
+            $dados = $this->service->supervisorIndex();
+
+            return view('supervisor.petition')->with($dados);
+        }
+        else if (Auth::user()->type == 'defender') {
             $dados = $this->service->defenderIndex();
 
             return view('defender.petition')->with($dados);
@@ -207,7 +213,7 @@ class PetitionController extends Controller
                 if ($doubleHu != null) { //se o usuario estiver consultando a sua peticao entoa OK
                     $autorizado = true;
                 }
-            } else if (Auth::user()->type == 'teacher' || Auth::user()->type == 'defender') {
+            } else if (Auth::user()->type == 'teacher' || Auth::user()->type == 'defender' || Auth::user()->type == 'supervisor') {
                 $autorizado = true;
             }
             if ($autorizado) {

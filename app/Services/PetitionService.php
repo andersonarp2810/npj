@@ -55,6 +55,15 @@ class PetitionService
         return ['teacher' => $teacher, 'group' => $group, 'doubleStudents' => $doubleStudents, 'petitions' => $petitions, 'humans' => $humans, 'user' => $user];
     }
 
+    public function supervisorIndex()
+    {
+        $supervisor = Human::all()->where('user_id', '=', Auth::user()->id)->where('status', '=', 'active')->first();
+        $petitions = Petition::all()->where('visible', 'true')->sortByDesc('updated_at');
+        $user = Auth::user();
+
+        return ['supervisor' => $supervisor, 'petitions' => $petitions, 'user' => $user];
+    }
+
     public function defenderIndex()
     {
 
@@ -161,6 +170,7 @@ class PetitionService
             'content' => $request['content'],
             'student_ok' => $petition->student_ok, 
             'teacher_ok' => $petition->teacher_ok,
+            'supervisor_ok' => $petition->supervisor_ok,
             'defender_ok' => $petition->defender_ok,
             'defender_id' => $petition->defender_id,
             'template_id' => $petition->template_id,
@@ -171,7 +181,7 @@ class PetitionService
             'petitionFirst' => $petition->petitionFirst,
         ]);
 
-        if($petition->student_ok != 'true'){ // aluno corrigindo 
+        if($petition->student_ok != 'true'){ // aluno corrigindo
             $newPetition['student_ok'] = 'true';
         } else { // professor corrigindo
             $newPetition['teacher_ok'] = 'true';
@@ -205,6 +215,7 @@ class PetitionService
         $petition->visible = 'false'; //tornour-se versão anterior
         $petition->student_ok = null;
         $petition->teacher_ok = null;
+        $petition->supervisor_ok = null;
         $petition->defender_ok = null;
         $petition->defender_id = null; //defensor nao deve estar vinculado a uma versao anterior, somente a vesao finalizada
         $petition->save();
@@ -215,6 +226,7 @@ class PetitionService
         $oldPetition->visible = 'false';
         $petition->student_ok = $oldPetition->student_ok;
         $petition->teacher_ok = $oldPetition->teacher_ok;
+        $petition->supervisor_ok = $oldPetition->supervisor_ok;
         $petition->defender_ok = $oldPetition->defender_ok;
         $petition->defender_id = $oldPetition->defender_id;
 
@@ -233,6 +245,7 @@ class PetitionService
         $oldPetition->student_ok = null;
         $oldPetition->teacher_ok = null;
         $oldPetition->defender_ok = null;
+        $oldPetition->supervisor_ok = null;
         $oldPetition->defender_id = null;
         $oldPetition->save();
         $petition->visible = 'true';
@@ -286,11 +299,11 @@ class PetitionService
         $photos = Photo::all()->where('petition_id', $petition->id);
         $IsPhotos = $photos->count() != 0 ? 'true' : 'false';
         $comments = Comment::all()->where('petition_id', $petition->id);
-        $profComments = $comments->reject(function($c){
-            return $c->human->user->type != 'teacher';
+        $profComments = $comments->filter(function($c){
+            return $c->human->user->type == 'teacher';
         })->all();
-        $defComments =  $comments->reject(function($c){
-            return $c->human->user->type != 'defender';
+        $defComments =  $comments->filter(function($c){
+            return $c->human->user->type == 'defender';
         })->all();
 
         return ['petition' => $petition, 'templates' => $templates, 'photos' => $photos, 'IsPhotos' => $IsPhotos, 'comments' => $comments, 'profComments' => $profComments, 'defComments' => $defComments];
@@ -304,11 +317,11 @@ class PetitionService
         $photos = Photo::all()->where('petition_id', $petition->id);
         $comments = Comment::all()->where('petition_id', $petition->id);
 
-        $profComments = $comments->reject(function ($c) {
-            return $c->human->user->type != 'teacher';
+        $profComments = $comments->filter(function ($c) {
+            return $c->human->user->type == 'teacher';
         })->all();
-        $defComments = $comments->reject(function ($c) {
-            return $c->human->user->type != 'defender';
+        $defComments = $comments->filter(function ($c) {
+            return $c->human->user->type == 'defender';
         })->all();
 
         return ['petition' => $petition, 'humans' => $humans, 'temps' => $temps, 'petitions' => $petitions, 'photos' => $photos, 'comments' => $comments, 'profComments' => $profComments, 'defComments' => $defComments];
@@ -321,11 +334,11 @@ class PetitionService
         $humans = Human::all()->where('status', 'active');
         $template = Template::find($petition->template_id);
         $comments = Comment::all()->where('petition_id', $petition->id);
-        $profComments = $comments->reject(function($c){
-            return $c->human->user->type != 'teacher';
+        $profComments = $comments->filter(function($c){
+            return $c->human->user->type == 'teacher';
         })->all();
-        $defComments =  $comments->reject(function($c){
-            return $c->human->user->type != 'defender';
+        $defComments =  $comments->filter(function($c){
+            return $c->human->user->type == 'defender';
         })->all();
 
         return ['petition' => $petition, 'photos' => $photos, 'humans' => $humans, 'template' => $template, 'comments' => $comments, 'profComments' => $profComments, 'defComments' => $defComments];
@@ -335,11 +348,11 @@ class PetitionService
     {
         $photos = Photo::all()->where('petition_id', $petition->id);
         $comments = Comment::all()->where('petition_id', $petition->id);
-        $profComments = $comments->reject(function($c){
-            return $c->human->user->type != 'teacher';
+        $profComments = $comments->filter(function($c){
+            return $c->human->user->type == 'teacher';
         })->all();
-        $defComments =  $comments->reject(function($c){
-            return $c->human->user->type != 'defender';
+        $defComments =  $comments->filter(function($c){
+            return $c->human->user->type == 'defender';
         })->all();
 
         return ['petition' => $petition, 'photos' => $photos, 'profComments' => $profComments, 'defComments' => $defComments];

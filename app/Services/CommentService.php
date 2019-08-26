@@ -70,7 +70,8 @@ class CommentService
                 'petition_id' => $request['idPetition'],
             ]);
             $petition->student_ok = 'true';
-            $petition->teacher_ok = 'false';
+            $petition->teacher_ok = 'true';
+            $petition->supervisor_ok = 'false'; // entra agora entre supervisor e professor
             $petition->defender_ok = 'false';
             $petition->defender_id = $defender->id; //petição passa a estar vinculada ao defensor
             $petition->save();
@@ -78,4 +79,26 @@ class CommentService
         }
     }
 
+    public function supervisorStore(Request $request, Petition $petition){
+
+        $supervisor = Human::where('user_id', Auth::user()->id)->first();
+
+        if($request->botao == 'APROVAR'){
+            $petition->supervisor_ok = 'true';
+            $petition->save();
+        }
+        else if($request->botao == 'REPROVAR'){
+            $comment = Comment::create([
+                'content' => $request['comment'],
+                'human_id' => $supervisor->id,
+                'petition_id' => $request['idPetition']
+            ]);
+            $petition->student_ok = 'true';
+            $petition->teacher_ok = 'false';
+            $petition->supervisor_ok = 'false';
+            $petition->save();
+            $request->session()->flash('status', 'Avaliação realizada com sucesso!');
+
+        }
+    }
 }
