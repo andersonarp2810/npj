@@ -212,7 +212,7 @@ class PetitionService
             }
         }
 
-        $petition->visible = 'false'; //tornour-se versão anterior
+        $petition->visible = 'false'; //tornou-se versão anterior
         $petition->student_ok = null;
         $petition->teacher_ok = null;
         $petition->supervisor_ok = null;
