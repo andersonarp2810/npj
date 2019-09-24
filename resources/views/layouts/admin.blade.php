@@ -19,6 +19,9 @@
             'item' => 'Grupos', 'itemUrl' => '/Admin/Grupos', 'icon' => 'users'
         ],
         [
+            'item' => 'Supervisor', 'itemUrl' => '/Admin/Supervisores', 'icon' => 'user-tie'
+        ],
+        [
             'item' => 'Defensores', 'itemUrl' => '/Admin/Defensores', 'icon' => 'user-tie'
         ],
     ]

@@ -25,6 +25,9 @@ class SupervisorController extends Controller
         if (Auth::user()->type == 'admin') {
             $petitions = Petition::all()->where('visible', 'true');
             $supervisors = Human::all()->where('status', '=', 'active');
+            $supervisors = $supervisors->filter(function($supervisor){
+                return $supervisor->user->type == 'supervisor';
+            });
             return view('admin.supervisor')->with(['supervisors' => $supervisors, 'petitions' => $petitions]);
         } else if (Auth::user()->type == 'supervisor') {
             $supervisors = Human::all()->where('user_id', '=', Auth::user()->id)->where('status', '=', 'active');

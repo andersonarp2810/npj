@@ -78,6 +78,18 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Admin'], function () {
     /////////////////Defensores////////////////
     ///////////////////////////////////////////
      */
+    Route::get('Supervisores', 'SupervisorController@index');
+
+    Route::post('Supervisor/Cadastrar', 'SupervisorController@store');
+
+    Route::post('Supervisor/Editar', 'SupervisorController@update');
+
+    Route::post('Supervisor/Excluir', 'SupervisorController@destroy');
+    /*
+    ///////////////////////////////////////////
+    /////////////////Defensores////////////////
+    ///////////////////////////////////////////
+     */
     Route::get('Defensores', 'DefenderController@index');
 
     Route::post('Defensor/Cadastrar', 'DefenderController@store');
@@ -204,6 +216,34 @@ Route::group(['middleware' => 'auth', 'prefix' => 'Defensor'], function () {
     Route::get('', 'DefenderController@index');
     Route::get('Preferencias', 'DefenderController@preferences');
     Route::post('Preferencias/Editar', 'DefenderController@preferencesEditar');
+
+    /*
+    ///////////////////////////////////////////
+    /////////////////Peticoes////////////////
+    ///////////////////////////////////////////
+     */
+    Route::get('Peticoes', 'PetitionController@index'); //ver as peticoes das quais ele pertence
+
+    Route::get('Peticao/Show/{id}', 'PetitionController@show');
+
+    Route::get('Peticao/Emitir/{id}', 'PetitionController@emitir');
+    //Ao ver as peticoes, ele irá ver também todos os comentarios que ele fez referentes aquela peticao
+    Route::get('Peticao/Avaliar/{id}', 'PetitionController@avaliar');
+
+    Route::post('Peticao/Emitir', 'PetitionController@emitir');
+
+    Route::post('Comentario/Cadastrar', 'CommentController@store'); //O defensor pode cadastrar comentario
+});
+
+Route::group(['middleware' => 'auth', 'prefix' => 'Supervisor'], function () {
+    /*
+    ///////////////////////////////////////////
+    /////////////////Painel de Controle/////////////
+    ///////////////////////////////////////////
+     */
+    Route::get('', 'Supervisor@index');
+    Route::get('Preferencias', 'SupervisorController@preferences');
+    Route::post('Preferencias/Editar', 'SupervisorController@preferencesEditar');
 
     /*
     ///////////////////////////////////////////
